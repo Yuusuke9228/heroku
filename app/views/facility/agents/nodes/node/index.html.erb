@@ -1,0 +1,14 @@
+<% locations = @items.map(&:locations).flatten.uniq.sort_by { |item| item.order } %>
+
+<div class="facility-nodes">
+  <% if locations.present? %>
+    <% locations.each do |loc| %>
+      <% items = @items.in(location_ids: loc.id).and_public(@cur_date).order_by(address: -1) %>
+      <% if items.present? %>
+        <%= render "facility/agents/nodes/node/table", id: loc.basename, caption: loc.facility_caption_name, items: items %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= render "facility/agents/nodes/node/table", id: nil, caption: @cur_node.name, items: @items %>
+  <% end %>
+</div>

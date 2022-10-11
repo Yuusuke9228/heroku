@@ -1,0 +1,14 @@
+<%
+  return if @item.thumb.blank?
+
+  addon ||= local_assigns.fetch(:addon, {})
+%>
+
+<dl class="see mod-cms-thumb-form">
+  <dt><%= @model.t :thumb_id %></dt>
+  <dd><%= show_image_info @item.thumb %></dd>
+</dl>
+
+<%= jquery do %>
+  SS_FileView.listenTo("#<%= addon[:id] %> .file-view > a", { viewPath: "<%= view_cms_apis_content_file_path(id: ":id") %>" });
+<% end %>

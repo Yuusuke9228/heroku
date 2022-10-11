@@ -1,0 +1,11 @@
+<%= render "cms/agents/addons/page_list/form", local_assigns %>
+
+<dl class="see">
+  <dt><%= @model.t :exclude_paths %><%= @model.tt :exclude_paths %></dt>
+  <dd><%= f.text_area :exclude_paths, value: @item.exclude_paths.join("\n"), style: "height: 100px;" %></dd>
+
+  <% if @model.use_display_target %>
+    <dt><%= @model.t :display_target %><%= @model.tt :display_target %></dt>
+    <dd><%= f.select :display_target, @item.display_target_options, include_blank: true %></dd>
+  <% end %>
+</dl>

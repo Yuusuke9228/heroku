@@ -1,0 +1,337 @@
+this.Syntax_Checker = (function () {
+  function ResultBox(form) {
+    this.$el = null;
+    this.$elBody = null;
+    this.form = form;
+  }
+
+  ResultBox.prototype.init = function() {
+    if (this.$el) {
+      return this;
+    }
+
+    var $div = $("#errorSyntaxChecker");
+    if ($div[0]) {
+      this.$el = $div;
+      this.$elBody = $div.find(".errorExplanationBody");
+
+      return this.moveLast();
+    }
+
+    $div = $("<div/>", { id: 'errorSyntaxChecker', class: 'errorExplanation' });
+    $div.append("<h2>" + "<%= I18n.t('cms.syntax_check') %>" + "</h2>");
+
+    var $body = $("<div/>", { class: 'errorExplanationBody' });
+    $div.append($body);
+
+    this.$el = $div;
+    this.$elBody = $body;
+
+    return this.moveLast();
+  };
+
+  ResultBox.prototype.moveLast = function() {
+    $(this.form.addonSelector).append(this.$el);
+    return this;
+  };
+
+  ResultBox.prototype.showMessage = function(message) {
+    this.init();
+    this.$elBody.html(message);
+    this.moveLast();
+    return this;
+  }
+
+  ResultBox.prototype.showServerError = function() {
+    this.showMessage(<%= raw I18n.t("errors.messages.syntax_check_server_error").to_json %>);
+  }
+
+  ResultBox.prototype.showChecking = function() {
+    return this.showMessage(SS.loading);
+  };
+
+  ResultBox.prototype.showResult = function (checks, errors) {
+    if (errors.length == 0) {
+      this.showMessage("<p>" + "<%= I18n.t('errors.template.no_errors') %>" + "</p>");
+      return;
+    }
+
+    this.init();
+
+    var ul = $("<ul/>");
+
+    this.appendMessage(ul, checks, errors);
+
+    this.$elBody.html("")
+    this.$elBody.append("<p>" + "<%= I18n.t('errors.template.body') %>" + "</p>");
+    this.$elBody.append(ul);
+
+    this.moveLast();
+
+    $(window).trigger('resize');
+
+    return this;
+  };
+
+  ResultBox.prototype.appendMessage = function (ul, checks, errors) {
+    var self = this;
+    var correct, li, message, code, column;
+
+    var errorHash = {};
+
+    $.each(errors, function(_, error) {
+      var id = error["id"];
+      errorHash[id] = errorHash[id] || [];
+      (errorHash[id]).push(error);
+    });
+
+    $.each(checks, function(id, check) {
+      errors = errorHash[id];
+
+      if (errors) {
+        // append column name
+        if (check["name"]) {
+          column = $('<li class="column-name">');
+          column.text(check["name"]);
+          ul.append(column);
+        }
+
+        $.each(errors, function(_, error) {
+          // append code
+          code = $('<code>')
+          code.text(error["code"]);
+          ul.append('<li class="code">');
+          ul.find('li:last').append(code);
+
+          // append message
+          ul.append('<ul>');
+          ul.find('> ul:last').append('<li>');
+          li = ul.find('> ul:last li:last');
+          message = $('<span class="message detail">' + error["msg"] + '</span>');
+          if (error["detail"]) {
+            var tooltip = $('<div class="tooltip">!</div>').appendTo(message);
+            var detail = $('<ul class="tooltip-content">').appendTo(tooltip);
+            $.each(error["detail"], function () {
+              detail.append("<li>" + this + "<br></li>");
+            });
+          }
+          li.append(message);
+
+          // append correct
+          if (error["correctContent"]) {
+            correct = $('<a href="#" class="correct">' + "<%= I18n.t('cms.auto_correct.link') %>" + '</a>');
+            correct.on("click", function (e) {
+              var setContent, getContent, correctContent, resolve, type;
+
+              correctContent = error["correctContent"];
+              setContent = check["setContent"];
+              getContent = check["getContent"];
+              resolve = check["resolve"];
+              type = check["type"];
+
+              setContent(correctContent(id, { content: getContent(), resolve: resolve, type: type }, error));
+              $(self.form.addonSelector).find("button.syntax-check").trigger("click");
+
+              return false;
+            });
+            li.append(correct)
+          }
+          if (error["collector"]) {
+            correct = $('<button />', { type: "button", class: "btn btn-auto-correct" }).text("<%= I18n.t('cms.auto_correct.link') %>");
+            correct.on("click", function (ev) {
+              ev.target.disabled = true;
+
+              var setContent = check["setContent"];
+              var getContent = check["getContent"];
+              var resolve = check["resolve"];
+              var type = check["type"];
+
+              var token = $('meta[name="csrf-token"]').attr('content');
+              $.ajax({
+                type: "POST",
+                url: Syntax_Checker.correct_url,
+                cache: false,
+                data: {
+                  authenticity_token: token,
+                  content: { content: getContent(), resolve: resolve, type: type },
+                  collector: error["collector"],
+                  params: error["collector_params"]
+                },
+                success: function(data, textStatus, xhr) {
+                  setContent(data["result"]);
+                  $(self.form.addonSelector).find("button.syntax-check").trigger("click");
+                },
+                error: function (xhr, status, error) {
+                  console.log(error);
+                },
+                complete: function (xhr, status) {
+                  ev.target.disabled = false;
+                }
+              });
+
+              ev.preventDefault();
+              return false;
+            });
+            li.append(correct)
+          }
+        });
+      }
+    });
+
+    return;
+  };
+
+  function Syntax_Checker() {};
+
+  Syntax_Checker.checks = {};
+  Syntax_Checker.errors = [];
+  Syntax_Checker.errorCount = 0;
+
+  Syntax_Checker.form = null;
+  Syntax_Checker.resultBox = null;
+  Syntax_Checker.afterCheck = null;
+
+  Syntax_Checker.render = function (form, options) {
+    form = form || Cms_Form
+    options = options || {};
+
+    Syntax_Checker.form = form;
+    Syntax_Checker.options = options;
+    Syntax_Checker.resultBox = new ResultBox(Syntax_Checker.form);
+    Syntax_Checker.afterCheck = options["afterCheck"];
+
+    $(document).on("click", "button.syntax-check", function () {
+      var button = this;
+      button.disabled = true;
+
+      var complete = function () {
+        button.disabled = false;
+      };
+
+      Syntax_Checker.resultBox.init();
+      Syntax_Checker.resultBox.showChecking();
+      Syntax_Checker.asyncCheck().done(complete).fail(complete);
+    });
+  };
+
+  Syntax_Checker.validServerParams = [ "content", "resolve", "type" ];
+
+  Syntax_Checker.asyncCheck = function () {
+    var defer = $.Deferred();
+
+    Syntax_Checker.resultBox.showChecking();
+    Syntax_Checker.reset();
+    Syntax_Checker.check(defer);
+
+    return defer.promise();
+  };
+
+  Syntax_Checker.addCheck = function (id, options) {
+    options = options || {};
+
+    var name = options["name"] || null;
+    var resolve = options["resolve"] || "text";
+    var type = options["type"] || "string";
+    var getContent = options["getContent"];
+    var setContent = options["setContent"];
+    var afterCheck = options["afterCheck"];
+
+    Syntax_Checker.checks[id] = {
+      name: name,
+      resolve: resolve,
+      type: type,
+      getContent: getContent,
+      setContent: setContent,
+      afterCheck: afterCheck
+    };
+  };
+
+  Syntax_Checker.resetChecks = function () {
+    Syntax_Checker.checks = {};
+    Syntax_Checker.errors = [];
+    Syntax_Checker.errorCount = 0;
+  };
+
+  Syntax_Checker.reset = function () {
+    this.errors = [];
+  };
+
+  Syntax_Checker.getContents = function () {
+    var contents = {};
+
+    $.each(Syntax_Checker.checks, function(id, check) {
+      contents[id] = { content: check["getContent"](), resolve: check["resolve"], type: check["type"], afterCheck: check["afterCheck"] };
+    });
+
+    return contents;
+  };
+
+  Syntax_Checker.check = function (defer) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var contents = Syntax_Checker.getContents();
+    var params = [];
+    $.each(contents, function(id, content) {
+      var param = {};
+      $.each(Syntax_Checker.validServerParams, function() {
+        if (content[this]) {
+          param[this] = content[this];
+        }
+      });
+
+      if (Object.keys(param).length > 0) {
+        param["id"] = id;
+        params.push(param);
+      }
+    });
+
+    $.ajax({
+      type: "POST",
+      url: Syntax_Checker.url,
+      data: JSON.stringify({ authenticity_token: token, item: { contents: params } }),
+      contentType: "application/json",
+      success: function(data, textStatus, xhr) {
+        Syntax_Checker.showServerResult(contents, data, textStatus, xhr);
+        defer.resolve({ status: Syntax_Checker.errors.length == 0 ? "ok" : "failed" });
+      },
+      error: function (xhr, status, error) {
+        Syntax_Checker.resultBox.showServerError();
+        defer.reject(null, null, error);
+      },
+      complete: function (xhr, status) {
+        defer.resolve({ status: Syntax_Checker.errors.length == 0 ? "ok" : "failed" });
+      }
+    });
+  };
+
+  Syntax_Checker.showServerResult = function (contents, data, textStatus, xhr) {
+    $.each(data.errors, function() {
+      Syntax_Checker.errors.push(this);
+    });
+
+    $.each(contents, function(id, content) {
+      var afterCheck = content["afterCheck"];
+      if (afterCheck) {
+        afterCheck(id, content);
+      }
+    });
+
+    if (Syntax_Checker.afterCheck) {
+      Syntax_Checker.afterCheck();
+    }
+
+    Syntax_Checker.resultBox.showResult(Syntax_Checker.checks, Syntax_Checker.errors);
+  }
+
+  // javascript syntax check
+
+  Syntax_Checker.message = {
+    invalidOrderOfH: "<%= I18n.t('errors.messages.invalid_order_of_h') %>",
+    checkLinkText: "<%= I18n.t('errors.messages.check_link_text') %>",
+  };
+  Syntax_Checker.detail = {
+    invalidOrderOfH: <%= I18n.t('errors.messages.syntax_check_detail.invalid_order_of_h').to_json %>,
+    checkLinkText: <%= I18n.t('errors.messages.syntax_check_detail.check_link_text').to_json %>,
+  };
+
+  return Syntax_Checker;
+})();

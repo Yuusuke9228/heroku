@@ -1,0 +1,16 @@
+<% if @cur_node.map_html.present? %>
+<%
+  html = @cur_node.map_html.gsub(/\#\{(.*?)\}/) do |m|
+    if $1 =~ /(sidebar|canvas|filters)/
+      render template: "_#{$1}", locals: { current: "map" }
+    else
+      m
+    end
+  end
+%>
+<%= raw html %>
+<% else %>
+<%= render template: "_sidebar" %>
+<%= render template: "_canvas" %>
+<%= render template: "_filters" %>
+<% end %>

@@ -1,0 +1,13 @@
+<%= render 'ss/crud/print_preview_head', links: [[ I18n.t('ss.links.back'), { action: :show } ]] %>
+
+<div class="sheet">
+  <%= render template: 'show_tree' %>
+</div>
+
+<%= jquery do %>
+  SS_Font.render();
+
+  $('.subscribed-users').hide();
+
+  SS_AddonTabs.show('.comment .body');
+<% end %>

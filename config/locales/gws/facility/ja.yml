@@ -1,0 +1,205 @@
+ja:
+  gws/facility:
+    facility: 設備
+    category: カテゴリー
+    manage_columns: 追加入力を管理する
+    prompts:
+      minutes: 分
+      days: 日先まで
+    navi:
+      item: 設備設定
+      usage: 設備利用率
+      state: 設備利用状況
+      category: 設備カテゴリー
+    usage:
+      type: 種類
+      usage_month: 利用月
+      usage_day: 利用日
+      hours: 時間
+      times: 回数
+    state:
+      facility: 設備名
+      start_at: 予約開始日時
+      end_at: 予約終了日時
+      section: 利用課
+      user: 予約者
+      purpose: 利用目的
+    errors:
+      require_approver: 予約承認には管理ユーザーの登録が必要です。
+  gws/facility/item:
+    csv:
+      id: ID
+      name: 設備名
+      order: 並び順
+      category_id: カテゴリー
+      activation_date: 有効期限（開始）
+      expiration_date: 有効期限（終了）
+      minutes_limit: 時間制限
+      min_minutes_limit: 時間制限（最小）
+      max_minutes_limit: 時間制限（最大）
+      html: 内容本文
+      type: 内容形式
+      max_days_limit: 予約可能期間
+      reservation_start_date: 予約可能期間（開始）
+      reservation_end_date: 予約可能期間（終了）
+      approval_check_state: 予約承認
+      reservable_group_names: 予約可能グループ
+      reservable_member_names: 予約可能ユーザー
+      readable_setting_range: 公開範囲
+      readable_group_names: 閲覧グループ
+      readable_member_names: 閲覧ユーザー
+      group_names: 管理グループ
+      user_names: 管理ユーザー
+      permission_level: 権限レベル
+
+      approval_check_state_datas:
+        enabled: 有効
+        disabled: 無効
+      readable_setting_range_datas:
+        select: 選択範囲
+        public: 全公開
+        private: 非公開
+      type_datas:
+        plain: テキスト形式
+        markdown: Markdown形式
+
+      columns:
+        id: "追加入力%{n}ID"
+        type: "追加入力%{n}入力項目"
+        name: "追加入力%{n}名前"
+        order: "追加入力%{n}並び順"
+        required: "追加入力%{n}必須入力"
+        tooltips: "追加入力%{n}ツールチップ"
+        prefix_label: "追加入力%{n}前ラベル"
+        postfix_label: "追加入力%{n}後ラベル"
+        max_length: "追加入力%{n}最大長"
+        place_holder: "追加入力%{n}プレースホルダー"
+        additional_attr: "追加入力%{n}追加属性"
+        input_type: "追加入力%{n}種類"
+        min_decimal: "追加入力%{n}最小値"
+        max_decimal: "追加入力%{n}最大値"
+        initial_decimal: "追加入力%{n}初期値"
+        scale: "追加入力%{n}小数点以下の桁数"
+        minus_type: "追加入力%{n}負数の表示方法"
+        select_options: "追加入力%{n}選択肢"
+        upload_file_count: "追加入力%{n}ファイルアップロード数"
+
+        input_type_datas:
+          text: テキスト
+          email: メールアドレス
+          tel: 電話番号
+          date: 日付のみ
+          datetime: 日付＋時間
+
+        required_datas:
+          required: 必須
+          optional: 任意
+
+        minus_type_datas:
+          normal: "-"
+          triangle: △
+          filled_triangle: ▲
+
+  gws_role:
+    read_other_gws_facility_items: 設備の閲覧（全て）
+    read_private_gws_facility_items: 設備の閲覧（所有）
+    edit_other_gws_facility_items: 設備の編集（全て）
+    edit_private_gws_facility_items: 設備の編集（所有）
+    delete_other_gws_facility_items: 設備の削除（全て）
+    delete_private_gws_facility_items: 設備の削除（所有）
+    read_other_gws_facility_categories: カテゴリーの閲覧（全て）
+    read_private_gws_facility_categories: カテゴリーの閲覧（所有）
+    edit_other_gws_facility_categories: カテゴリーの編集（全て）
+    edit_private_gws_facility_categories: カテゴリーの編集（所有）
+    delete_other_gws_facility_categories: カテゴリーの削除（全て）
+    delete_private_gws_facility_categories: カテゴリーの削除（所有）
+    use_private_gws_facility_plans: 設備予約の利用
+    duplicate_private_gws_facility_plans: 設備の重複予約
+
+  modules:
+    gws/facility: 設備管理
+    addons:
+      gws/facility/group_setting: 設備管理
+      gws/facility/reservable_setting: 予約権限
+      gws/facility/column_setting: 追加入力
+
+  mongoid:
+    models:
+      gws/facility/item: 設備
+      gws/facility/category: カテゴリー
+      gws/facility/custom_field: 追加入力
+    attributes:
+      gws/facility/item:
+        name: 設備名
+        order: 並び順
+        category_id: カテゴリー
+        activation_date: 有効期限（開始）
+        expiration_date: 有効期限（終了）
+        minutes_limit: 時間制限
+        min_minutes_limit: 時間制限（最小）
+        max_minutes_limit: 時間制限（最大）
+        max_days_limit: 予約可能期間
+        reservation_start_date: 予約可能期間（開始）
+        reservation_end_date: 予約可能期間（終了）
+        approval_check_state: 予約承認
+        html: 設備概要
+      gws/facility/category:
+        name: カテゴリー名
+        order: 並び順
+      gws/addon/facility/group_setting:
+        facility_hours: 取得可能時間
+        facility_min_hour: 取得可能時間（開始）
+        facility_max_hour: 取得可能時間（終了）
+      gws/addon/facility/reservable_setting:
+        reservable_group_ids: 予約可能グループ
+        reservable_groups_hash: 予約可能グループ(ハッシュ)
+        reservable_member_ids: 予約可能ユーザー
+        reservable_members_hash: 予約可能ユーザー(ハッシュ)
+      gws/addon/facility/column_setting:
+        columns: 追加入力
+      gws/facility/custom_field:
+        name: 名前
+        order: 並び順
+
+  tooltip:
+    gws/facility/item:
+      name:
+        - 設備名を入力します。
+      order:
+        - 並び順を入力します。
+        - 数字が小さいほど上位に表示されます。
+      category_id:
+        - カテゴリーを選択します。
+      activation_date:
+        - 有効期間（開始）を入力します。
+        - 有効期間がない場合は空にしておきます。
+      expiration_date:
+        - 有効期間（終了）を入力します。
+        - 有効期間がない場合は空にしておきます。
+      minutes_limit:
+        - 連続して利用することが可能な最大の時間を入力します。
+      max_days_limit:
+        - 何日先まで予約可能かを入力します。
+        - この制限は設備管理者には適用されず、設備管理者はこの制限を受けずに何日先でも予約することができます。
+      reservation_start_date:
+        - 予約可能期間（開始）を入力します。
+        - 予約可能期間の指定がない場合は空にしておきます。
+        - この制限は設備管理者にも適用されます。
+      reservation_end_date:
+        - 予約可能期間（終了）を入力します。
+        - 予約可能期間の指定がない場合は空にしておきます。
+        - この制限は設備管理者にも適用されます。
+      approval_check_state:
+        - 予約に管理ユーザーの承認を必要とします。
+    gws/facility/category:
+      name:
+        - カテゴリー名を入力します。
+      order:
+        - 並び順を入力します。
+        - 数字が小さいほど上位に表示されます。
+    gws/facility/custom_field:
+      name:
+        - 項目の名称を入力します。
+      order:
+        - 質問項目の並び順を指定します。
+        - 数字が小さいほど上位に表示されます。

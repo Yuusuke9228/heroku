@@ -1,0 +1,37 @@
+<%= jquery do %>
+Gws_Schedule_Multiple_Calendar.renderController('#calendar-controller');
+SS_Clipboard.renderCopy();
+Gws_Schedule_Integration.paths.newMemoMessage = <%== new_gws_memo_message_path(folder: "INBOX").to_json %>;
+Gws_Schedule_Integration.paths.newWebmail = <%== new_webmail_mail_path(webmail_mode: "account", account: 0, mailbox: "INBOX").to_json %>;
+Gws_Schedule_Integration.render();
+<% end %>
+
+<%= render "gws/schedule/search/main/tabs" %>
+
+<section class="main-box gws-schedule-box gws-schedule-search">
+  <%= render "search" %>
+
+  <% if @items.present? %>
+  <div class="gws-schedule-search-hr"></div>
+  <div class="calendar" id="calendar-controller"></div>
+  <% end %>
+
+  <% @items.each_with_index do |item, idx| %>
+    <div class="calendar-multiple-header">
+      <%= link_to gws_public_user_long_name(item.long_name), gws_schedule_user_plans_path(user: item.id), class: "calendar-name" %>
+      <% if item.id == @cur_user.id %>
+        <%= link_to t('gws/schedule.links.add_plan'), new_gws_schedule_user_plan_path(user: item.id), class: 'add-plan' %>
+      <% end %>
+      <%= render "gws/schedule/main/calendar_attr", user: item %>
+    </div>
+    <div class="calendar multiple" id="cal-<%= item.id %>"></div>
+
+    <%= jquery do %>
+    Gws_Schedule_Multiple_Calendar.render('#cal-<%= item.id %>', {
+      tapMenu: <%= item.id == @cur_user.id %>,
+      restUrl: '<%= gws_schedule_user_plans_path(user: item.id) %>',
+      eventSources: [{ url: '<%= events_gws_schedule_user_plans_path(user: item.id, format: :json) %>' }]
+    });
+    <% end %>
+  <% end %>
+</section>

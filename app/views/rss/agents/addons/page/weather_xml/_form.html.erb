@@ -1,0 +1,7 @@
+<dl class="see mod-rss-page-weather-xml">
+  <dt><%= @model.t :event_id %><%= @model.tt :event_id %></dt>
+  <dd><%= f.text_field :event_id %></dd>
+
+  <dt><%= @model.t :weather_xml %></dt>
+  <dd><%= f.text_area :weather_xml, value: @item.weather_xml, class: "monospace", style: "height:400px;", readonly: true %></dd>
+</dl>

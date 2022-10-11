@@ -1,0 +1,37 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<dl class="see addon-gws-schedule-group-setting">
+  <dt><%= @model.t :schedule_max_date %></dt>
+  <dd><%= I18n.l @item.schedule_max_at.to_date, format: :gws_long %></dd>
+
+  <dt><%= @model.t :schedule_attachment_state %></dt>
+  <dd><%= @item.label :schedule_attachment_state %></dd>
+
+  <dt><%= @model.t :schedule_max_file_size %></dt>
+  <dd><%= number_to_human_size(@item.schedule_max_file_size) %></dd>
+
+  <dt><%= @model.t :schedule_drag_drop_state %></dt>
+  <dd><%= @item.label :schedule_drag_drop_state %></dd>
+
+  <% if false %>
+  <dt><%= @model.t :todo_delete_threshold %></dt>
+  <dd><%= @item.todo_delete_threshold_name %></dd>
+  <% end %>
+
+  <% %w(personal group custom_group group_all facility).each do |type| %>
+    <dt><%= @model.t("schedule_#{type}_tab_state") %></dt>
+    <dd>
+      <% if @item.send("schedule_#{type}_tab_visible?") %>
+        <%= @item.try("schedule_#{type}_tab_label").presence || @item.try("schedule_#{type}_tab_placeholder") || @item.label("schedule_#{type}_tab_state") %>
+      <% else %>
+        <%= @item.label("schedule_#{type}_tab_state") %>
+      <% end %>
+      <% if @item.respond_to?("schedule_#{type}_extra_state") && @item.send("schedule_#{type}_extra_state").present? %>
+        + <%= @item.label("schedule_#{type}_extra_state") %>
+      <% end %>
+    </dd>
+  <% end %>
+</dl>

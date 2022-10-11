@@ -1,0 +1,34 @@
+<%
+  template_path = @item.route.sub('/', '/agents/nodes/') + "/edit/_form"
+  file_path = "#{Rails.root}/app/views/#{template_path}.html.erb"
+%>
+
+<dl class="see">
+  <dt><%= @model.t :route %><%= @model.tt :route %></dt>
+  <dd><%= f.hidden_field :route %>
+    <%= @item.label :route %> &nbsp;
+    <% case controller.action_name
+      when "new", "create" %><%= link_to t('ss.links.change'), routes_cms_nodes_path(base_url: url_for(action: :new)), class: "ajax-box" %></dd>
+    <% when "edit", "update" %><%= link_to t('ss.links.change'), routes_cms_nodes_path(base_url: url_for(action: :edit)), class: "ajax-box" %></dd>
+    <% else %><%= link_to t('ss.links.change'), routes_cms_nodes_path, class: "ajax-box" %></dd>
+    <% end %>
+
+  <dt><%= @model.t :name %><%= @model.tt :title %></dt>
+  <dd><%= f.text_field :name %></dd>
+
+  <dt><%= @model.t :index_name %><%= @model.tt :title_for_index %></dt>
+  <dd><%= f.text_field :index_name %></dd>
+
+  <% if @item.persisted? && SS.config.cms.replace_urls_after_move %>
+    <dt><%= @model.t :basename %></dt>
+    <dd><%= @item.basename %> <%= f.hidden_field :basename, class: "filename" %></dd>
+  <% else %>
+    <dt><%= @model.t :basename %><%= @model.tt :foldername %></dt>
+    <dd><%= f.text_field :basename, class: "filename" %></dd>
+  <% end %>
+
+  <dt><%= @model.t :layout_id %><%= @model.tt :layout_id %></dt>
+  <dd><%= f.select :layout_id, ancestral_layouts(@item, @item.layout), include_blank: " " %></dd>
+</dl>
+
+<%= render template: template_path, locals: { f: f } if File.exist?(file_path) %>

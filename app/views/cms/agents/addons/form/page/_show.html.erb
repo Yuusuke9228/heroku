@@ -1,0 +1,8 @@
+<% return if @item.form.blank? %>
+
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:head] = @item.form.name
+%>
+
+<%= render "cms/form/forms/columns_show", form: @item.form, column_values: @item.column_values %>

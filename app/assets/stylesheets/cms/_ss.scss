@@ -1,0 +1,212 @@
+.routes-view {
+  article {
+    width: 100%;
+    padding: 5px 0;
+    float: left;
+    clear: both;
+    border-bottom: 1px solid #ddd;
+    h1 {
+      width: 160px;
+      padding: 5px;
+      float: left;
+      clear: both;
+    }
+    div {
+      float: left;
+      a {
+        display: inline-block;
+        margin: 0 0 0 15px;
+        padding: 5px 0;
+      }
+    }
+  }
+}
+
+.task-box {
+  .info {
+    margin: 0 0 15px;
+    dt, dd {
+      display: inline-block;
+      padding: 5px 10px;
+    }
+    dt {
+      background-color: #888;
+      color: #fff;
+    }
+    dd {
+      min-width: 60px;
+      margin: 0;
+    }
+  }
+  .logs {
+    textarea {
+      height: 300px;
+      background-color: #eee;
+    }
+  }
+  .controller {
+    @include display-flex(flex);
+    @include align-items(center);
+    width: 100%;
+    margin: 5px 0;
+  }
+  .auto-reload {
+    @include flex-grow(2);
+    @include display-flex(inline-flex);
+    @include justify-content(flex-end);
+    @include align-items(center);
+    [type=number] {
+      width: 6rem !important;
+      margin: 0 .25rem;
+      text-align: center;
+    }
+  }
+}
+
+.notices {
+  .datetime {
+    margin-left: 5px;
+    color: #888;
+  }
+}
+
+.notices-more {
+  padding: 0 10px 10px;
+  text-align: right;
+}
+
+.list-item {
+  .title.notice-severity-high {
+    color: $pink;
+    font-weight: bold;
+  }
+  .state {
+    display: inline-block;
+    padding: 1px 5px;
+    @include border-radius(3px);
+    font-size: 90%;
+    font-weight: normal;
+    &.state-public, &.state-public-expired, &.state-closed, &.state-ready, &.state-request, &.state-request-remind, &.state-edit, &.state-remand, &.state-deletion-locked {
+      color: #fff;
+    }
+    &.state-public, &.state-completed {
+      background-color: #2f7e42;
+    }
+    &.state-public-expired {
+      background-color: #2f7e42;
+    }
+    &.state-closed {
+      background-color: #6c757d;
+    }
+    &.state-ready {
+      background-color: #956c0a;
+    }
+    &.state-request {
+      background-color: #426ba9;
+    }
+    &.state-request-remind {
+      background-color: #c82635;
+    }
+    &.state-edit {
+      background-color: #6d4c41;
+    }
+    &.state-remand {
+      background-color: #895b8a;
+    }
+    &.state-deletion-locked {
+      background-color: #6c757d;
+    }
+  }
+}
+.list-item, .see {
+  .answer-state {
+    display: inline-block;
+    padding: 1px 5px;
+    @include border-radius(3px);
+    font-size: 90%;
+    font-weight: normal;
+    &.state-open {
+      background-color: rgba(237, 128, 119, .4);
+    }
+    &.state-processing {
+      background-color: rgba(68, 136, 197, .4);
+    }
+    &.state-processed {
+      background-color: rgba(94, 181, 166, .4);
+    }
+    &.state-closed {
+      background-color: rgba(176, 190, 60, .4);
+    }
+  }
+}
+
+.cms-tabs {
+  @include clear;
+  margin-top: -1px;
+  a {
+    display: block;
+    margin: 1px 0 -1px 6px;
+    float: left;
+    border: 1px solid $gray4;
+    border-left: 3px solid #bbb;
+    border-radius: 0 4px 0 0;
+    background-color: $gray5;
+    color: #000;
+    .tab-name {
+      display: block;
+      padding: 5px 8px;
+      text-align: center;
+    }
+    &:hover {
+      border-left-color: $orange;
+      background-color: #fff;
+      text-decoration: none;
+    }
+  }
+  a.current {
+    border-bottom-color: #fff;
+    border-left-color: $orange;
+    background-color: #fff;
+  }
+}
+
+// Dropdown
+.cms-dropdown-menu {
+  left: -4px;
+  max-height: 300px;
+  margin: 0;
+  padding: 4px;
+  overflow-y: scroll;
+  border: $border-gray4;
+  background: $white;
+  @include box-shadow(0 3px 12px rgba(0, 0, 0, .2));
+  white-space: nowrap;
+}
+
+.cms-modal-tabs {
+  height: 30px;
+  margin-top: -1px;
+  padding: 0 10px;
+  zoom: 1;
+  a {
+    display: block;
+    margin: 1px 6px -1px 0;
+    float: left;
+    border: 1px solid #d0d0d0;
+    border-left: 3px solid #bbb;
+    border-radius: 0 4px 0 0;
+    background-color: #dcdcdc;
+    color: #000;
+    text-decoration: none;
+    &.current, &:hover {
+      border-bottom-color: #fff;
+      border-left-color: #f25a38;
+      background-color: #fff;
+    }
+    .tab-name {
+      display: block;
+      padding: 5px 8px;
+      text-align: center;
+    }
+  }
+}

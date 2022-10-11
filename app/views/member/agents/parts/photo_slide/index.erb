@@ -1,0 +1,42 @@
+<%
+
+return if @items.blank?
+wrap_id = "member-photo-slide-#{@items[0].id}"
+target  = @cur_part.link_target.present? ? %(target="#{@cur_part.link_target}" rel="noopener") : nil
+opts = {}
+opts['speed'] = @cur_part.kv_speed if @cur_part.kv_speed.present?
+opts['pause'] = @cur_part.kv_pause if @cur_part.kv_pause.present?
+
+%>
+<%= jquery do %>
+  KeyVisual_Image.slide("#<%= wrap_id %>", <%== opts.to_json %>);
+<% end %>
+
+<div class="member-photo-slide" id="<%= wrap_id %>">
+  <div class="controls-start" style="display: none;"><%= t('key_visual.controls.start') %></div>
+  <div class="controls-stop" style="display: none;"><%= t('key_visual.controls.stop') %></div>
+
+  <%== @cur_part.upper_html if @cur_part.upper_html.present? %>
+
+  <ul class="images">
+    <% @items.each do |item| %>
+      <%
+        next unless item.image
+        url = @cur_part.node_url.present? ? item.full_url : item.url
+      %>
+      <li><a href="<%= url %>" <%== target %>><%= image_tag item.image.url, alt: item.name %></a></li>
+    <% end %>
+  </ul>
+
+  <div class="bx-thumbs">
+    <% @items.each_with_index do |item, idx| %>
+    <% file = item.image %>
+    <% next unless file %>
+      <a data-slide-index="<%= idx %>" href="">
+        <%= image_tag file.thumb_url, alt: item.name %>
+      </a>
+    <% end %>
+  </div>
+
+  <%== @cur_part.lower_html if @cur_part.lower_html.present? %>
+</div>

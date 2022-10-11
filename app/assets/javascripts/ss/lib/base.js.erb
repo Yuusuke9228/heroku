@@ -1,0 +1,767 @@
+this.SS = (function () {
+  function SS() {
+  }
+
+  SS.config = {};
+
+  SS.head = "";
+
+  SS.href = "";
+
+  SS.loading = <%= ApplicationController.helpers.loading.to_json %>;
+
+  SS.noticeTimeoutId = null;
+
+  SS.page = "";
+
+  SS.pageName = null;
+
+  SS.parts = null;
+
+  SS.siteName = null;
+
+  SS.timeFormatter = {
+    default: "YYYY/M/D HH:mm"
+  };
+
+  SS.debug = false;
+
+  SS.confirm = {
+    delete: <%= I18n.t('ss.confirm.delete').to_json %>
+  };
+
+  SS.defaultTimeoutMillis = 2000;
+
+  SS.KEY_ENTER = 13;
+
+  // $.isEmptyObject には IE11 で非互換がある。
+  //
+  //                            | Chrome 84 | IE 11  |
+  // ===========================|===========|========|
+  // $.isEmptyObject()          | true      | true   |
+  // $.isEmptyObject(undefined) | true      | true   |
+  // $.isEmptyObject(null)      | true      | true   |
+  // $.isEmptyObject([])        | true      | false  |
+  // $.isEmptyObject({})        | true      | true   |
+  // $.isEmptyObject(0)         | true      | true   |
+  // $.isEmptyObject("")        | true      | false  |
+  // $.isEmptyObject([0])       | false     | false  |
+  // $.isEmptyObject({a:0})     | false     | false  |
+  // $.isEmptyObject(1)         | true      | true   |
+  // $.isEmptyObject(-1)        | true      | true   |
+  // $.isEmptyObject("a")       | false     | false  |
+  // * `[]` と `""` との場合で非互換がある。
+  //
+  // 本来の $.isEmptyObject には上記のような非互換は存在しないが、
+  // IE 11 向けにポリフィルを組み込むと、上記のような非互換が発生する。
+  //
+  // IE 11 でも isEmptyObject が動作するように本メソッドを提供する。
+  SS.isEmptyObject = function (objectOrArray) {
+    if ($.isEmptyObject(objectOrArray)) {
+      return true;
+    }
+    if ($.isArray(objectOrArray) && objectOrArray.length === 0) {
+      return true;
+    }
+    if ($.type(objectOrArray) === "string" && objectOrArray.length === 0) {
+      return true;
+    }
+
+    return false;
+  };
+
+  SS.disableClick = function (el) {
+    if (el.data('clicked')) {
+      return false;
+    }
+    el.data('clicked', true);
+    return true;
+  };
+
+  SS.load = function () {
+  };
+
+  SS.render = function (box) {
+    if (box == null) {
+      box = null;
+    }
+    if (box) {
+      this.renderInBox(box);
+    } else {
+      this.renderNotInBox();
+    }
+    //default
+    box = $(document);
+    //eternal links
+    box.find("a[href^=http]").each(function () {
+      return $(this).addClass("external");
+    });
+    this.renderAjaxBox();
+    this.renderDateTimePicker();
+    this.renderFileUpload();
+  };
+
+  SS.renderNotInBox = function () {
+    return SS_Login.render();
+  };
+
+  SS.renderInBox = function (box) {
+    var anchorCallback;
+    anchorCallback = function () {
+      return $("#cboxLoadedContent .ajax-box:not(.cboxElement)").each(function () {
+        var elem;
+        elem = $(this);
+        elem.addClass("cboxElement");
+        if (!elem.attr("target") && !elem.data("target")) {
+          return elem.colorbox({
+            fixed: true,
+            width: "90%",
+            height: "90%",
+            onComplete: anchorCallback
+          });
+        }
+      });
+    };
+    return $(box).find(".ajax-box:not(.cboxElement)").each(function () {
+      var elem;
+      elem = $(this);
+      if (!elem.attr("target") && !elem.data("target")) {
+        return elem.colorbox({
+          fixed: true,
+          width: "90%",
+          height: "90%",
+          onComplete: anchorCallback
+        });
+      }
+    });
+  };
+
+  SS.renderClipboardCopy = function () {
+    $(".ss-clipboard-copy").on("click", function () {
+      var clip_attr = $(this).attr("data-clip-attr");
+      if (clip_attr) {
+        SS_Clipboard.copy($(this).attr(clip_attr), { "success_alert": true });
+      } else {
+        SS_Clipboard.copy($(this).text(), { "success_alert": true });
+      }
+      return false;
+    })
+  };
+
+  SS.renderLayout = function (url) {
+    var body, head;
+    head = $("head");
+    body = $("body");
+    SS.head = head.html();
+    SS.page = $("#page").html();
+    body.html(SS.loading);
+    return $.ajax({
+      type: "GET",
+      url: SS_Kana.url(url),
+      dataType: "json",
+      cache: true,
+      success: function (data) {
+        var cache;
+        body.append(data.body.replace("</ yield />", SS.page));
+        $("#ss-site-name").html(SS.siteName);
+        $("#ss-page-name").html(SS.pageName);
+        if (data.href !== SS.href) {
+          cache = $.ajaxSettings.cache;
+          $.ajaxSettings.cache = true;
+          if (SS.href) {
+            head.children("link").remove();
+            head.children("script").remove();
+          }
+          head.append(data.head);
+          $.ajaxSettings.cache = cache;
+        }
+        SS.href = data.href;
+        return SS.renderTools();
+      },
+      error: function (req, status, error) {
+        return body.html(SS.page);
+      },
+      complete: function () {
+        return $(".ss-part").each(function () {
+          return SS.renderPart($(this));
+        });
+      }
+    });
+  };
+
+  SS.renderPart = function (elem) {
+    var url, ref;
+    url = elem.data("href") || elem.attr("href");
+    url = SS_Kana.url(url.replace(/\.html/, ".json"));
+    url = SS_Translate.url(url.replace(/\.html/, ".json"), $("body").data("translate"));
+
+    ref = SS_Kana.url(location.pathname, false);
+    ref = SS_Translate.url(location.pathname, false);
+
+    elem.append(" " + SS.loading);
+    return $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "json",
+      data: "ref=" + ref,
+      success: function (data) {
+        return $(elem).replaceWith(data);
+      },
+      error: function (xhr, status, error) {
+        return $(elem).remove();
+      },
+      complete: function () {
+        SS.part = SS.part - 1;
+        if (SS.part === 0) {
+          return SS_Recommend.render();
+        }
+      }
+    });
+  };
+
+  SS.ajaxForm = function (elem, selector, params) {
+    if (typeof selector !== "string") {
+      params = params || selector;
+      selector = undefined;
+    }
+    if (!params) {
+      params = {};
+    }
+    elem = $(elem);
+    var defaults = {
+      url: elem.attr("action") + ".json",
+      dataType: "json",
+      success: function () {
+      },
+      error: function (data, status) {
+        alert([ "== Error ==" ].concat(data.responseJSON).join("\n"));
+      }
+    };
+    elem.on("submit", selector, function (e) {
+      var options;
+
+      if ($.isFunction(params)) {
+        options = params();
+      } else {
+        options = params;
+      }
+
+      $(this).ajaxSubmit($.extend(true, defaults, options));
+      e.preventDefault();
+    });
+  };
+
+  SS.ajax = function (elem, selector, params) {
+    if (typeof selector !== "string") {
+      params = params || selector;
+      selector = undefined;
+    }
+    if (!params) {
+      params = {};
+    }
+    return $(elem).on("click", selector, function (e) {
+      var defaults, self;
+      self = $(this);
+      defaults = {
+        url: self.attr("href"),
+        beforeSend: function () {
+          return self.html(SS.loading);
+        },
+        success: function () {
+        },
+        error: function (data, status) {
+          return alert("== Error ==");
+        }
+      };
+      $.ajax($.extend(true, defaults, params));
+      e.preventDefault();
+      return false;
+    });
+  };
+
+  SS.ajaxDelete = function (elem, selector, params) {
+    if (typeof selector !== "string") {
+      params = params || selector;
+      selector = undefined;
+    }
+    if (!params) {
+      params = {};
+    }
+
+    $(elem).on("click", selector, function (e) {
+      var defaults, self;
+      if (!confirm(SS.confirm.delete)) {
+        return false;
+      }
+      self = $(this);
+      defaults = {
+        type: "POST",
+        data: "_method=delete",
+        url: self.attr("href") + ".json",
+        dataType: "json",
+        beforeSend: function () {
+          self.html(SS.loading);
+        },
+        success: function () {
+          if (self.data("remove")) {
+            $(self.data("remove")).remove();
+          }
+        },
+        error: function (data, status) {
+          alert([ "== Error ==" ].concat(data.responseJSON).join("\n"));
+        }
+      };
+      $.ajax($.extend(true, defaults, params));
+      e.preventDefault();
+      return false;
+    });
+  };
+
+  SS.notice = function (message, opts) {
+    if (!opts) {
+      opts = {};
+    }
+
+    SS.clearNotice(message);
+
+    var notice = $('#notice');
+    if (!notice.hasClass('js-notice')) {
+      notice.addClass('js-notice').on("click", function () {
+        return notice.slideUp('normal');
+      });
+    }
+    notice.find('.wrap').html(message);
+    notice.slideDown('normal');
+    if (opts) {
+      if (opts.timeout === 0) {
+        return;
+      }
+    }
+    SS.noticeTimeoutId = setTimeout((function () {
+      return $('#notice').slideUp('normal');
+    }), 1800);
+
+    return SS.noticeTimeoutId;
+  };
+
+  SS.clearNotice = function (message) {
+    if (SS.noticeTimeoutId) {
+      clearTimeout(SS.noticeTimeoutId);
+      SS.noticeTimeoutId = null;
+    }
+
+    var $notice = $('#notice');
+    $notice.hide();
+
+    var $wrap = $notice.find('.wrap');
+    var save = $wrap.html();
+    $wrap.html(message || '');
+
+    return save;
+  };
+
+  SS.formChanged = false;
+  SS.disableConfirmUnloading = false;
+
+  SS.confirmUnloading = function () {
+    SS.formChanged = false;
+    $("input[type=text],textarea,select").on("change", function () {
+      SS.formChanged = true;
+    });
+    $(window).on("beforeunload", function () {
+      if (SS.formChanged && !SS.disableConfirmUnloading) {
+        return <%= I18n.t('ss.confirm.unload').to_json %>;
+      }
+    });
+    $("input[type=submit]").on("click", function () {
+      SS.formChanged = false;
+      return true;
+    });
+  };
+
+  SS.randomPassword = function (length) {
+    var chars, i, j, pass, ref1;
+    if (length == null) {
+      length = 8;
+    }
+    chars = 'abcdefghijkmnopqrstuvwxyz!@#$%&-+ABCDEFGHIJKLMNOP234567890';
+    pass = '';
+    for (i = j = 0, ref1 = length; 0 <= ref1 ? j <= ref1 : j >= ref1; i = 0 <= ref1 ? ++j : --j) {
+      i = Math.floor(Math.random() * chars.length);
+      pass += chars.charAt(i);
+    }
+    return pass;
+  };
+
+  SS.fileCheck = function () {
+    return $('#item_files').on("change", function () {
+      var form, uri;
+      form = $(this).val();
+      if (!form) {
+        $(".js-uploader-alert-message").hide();
+        return;
+      }
+      uri = location.pathname.split("/");
+      return $.ajax({
+        type: "get",
+        url: uri.join("/"),
+        dataType: "json",
+        data: {
+          "do": "check",
+          item_files: form
+        },
+        success: function (data) {
+          if (data["message"]) {
+            $(".js-uploader-alert-message").html(data["message"]);
+            return $(".js-uploader-alert-message").show();
+          } else {
+            return $(".js-uploader-alert-message").hide();
+          }
+        },
+        error: function (xhr, status) {
+          var errors;
+          try {
+            errors = $.parseJSON(xhr.responseText);
+            return alert([ "== Error ==" ].concat(errors).join("\n"));
+          } catch (_error) {
+            return alert([ "== Error ==" ].concat(xhr["statusText"]).join("\n"));
+          }
+        }
+      });
+    });
+  };
+
+  // renderAjaxBox([box][, params])
+  SS.renderAjaxBox = function () {
+    var box = null;
+    var params = null;
+
+    // parse arguments
+    if (arguments.length > 0) {
+      if (typeof (arguments[0]) === "object") {
+        if (arguments[0].jquery) {
+          box = arguments[0];
+        } else {
+          params = arguments[0];
+        }
+      } else {
+        box = $(arguments[0]);
+      }
+
+      if (!params && arguments.length > 1) {
+        params = arguments[1];
+      }
+    }
+
+    if (!box) {
+      box = $(document);
+    }
+
+    if (!params) {
+      params = {
+        fixed: true,
+        width: "90%",
+        height: "90%",
+        onOpen: function () {
+          $("#cboxContent").data('on-select', null);
+        }
+      };
+    }
+
+    box.find(".ajax-box:not(.cboxElement)").each(function () {
+      var elem = $(this);
+      if (elem.attr("target") || elem.data("target") || typeof elem.colorbox === 'undefined') {
+        return;
+      }
+
+      elem.colorbox(params);
+    });
+  };
+
+  // datetimepicker
+
+  // 注意:
+  // datetimepicker にはバグがある。
+  // このコントールの次の要素が disabled の場合、コントロール内で Enter キーを押しても、入力した日時が確定しない。
+  //
+  // datetimepicker では、コントロール内で Enter キーを押すと次の要素にフォーカスを移動させる。
+  // フォーカスを移動させることでイベント "blur" が発生し、入力が確定 → onChangeDateTime イベント発生という順で処理が進む。
+  //
+  // しかし、次の要素が disabled の場合、フォーカスを移動させれず、イベント "blur" が発生しない。
+  // このため、入力が確定せず、onChangeDateTime イベントも発生しない。
+  //
+  // 問題となるソースコードは https://github.com/xdan/datetimepicker/blob/master/jquery.datetimepicker.js#L2591
+  // 要素セレクターに ":enabled" の条件がない。
+  //
+  // そこで、Enter キーが押されたら、イベント "blur" を発生させ、入力が確定 → onChangeDateTime イベント発生という順で処理が進むようにする。
+  // また、念の為 Enter キーでフォーカスを移動させないようにするため enterLikeTab を false にする。
+  SS.renderDateTimePicker = function () {
+    $.datetimepicker.setLocale('ja');
+    $.each($(".js-date"), function () {
+      var $this = $(this);
+      var opts = {
+        timepicker: false,
+        format: 'Y/m/d',
+        closeOnDateSelect: true,
+        scrollInput: false,
+        enterLikeTab: false
+      };
+      var data = $this.data();
+      if ("minDate" in data) {
+        opts.minDate = data.minDate;
+      }
+      if ("maxDate" in data) {
+        opts.maxDate = data.maxDate;
+      }
+      $this.attr('autocomplete', 'off')
+        .datetimepicker(opts)
+        .on("keydown", function(ev) {
+          var key = ev.which;
+          if (key === SS.KEY_ENTER) {
+            $this.trigger("blur.xdsoft")
+          }
+          return true;
+        });
+    });
+    $.each($(".js-datetime"), function () {
+      var $this = $(this);
+      var opts = {
+        roundTime: 'ceil',
+        step: 30,
+        enterLikeTab: false
+      };
+      var data = $this.data();
+      if ("minDate" in data) {
+        opts.minDate = data.minDate;
+      }
+      if ("maxDate" in data) {
+        opts.maxDate = data.maxDate;
+      }
+      if ("step" in data) {
+        opts.step = data.step;
+      }
+      $this.attr('autocomplete', 'off')
+        .datetimepicker(opts)
+        .on("keydown", function(ev) {
+          var key = ev.which;
+          if (key === SS.KEY_ENTER) {
+            $this.trigger("blur.xdsoft")
+          }
+          return true;
+        });
+    });
+  };
+
+  // SS.formatTime("2019-07-09T14:33:38+0900") = "2019/7/9 14:33"
+  // SS.formatTime("2019-07-09T14:33:38+0900", "default") = "2019/7/9 14:33"
+  //
+  // You can pass a Date or moment instance to 1st argument
+  //
+  // SS.formatTime(new Date())
+  // SS.formatTime(moment())
+  SS.formatTime = function (time, format) {
+    if (!format) {
+      format = "default"
+    }
+    if (SS.timeFormatter[format]) {
+      format = SS.timeFormatter[format];
+    }
+
+    return moment(time).format(format);
+  };
+
+  SS.renderFileUploadInitialized = false;
+
+  SS.renderFileUpload = function () {
+    $(".ss-file-field .btn-file-upload").each(function () {
+      var $uploadBtn = $(this);
+      if ($uploadBtn.data("on-select")) {
+        return;
+      }
+
+      var $container = $uploadBtn.closest(".ss-file-field")
+      var onSelect = function ($item) {
+        $.colorbox.close();
+
+        var $data = $item.closest("[data-id]");
+        var fileId = $data.data('id');
+        var fileName = $data.data("humanizedName") || $data.data("name") || $data.find(".select-item").text() || $item.text() || $data.text();
+        if (!fileId || !fileName) {
+          return;
+        }
+
+        $container.find(".humanized-name").text(fileName);
+        $container.find(".file-id").val(fileId);
+        $container.find(".sanitizer-status").replaceWith($data.find('.sanitizer-status'));
+        $container.find(".btn-file-delete").removeClass("hide");
+        $container.find(".upload-drop-notice").addClass("hide");
+      };
+
+      $uploadBtn.data("on-select", onSelect);
+
+      $container.find(".dropdown-item").on("click", function (ev) {
+        ev.preventDefault();
+
+        var $el = $(this);
+        var href = $el.attr("href");
+
+        $uploadBtn.attr("href", href).text($el.text()).trigger("click");
+
+        var $dropdown = $el.closest(".dropdown")
+        $dropdown.removeClass('active');
+        $dropdown.find(".dropdown-menu").removeClass('active');
+
+        return false;
+      });
+
+      var dropEventTriggered = false;
+      var dropNoticeHtml = $container.find(".upload-drop-notice").html();
+      $container.on("dragenter", function (ev) {
+        if (!dropEventTriggered) {
+          $container.addClass('file-dragenter');
+        }
+        return false;
+      });
+      $container.on("dragleave", function (ev) {
+        $container.removeClass('file-dragenter');
+        return false;
+      });
+      $container.on("dragover", function (ev) {
+        if (!dropEventTriggered) {
+          $container.addClass('file-dragenter');
+        }
+        return false;
+      });
+      $container.on("drop", function (ev) {
+        $container.removeClass('file-dragenter');
+
+        var files = ev.originalEvent.dataTransfer.files;
+        if (files.length === 0) {
+          return false;
+        }
+
+        if (dropEventTriggered) {
+          return false;
+        }
+        dropEventTriggered = true;
+        $container.find(".upload-drop-notice").html(SS.loading).removeClass("hide");
+        $container.css("cursor", "progress");
+
+        var token = $('meta[name="csrf-token"]').attr('content');
+        var formData = new FormData();
+        formData.append('authenticity_token', token);
+        var defaultFileResizing = SS_AjaxFile.defaultFileResizing();
+        if (defaultFileResizing) {
+          formData.append('item[resizing]', defaultFileResizing);
+        }
+        for (var j = 0, len = files.length; j < len; j++) {
+          formData.append('item[in_files][]', files[j]);
+        }
+
+        var uploadUrl = $uploadBtn.attr("href");
+        $.ajax({
+          url: uploadUrl,
+          type: "POST",
+          dataType: "JSON",
+          data: formData,
+          processData: false,
+          contentType: false
+        }).then(function (data) {
+          // success
+          var fileData = data[0];
+          if (!fileData) {
+            return;
+          }
+
+          $container.find(".humanized-name").text(fileData["humanized_name"]);
+          $container.find(".file-id").val(fileData["id"] || fileData["_id"]);
+          $container.find(".sanitizer-status").addClass("hide");
+          $container.find(".btn-file-delete").removeClass("hide");
+          $container.find(".upload-drop-notice").addClass("hide");
+        }, function (xhr, textStatus, errorThrown) {
+          // error
+          if (xhr.status === 413) {
+            alert([ "== Error ==" ].concat(<%= I18n.t('errors.messages.request_entity_too_large').to_json %>).join("\n"));
+          } else if (xhr.responseJSON && Array.isArray(xhr.responseJSON)) {
+            alert([ "== Error ==" ].concat(xhr.responseJSON).join("\n"));
+          } else {
+            alert([ "== Error ==" ].concat(xhr.statusText).join("\n"));
+          }
+        }).then(function () {
+          // complete
+          dropEventTriggered = false;
+          $container.find(".upload-drop-notice").html(dropNoticeHtml);
+          $container.css("cursor", "auto");
+        });
+
+        return false;
+      });
+    });
+
+    if (!SS.renderFileUploadInitialized) {
+      SS.renderFileUploadInitialized = true;
+
+      $(document).on("click", ".ss-file-field .btn-file-delete", function () {
+        var $this = $(this);
+        var $container = $this.closest(".ss-file-field")
+        $container.find(".humanized-name").text("");
+        $container.find(".file-id").val("");
+        $container.find(".sanitizer-status").addClass("hide");
+        $container.find(".btn-file-delete").addClass("hide");
+        $container.find(".upload-drop-notice").removeClass("hide");
+
+        return false;
+      });
+    }
+  };
+
+  SS.timeoutAfterSubmit = function() {
+    $(document).on("submit", "form", function (ev) {
+      var $form = $(ev.target);
+      var timeout = $form.data("ss-timeout") || SS.defaultTimeoutMillis;
+
+      setTimeout(function () {
+        $form.trigger("ss:submitTimeout");
+      }, timeout);
+    });
+  };
+
+  SS.enableFormElementsOnTimeoutSubmit = function() {
+    $(document).on("ss:submitTimeout", function (ev) {
+      var $form = $(ev.target);
+      $.rails.enableFormElements($form);
+    });
+  };
+
+  SS.onDoubleClickGuardClick = function(ev) {
+    var $element = $(ev.target);
+    var timeout = $element.data("ss-timeout") || SS.defaultTimeoutMillis;
+
+    $.rails.disableFormElement($element);
+    setTimeout(function () {
+      $element.trigger("ss:clickTimeout");
+    }, timeout);
+  };
+
+  SS.onClickTimeout = function(ev) {
+    var $element = $(ev.target);
+    $.rails.enableFormElement($element);
+  };
+
+  SS.enableDoubleClickGuard = function () {
+    SS.timeoutAfterSubmit();
+    SS.enableFormElementsOnTimeoutSubmit();
+
+    $(document).on("click", ".ss-dc-guard", SS.onDoubleClickGuardClick);
+    $(document).on("ss:clickTimeout", SS.onClickTimeout);
+  };
+
+  SS.debugLog = function () {
+    if (SS.debug) {
+      console.log.apply(console, arguments);
+    }
+  };
+
+  return SS;
+
+})();

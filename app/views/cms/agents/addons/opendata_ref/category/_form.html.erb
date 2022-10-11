@@ -1,0 +1,25 @@
+<% return "" if @cur_node.try(:opendata_site_ids).blank? %>
+<% return "" if @item.respond_to?(:master?) && !@item.master? %>
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<%
+  categories = Opendata::Node::Category.in(site_id: @cur_node.opendata_site_ids).and_public.order_by(order: 1).pluck(:name, :id)
+  return if categories.blank?
+%>
+<dl class="see mod-cms-opendata-category category-form">
+  <dt class="wide"><%= @model.t :opendata_category_ids %><%= @model.tt :opendata_category_ids %></dt>
+  <dd class="wide">
+    <%= f.hidden_field 'opendata_category_ids[]', value: '' %>
+    <% categories.each do |cate| %>
+      <div class="parent">
+        <%= label_tag do %>
+          <%= f.check_box 'opendata_category_ids[]', {}, cate[1] %>
+          <%= cate[0] %>
+        <% end %>
+      </div>
+    <% end %>
+  </dd>
+</dl>

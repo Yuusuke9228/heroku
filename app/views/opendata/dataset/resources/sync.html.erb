@@ -1,0 +1,14 @@
+<%= form_for :item, url: { action: :sync }, html: { method: :post, multipart: true } do |f| %>
+  <%= error_messages_for :item %>
+
+  <div class="addon-views">
+    <%= render "ss/crud/addon", addon: { id: "addon-basic", head: t("ldap.confirm.sync") } do %>
+      <%= render template: "_sync" %>
+    <% end %>
+  </div>
+
+  <footer class="send">
+    <%= f.submit t("ldap.buttons.sync"), class: 'btn-primary sync' %>
+    <%= f.button t("ss.buttons.cancel"), class: 'btn-default', type: :reset, onclick: "location.href='#{url_for(action: :show)}'; return false;" %>
+  </footer>
+<% end %>

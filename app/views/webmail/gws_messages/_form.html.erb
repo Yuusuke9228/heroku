@@ -1,0 +1,6 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:class] = "hide"
+%>
+
+<%= render "gws/memo/messages/form", local_assigns %>

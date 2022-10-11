@@ -1,0 +1,520 @@
+// Webmail
+
+// -------------------------------------------------------------------------------------------------
+// menu and common
+
+.webmail-dropdown-menu, .webmail-address-dropdown-menu {
+  @include box-shadow(0 3px 12px rgba(0, 0, 0, .2));
+  left: 0;
+  margin: 0;
+  padding: 5px 0;
+  border: 1px solid #ccc;
+  background: #fff;
+  text-align: left;
+  a {
+    @include truncate;
+    padding: 5px 10px;
+    color: $black;
+  }
+  a:hover {
+    background-color: $gray1;
+    color: $orange;
+    text-decoration: none;
+  }
+  .pad {
+    display: inline-block;
+    width: 10px;
+  }
+}
+#menu .nav-menu .dropdown {
+  display: inline;
+  .dropdown-menu {
+    a {
+      display: block;
+      padding: 5px 10px;
+      background-image: none;
+    }
+  }
+}
+#menu .nav-menu .webmail-dropdown:after {
+  content: none !important;
+}
+li.webmail-accounts {
+  float: right;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+.webmail-category-label {
+  @include border-radius(3px);
+  display: inline-block;
+  padding: 1px 5px;
+  background-color: #e8e8e8;
+  background-image: url(/assets/img/gws/bg-plan.png);
+  color: #444;
+  font-size: 90%;
+  font-weight: normal;
+
+  &.webmail-error {
+    background-color: #f40;
+    color: #fff;
+  }
+}
+
+// -------------------------------------------------------------------------------------------------
+// navi
+
+.webmail-navi {
+  .reload {
+    &:hover { background: none !important; }
+    &:hover .material-icons { color: $orange; }
+    &.disabled .material-icons { color: rgba(0, 0, 0, .2); }
+  }
+}
+.webmail-navi-mailboxes {
+  .reload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    padding: 7px 8px 9px;
+  }
+  .unseen {
+    color: $orange;
+    font-weight: bold;
+  }
+  .unseen.count0 {
+    display: none;
+  }
+  .mailboxes {
+    a {
+      display: block;
+      width: 100%;
+      padding: 6px 5px 6px 14px;
+    }
+    a:last-child {
+      margin-bottom: 8px;
+    }
+    a.current, a:hover {
+      background-color: $gray1;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    .pad {
+      display: inline-block;
+      width: 16px;
+    }
+    .material-icons {
+      margin-right: 2px;
+      vertical-align: top;
+    }
+    .mailbox--noselect .material-icons {
+      color: rgba(0, 0, 0, .5);
+    }
+  }
+  .droppable-hover {
+    color: #f00;
+  }
+}
+.webmail-navi-quota {
+  position: relative;
+  .reload {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+  }
+  .ss-quota-bar {
+    margin: 0 10px 10px;
+  }
+}
+.webmail-quota-alert {
+  margin-left: 230px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #ff0f0f;
+}
+
+// -------------------------------------------------------------------------------------------------
+// mails
+
+.webmail-mails-head, .webmail-address-head {
+  .dropdown {
+    display: inline;
+    font-weight: normal;
+    .btn {
+      padding-right: 8px;
+    }
+  }
+  .dropdown-menu {
+    width: 200px;
+  }
+}
+.webmail-mail-search-label {
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+
+  .webmail-mail-search-label-reset {
+    width: 100%;
+    text-align: right;
+  }
+}
+.webmail-mail-search {
+  display: none;
+  margin: 0 10px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  label.flag {
+    width: auto;
+    padding: 0 15px;
+  }
+}
+
+@media print {
+  .webmail-print {
+    #head, #foot, #navi, #crumbs, #menu {
+      display: none;
+    }
+    #page:after {
+      display: none;
+    }
+    #main, #main .wrap {
+      margin: 0;
+    }
+  }
+}
+
+// index
+.webmail-mails {
+  .list-item {
+    padding: 5px 8px;
+    display: block;
+  }
+  .list-item-head {
+    @include mb { display: none; }
+    font-weight: bold;
+    padding-bottom: 8px;
+    .head {
+      @include display-flex;
+      position: relative;
+      height: 1.2em;
+      margin-left: 82px;
+      .field { display: inline-block; }
+      .from, .to { width: 194px; }
+      .title { width: calc(100% - 425px); }
+      .datetime { width: 10em; }
+      .size {
+        width: 95px;
+        text-align: right;
+      }
+    }
+  }
+  .info {
+    @include truncate;
+    @include display-flex;
+    @include mb {
+      display: block;
+    }
+    .field {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: text-top;
+    }
+    .from, .to {
+      width: 200px;
+      padding-right: 5px;
+      a { color: inherit; }
+    }
+    .icon-reply {
+      margin-right: .2rem;
+      color: #a5f;
+      vertical-align: top;
+    }
+    .title {
+      width: calc(100% - 400px);
+      width: -webkit-calc(100% - 400px);
+      padding-right: 5px;
+      font-size: 100%;
+      @include mb {
+        width: 100%;
+      }
+    }
+    .datetime {
+      width: 10em;
+      font-weight: normal;
+    }
+    .size {
+      width: 95px;
+      font-weight: normal;
+      text-align: right;
+    }
+  }
+}
+
+// show
+.webmail-mail {
+  .addon-head {
+    padding: 1px 15px 15px;
+    .icon-star {
+      float: right;
+      margin: 12px 0 0;
+      &.on    .material-icons { color: #f70; }
+      &.off   .material-icons { color: #ddd; }
+      &:hover .material-icons { opacity: .8; }
+    }
+    .subject {
+      display: block;
+      margin: 12px 0;
+      font-size: 130%;
+      line-height: 1.4;
+    }
+    .from {
+      float: left;
+      line-height: 1.4;
+      @include mb {
+        float: none;
+        margin-bottom: 10px;
+      }
+    }
+    .date {
+      text-align: right;
+      line-height: 1.4;
+    }
+  }
+  .address-header {
+    padding: 5px 15px;
+    border-top: 1px solid #e4e4e4;
+    background-color: #fafafa;
+  }
+  .address-field {
+    padding: 3px 0;
+    .label {
+      float: left;
+      color: #888;
+    }
+    .value {
+      padding: 0 0 0 45px;
+    }
+  }
+  .address-item {
+    margin: 0 10px 0 0;
+    &.clickable:hover {
+      text-decoration: underline;
+    }
+    .material-icons {
+      margin: 2px 1px 0 0;
+      vertical-align: top;
+    }
+  }
+  .request-mdn-notice {
+    @include clear;
+    padding: 5px 15px;
+    border-bottom: 1px solid #969696;
+    background-color: #cecece;
+    line-height: 25px;
+    .action {
+      float: right;
+    }
+  }
+  .show-image {
+    display: block;
+    margin: -5px 0 10px;
+    padding: 8px;
+    border: 1px solid #fd8;
+    background-color: rgba(255, 255, 0, .2);
+    background-color: #ffc;
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      border-color: #fb8;
+      background-color: rgba(255, 255, 0, .35);
+      background-color: #ffa;
+    }
+  }
+  .addon-body {
+    min-height: 200px;
+    border-top: 1px solid #e4e4e4;
+    .body--html {
+      ul li {
+        list-style-type: disc;
+      }
+      blockquote {
+        padding: 2px 8px 2px 20px;
+        border-left-style: solid;
+        border-left-color: #ccc;
+        border-left-width: 5px;
+      }
+      img[data-url] {
+        height: unset;
+      }
+    }
+  }
+  .attachments {
+    padding: 15px 15px 5px;
+    border-top: 1px solid #e4e4e4;
+    .file {
+      display: inline-block;
+      margin: 0 10px 10px 0;
+    }
+
+    .batch-download {
+      width: 100%;
+      text-align: right;
+    }
+  }
+}
+
+// form
+.webmail-mail-form-address {
+  margin: 0;
+  padding: 0 10px;
+  &.cc-bcc {
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #e4e4e4;
+  }
+  dt {
+    float: left;
+    min-width: 50px;
+    color: #a0522d;
+    font-weight: bold;
+  }
+  dd {
+    margin-left: 50px;
+  }
+  .address {
+    height: auto;
+  }
+  .selected-address {
+    @include clear;
+    margin-top: 10px;
+    cursor: pointer;
+    span {
+      float: left;
+      max-width: 500px;
+      margin: 0 4px 4px 0;
+      padding: 2px 5px;
+      border: 1px solid #bcd;
+      border-radius: 3px;
+      background: #def;
+      &:hover {
+        background: #d7e7f7;
+      }
+    }
+    .invalid-address {
+      border-bottom: dotted 2px #f00;
+    }
+    .placeholder {
+      height: 26px;
+    }
+  }
+}
+.cc-bcc-label {
+  display: inline-block;
+  margin: 0 0 0 60px;
+  color: #888;
+}
+.webmail-addon-mail-body {
+  @include clear;
+  .subject {
+    float: left;
+    width: calc(100% - 300px);
+    width: -webkit-calc(100% - 300px);
+    min-width: 300px;
+    margin-bottom: 15px;
+    input {
+      width: 100%;
+      padding: 10px 6px;
+    }
+  }
+  .options {
+    float: right;
+    margin-bottom: 15px;
+    text-align: right;
+  }
+  #item_signature {
+    max-width: 200px;
+  }
+  .body-content {
+    clear: both;
+    margin-top: 15px;
+  }
+  .template-options {
+    margin-top: 10px;
+    float: left;
+  }
+  .header-options {
+    margin-top: 10px;
+    float: right;
+  }
+}
+// form-addresses
+.webmail-address-field.see {
+  padding: 0;
+  .ajax-box {
+    //float: left;
+  }
+  .address-groups {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+  }
+  .address-group {
+    padding: 0 10px 5px 0;
+  }
+  .address-group-label {
+    display: block;
+    padding: 0 0 2px;
+  }
+}
+.webmail-addon-mail-file {
+  .action a {
+    display: none;
+  }
+  .action a:last-of-type {
+    display: inline-block;
+  }
+}
+
+// -------------------------------------------------------------------------------------------------
+// filter
+
+.webmail-filter-conditions {
+  div {
+    margin: 15px 0 0;
+  }
+}
+
+// -------------------------------------------------------------------------------------------------
+// tab
+
+.webmail-tabs {
+  @include clear;
+  margin-top: -1px;
+  a {
+    display: block;
+    float: left;
+    margin: 1px 0 -1px 6px;
+    border: 1px solid $gray4;
+    border-left: 3px solid #bbb;
+    border-radius: 0 4px 0 0;
+    background-color: $gray5;
+    color: #000;
+    .tab-name {
+      display: block;
+      padding: 5px 8px;
+      text-align: center;
+    }
+    &:hover {
+      border-left-color: $orange;
+      background-color: #fff;
+      text-decoration: none;
+    }
+  }
+  a.current {
+    border-bottom-color: #fff;
+    border-left-color: $orange;
+    background-color: #fff;
+  }
+}

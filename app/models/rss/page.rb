@@ -1,0 +1,18 @@
+class Rss::Page
+  include Cms::Model::Page
+  include Cms::Page::SequencedFilename
+  include Rss::Addon::Page::Body
+  include Category::Addon::Category
+  include Cms::Addon::Release
+  include Cms::Addon::GroupPermission
+  include History::Addon::Backup
+
+  set_permission_name "article_pages"
+
+  store_in_repl_master
+  default_scope ->{ where(route: "rss/page") }
+
+  skip_callback(:destroy, :before, :create_history_trash)
+
+  self.default_released_type = "fixed"
+end

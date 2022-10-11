@@ -1,0 +1,7 @@
+<% if @item && @item.errors.present? %>
+  <%= error_messages_for :item %>
+<% end %>
+
+<% if @items.present? %>
+  <%= render "workflow/pages/branch", items: @items  %>
+<% end %>

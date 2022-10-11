@@ -1,0 +1,57 @@
+this.SS_Color = (function () {
+  function SS_Color() {
+  }
+
+  SS_Color.swatches = <%= SS.config.minicolors_swatches.color_codes %>;
+
+  SS_Color.render = function () {
+    $(".js-color").each(function () {
+      var self, warp, slider, swatches, panel, top;
+      self = $(this);
+
+      if (self.data("swatches")) {
+        self.minicolors({ swatches: SS_Color.swatches });
+
+        warp = self.closest(".minicolors");
+        slider = $(warp).find('.minicolors-slider');
+        swatches = $(warp).find('ul.minicolors-swatches');
+        panel = $(warp).find(".minicolors-panel");
+
+        panel.prepend(swatches);
+        top = warp.find('li.minicolors-swatch.minicolors-sprite').outerHeight(true) * 2
+          + swatches.outerHeight(true)
+          + parseInt(slider.css('top'));
+
+        slider.css('top', top.toString() + 'px');
+      } else {
+        self.minicolors();
+      }
+
+      if (self.data('clear')) {
+        var btn = $("<input type='button' class='btn' value='" + <%= I18n.t('ss.buttons.clear').to_json %> + "' />");
+        self.after(btn).after(' ');
+        btn.on("click", function () {
+          self.minicolors('value', { color: 'transparent' });
+        });
+      }
+      if (self.data('random')) {
+        var randomColor = self.data('random').split(' ');
+        var randomIndex = 0;
+        var btn = $("<input type='button' class='btn' value='" + <%= I18n.t('ss.buttons.random_gen').to_json %> + "' />");
+        self.after(btn).after(' ');
+        btn.on("click", function () {
+          var nextColor = randomColor[randomIndex];
+          randomIndex++;
+          if (randomIndex >= randomColor.length) {
+            randomIndex = 0;
+          }
+          self.minicolors('value', { color: nextColor });
+        });
+      }
+    });
+  };
+
+  return SS_Color;
+
+})();
+

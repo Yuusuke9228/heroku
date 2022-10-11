@@ -1,0 +1,97 @@
+<%
+  source_cleaner_conf = Cms::SourceCleanerTemplate.site(@cur_site).and_public.to_config(site: @cur_site)
+
+  syntax_check = cms_syntax_check_enabled?
+
+  addon ||= local_assigns.fetch(:addon, {})
+  if @item.respond_to?(:form) && @item.form.present?
+    css_class = Array(addon[:class])
+    addon[:class] = css_class + %w(hide)
+  end
+%>
+
+<% if SS.config.cms.html_editor == "markdown" %>
+
+  <%= jquery do %>
+    SS_Addon_Markdown.render();
+    SS_Addon_Markdown.renderFormMarkdown()
+  <% end %>
+
+  <div class="ss-addon-markdown">
+    <div class="ss-addon-markdown-toolbar"></div>
+    <div class="ss-addon-markdown-content">
+      <%= f.text_area :markdown, class: "markdown", style: "height: 240px;" %>
+    </div>
+  </div>
+
+<% else %>
+  <%= html_editor ".mod-cms-body .html", advanced: Cms::EditorExtension.allowed?(:use, @cur_user, site: @cur_site) %>
+  <%= jquery do %>
+    Link_Checker.url               = "<%= SS.config.cms.link_check_url %>";
+    Link_Checker.rootUrl           = "<%= @cur_site.full_root_url %>";
+    Mobile_Size_Checker.enabled    = <%= @cur_site.mobile_enabled? %>;
+    Mobile_Size_Checker.url        = <%== cms_apis_mobile_size_check_path(format: "json").to_json %>;
+    <% if params[:action] =~ /edit|delete/ && @item.is_a?(Cms::Model::Page) && @item.persisted? %>
+      Backlink_Checker.enabled     = true;
+      Backlink_Checker.itemId      = <%== @item.try(:id).to_json %>;
+      Backlink_Checker.url         = <%== cms_apis_backlink_check_path(format: "json").to_json %>;
+    <% end %>
+
+    Form_Preview.page_route        = "<%= @item.try(:route) %>";
+    Form_Preview.form_preview_path = "<%= cms_form_preview_path(path: "#{tryb{@cur_node.filename + "/"}}.html") %>";
+
+    <% if source_cleaner_conf[:source_cleaner].present? || source_cleaner_conf[:source_cleaner_site_setting].present? %>
+      Cms_Source_Cleaner.config = <%= raw source_cleaner_conf.to_json %>
+      Cms_Source_Cleaner.confirms.clean = <%== t("cms.confirm.source_clean").to_json %>;
+      Cms_Source_Cleaner.render(".source-cleaner");
+    <% end %>
+
+    Syntax_Checker.url = <%= raw cms_apis_check_syntax_check_path(format: "json").to_json %>
+    Syntax_Checker.correct_url = <%= raw cms_apis_correct_syntax_check_path(format: "json").to_json %>
+
+    Cms_Form.options.check.syntax = <%= syntax_check %>;
+    Cms_Form.render();
+    Cms_Form.addSyntaxCheck("addon-cms-agents-addons-body", {
+      resolve: "html",
+      name: "<%= t("modules.addons.cms/body") %>",
+      getContent: function () { return Cms_Form.getEditorHtml(); },
+      setContent: function (content) { Cms_Form.setEditorHtml(content); },
+    });
+    Cms_Form.activateSyntaxChecks();
+
+  <% end %>
+
+  <dl class="see mod-cms-body">
+    <dd class="wide"><%= f.text_area :html, class: "html", style: "height: 400px;" %></dd>
+    <dd class="wide">
+    <%= button_tag t("cms.syntax_check"), { type: :button, class: "btn syntax-check" } if syntax_check %>
+    <%= button_tag t("cms.mobile_size_check"), { type: :button, class: "btn mobile-size-check" } if @cur_site.mobile_enabled? %>
+    <%= button_tag t("cms.link_check"), { type: :button, class: "btn link-check" } %>
+    <%= button_tag t("cms.source_cleaner"), { type: :button, class: "btn source-cleaner" } if source_cleaner_conf[:source_cleaner].present? || source_cleaner_conf[:source_cleaner_site_setting].present? %>
+    <% if !@inplace_mode && @item.respond_to?(:route) %>
+      <%= button_tag t("cms.preview_page"), { type: :button, class: "btn preview" } %>
+    <% end %>
+    <% if !@inplace_mode %>
+      <%
+        page_params = {}
+        if @cur_node
+          page_params[:s] = { node: @cur_node }
+        end
+      %>
+      <%= link_to t("cms.apis.related_pages.index"), cms_apis_pages_path(page_params), class: "ajax-box related-pages" %>
+    <% end %>
+    </dd>
+  </dl>
+
+  <%= jquery do %>
+    var hostUrl = "<%= @cur_site.url %>";
+    $('#addon-cms-agents-addons-body a.ajax-box.related-pages').data('on-select', function ($item) {
+      var data = $item.closest("[data-id]");
+      var href = hostUrl + data.find(".filename").text();
+      var label = data.find(".select-item").text();
+      var text = ejs.render("<a href=\"<%%= href %>\"><%%= label %></a>", { href: href, label: label });
+      SS_FileView.insertContent(text);
+    });
+  <% end %>
+
+<% end %>

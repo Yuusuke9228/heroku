@@ -1,0 +1,123 @@
+<% addon ||= local_assigns.fetch(:addon, {}) %>
+
+<%= code_editor "##{addon[:id]} .html", mode: :html %>
+<%= jquery do %>
+  if ($('#item_loop_html').length) {
+    Cms_Editor_CodeMirror.lock('#item_loop_setting_id', '#item_loop_html');
+  }
+
+  var $addon = $("<%= "##{addon[:id]}" %>");
+  $addon.find("select[name='item[sort]']").on("change", function() {
+    var $selected = $(this).find("option:selected");
+    if (!$selected[0] || !$selected.data("description")) {
+      $addon.find(".sort-description").html("").addClass("hide");
+    } else {
+      $addon.find(".sort-description").html($selected.data("description")).removeClass("hide");
+    }
+  }).trigger("change");
+
+  <% if @model.use_liquid %>
+  var changeLoopFormat = function() {
+    var format = $addon.find("select[name='item[loop_format]']").val();
+    if (format === "liquid") {
+      $addon.find(".loop-format-shirasagi").addClass("hide");
+      $addon.find(".loop-format-liquid").removeClass("hide");
+      $("#addon-cms-agents-addons-child_list").addClass("hide");
+    } else {
+      $addon.find(".loop-format-shirasagi").removeClass("hide");
+      $addon.find(".loop-format-liquid").addClass("hide");
+      $("#addon-cms-agents-addons-child_list").removeClass("hide");
+    }
+  };
+
+  changeLoopFormat();
+
+  $addon.find("select[name='item[loop_format]']").on("change", changeLoopFormat);
+  <% end %>
+
+  <% if @model == Cms::Node::Archive %>
+    var changeArchiveView = function() {
+      var selectedVal = $("#item_archive_view").val();
+      if (selectedVal === "calendar") {
+        $(".loop-format-shirasagi, .loop-format-liquid, .new-days, .sort, .limit, .loop_format").addClass("hide");
+      } else {
+        $(".loop-format-shirasagi, .loop-format-liquid, .new-days, .sort, .limit, .loop_format").removeClass("hide");
+      }
+    }
+
+    changeArchiveView();
+
+    $("#item_archive_view").on("change", changeArchiveView);
+  <% end %>
+<% end %>
+
+<% if @model.use_conditions %>
+  <dl class="see">
+    <dt><%= @model.t :conditions %><%= @model.tt :conditions %></dt>
+    <dd><%= f.text_area :conditions, value: @item.conditions.join("\n"), style: "height: 100px;" %></dd>
+  </dl>
+<% end %>
+
+<% if @model.use_condition_forms %>
+  <%= render "cms/agents/addons/page_list/form_condition_forms", local_assigns %>
+<% end %>
+
+<dl class="see">
+  <% if @model.use_sort %>
+    <dt class="sort"><%= @model.t :sort %><%= @model.tt :sort %></dt>
+    <dd class="sort">
+      <%= f.select :sort, @item.sort_options, include_blank: " " %>
+      <span class="sort-description hide"></span>
+    </dd>
+  <% end %>
+
+  <dt class="limit"><%= @model.t :limit %><%= @model.tt :limit %></dt>
+  <dd class="limit"><%= f.number_field :limit %></dd>
+
+  <% if @model.use_new_days %>
+    <dt class="new-days"><%= @model.t :new_days %><%= @model.tt :new_days %></dt>
+    <dd class="new-days short"><%= f.number_field :new_days %> <span class="postfix"><%= t "datetime.prompts.day" %></span></dd>
+  <% end %>
+
+  <% if @model.use_loop_settings && @model.use_liquid %>
+    <dt class="loop_format"><%= @model.t :loop_format %><%= @model.tt :loop_format %></dt>
+    <dd class="loop_format"><%= f.select :loop_format, @item.loop_format_options %></dd>
+  <% end %>
+</dl>
+
+<% if @model.use_loop_settings %>
+  <dl class="see loop-format-shirasagi">
+    <% if @model.use_upper_html %>
+      <dt><%= @model.t :upper_html %><%= @model.tt :upper_html %></dt>
+      <dd><%= f.text_area :upper_html, class: :html %></dd>
+    <% end %>
+
+    <% if @model.use_loop_html %>
+      <dt><%= @model.t :loop_html %><%= @model.tt :loop_html %></dt>
+      <dd><%= f.select :loop_setting_id, ancestral_loop_settings, include_blank: t('cms.input_directly') %></dd>
+      <dd><%= f.text_area :loop_html, class: :html, style: "height: 100px;" %></dd>
+    <% end %>
+
+    <% if @model.use_lower_html %>
+      <dt><%= @model.t :lower_html %><%= @model.tt :lower_html %></dt>
+      <dd><%= f.text_area :lower_html, class: :html %></dd>
+    <% end %>
+
+    <% if @model.use_no_items_display %>
+      <dt><%= @model.t :no_items_display_state %><%= @model.tt :no_items_display_state %></dt>
+      <dd><%= f.select :no_items_display_state, @item.no_items_display_state_options, include_blank: true %></dd>
+    <% end %>
+
+    <% if @model.use_substitute_html %>
+      <dt><%= @model.t :substitute_html %><%= @model.tt :substitute_html %></dt>
+      <dd><%= f.text_area :substitute_html, class: :html %></dd>
+    <% end %>
+  </dl>
+<% end %>
+
+<% if @model.use_loop_settings && @model.use_liquid %>
+  <dl class="see loop-format-liquid">
+    <dt><%= @model.t :loop_liquid %><%= @model.tt :loop_liquid %></dt>
+    <dd><%= f.text_area :loop_liquid, class: :html, style: "height: 300px;" %></dd>
+  </dl>
+<% end %>

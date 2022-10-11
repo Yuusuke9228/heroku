@@ -1,0 +1,1397 @@
+ja:
+  ss:
+    backup: バックアップ
+    basic_info: 基本情報
+    config: 設定
+    management: 管理
+    download: ダウンロード
+    file: ファイル
+    function: 機能
+    page: ページ
+    node: フォルダー
+    group_users: 所属ユーザー
+    image: 画像
+    import: インポート
+    log: ログ
+    export: エクスポート
+    export_log: エクスポートログ
+    login: ログイン
+    logout: ログアウト
+    module: モジュール
+    operation: 操作
+    regexp: 正規表現
+    resize_image: 画像リサイズ
+    role: ロール
+    role_setting: ロール一括設定
+    required: 必須入力
+    required_field: ※必須入力
+    restore: 復元
+    search_operation: 操作対象
+    search_operator: 操作実行者
+    search_result: 検索結果
+    url: URL
+    login_url: ログインURL
+    all: すべて
+    keyword: キーワード
+    quota: 容量
+    encoding: 文字コード
+    text_zoom: 文字サイズ
+    default_here_label: "詳細はこちら⇒"
+    dash: ー
+    wave_dash: ～
+    color: 表示色
+    bg_color: 背景色
+    contrast_ratio: コントラスト比
+    search_on: "%{name}で検索する"
+    replace: 差し替え
+    before_replace: 差し替え前
+    after_replace: 差し替え後
+    broken_link: リンク切れ
+    auto_reload: 自動更新
+    quality: 画質
+    resize_image_auto: 画像リサイズ(自動)
+    input_example: 記入例
+    csv_file: CSVファイル
+    under_maintenance_mode: 現在メンテナンス中です。
+
+    views:
+      login/login:
+        id: ユーザーIDまたはメールアドレス
+        password: パスワード
+        organization_uid: 職員番号またはメールアドレス
+      index:
+        updated: "更新日時：%{updated}"
+        released: "公開日時：%{released}"
+        approved: "承認日時：%{approved}"
+        reserved: "予約日時：%{time}"
+        delivered: "配信日時：%{time}"
+        term: "期間：%{term}"
+    navi:
+      readable: 閲覧一覧
+      editable: 管理一覧
+      unseen: 未読一覧
+      seen: 既読一覧
+      trash: ゴミ箱
+    links:
+      add: 追加する
+      cms: サイト管理
+      gws: グループ
+      new: 新規作成
+      post: 投稿
+      new_post: 新規投稿
+      show: 詳細を見る
+      edit: 編集する
+      move: 移動する
+      copy: 複製する
+      command: コマンド
+      input: 入力する
+      make_them_public: 公開にする
+      make_them_close: 非公開にする
+      delete: 削除する
+      import: インポート
+      import_csv: CSVインポート
+      import_url: URLインポート
+      reply: 返信する
+      back: 戻る
+      deliver: 配信する
+      test_deliver: テスト配信する
+      back_to_show: 詳細へ戻る
+      back_to_index: 一覧へ戻る
+      back_to_administration: 管理画面へ戻る
+      parent_directory: 上の階層へ
+      preview: プレビュー
+      pc_preview: PCプレビュー
+      mobile_preview: 携帯プレビュー
+      pc: PC
+      mobile: 携帯
+      view_site: 公開画面を見る
+      open: 開く
+      change: 変更する
+      more: もっと見る
+      more_all: 全て見る
+      select: 選択する
+      delete_all: すべて削除する
+      markdown_help: Markdown ヘルプ
+      split: 分割する
+      integrate: 統合する
+      download: ダウンロード
+      download_csv: CSVダウンロード
+      download_template: 雛形をダウンロード
+      download_sample_csv: サンプルCSVをダウンロード
+      export: エクスポート
+      resize: リサイズする
+      set_tag: タグ設定
+      reset_tags: タグ解除
+      upload: アップロード
+      decode: デコードする
+      print: 印刷する
+      initialize: 初期化する
+      lock_user: 利用を停止する
+      unlock_user: 利用停止を解除する
+      trash: ゴミ箱
+      restore: 元に戻す
+      send_email: メールを作成する
+      send_message: メッセージを作成する
+      copy_email_address: メールアドレスをコピー
+      closed_save: 非公開にする
+      edit_password: パスワード変更
+    buttons:
+      save: 保存
+      saving: 保存中
+      new: 新規作成
+      draft_save: 下書き保存
+      closed_save: 非公開保存
+      publish: 公開
+      publish_save: 公開保存
+      withdraw: 取り下げ保存
+      ignore_alert: 警告を無視する
+      cancel: キャンセル
+      edit: 編集
+      delete: 削除
+      deleting: 削除中
+      search: 検索
+      replace: 置換
+      replace_all: 全置換
+      reset: リセット
+      clear: クリア
+      send: 送信
+      sending: 送信中
+      run: 実行
+      running: 実行中
+      stop: 停止
+      toggle: 折りたたみ表示
+      move: 移動
+      moving: 移動中
+      import: インポート
+      restore_message: 復元
+      importing: インポート中
+      restoring_message: 復元中
+      convert: 変換
+      unlock_and_edit_forcibly: 強制的にロックを解除し編集する
+      random_gen: ランダム生成
+      copy: コピー
+      paste: 貼り付け
+      attach: 添付
+      confirm: 確認
+      setting: 設定
+      request: 公開申請
+      split: 分割
+      integrate: 統合
+      upload: アップロード
+      uploading: アップロード中
+      download: ダウンロード
+      add: 追加
+      print: 印刷
+      select_all: 全て選択
+      deselect_all: 全て解除
+      change: 変更
+      initialize: 初期化
+      restore: 元に戻す
+      close: 閉じる
+      csv: CSV
+      ignore_alerts_and_save: 警告を無視して保存する
+      zoom_out: 縮小
+      zoom_in: 拡大
+      calculate: 計算
+      reload: 再読込
+      replace_file: 差し替え
+      file_histories: ファイル履歴
+      translate: 翻訳
+      replace_save: 差し替え保存
+      copy_url: URLをコピー
+      make_them_public: 公開にする
+      make_them_close: 非公開にする
+      file_name_order: 名前順
+      file_upload_order: アップロード順
+      make_them_closed: 非公開にする
+    confirm:
+      change_state: 公開状態を変更してよろしいですか？
+      delete: 削除してよろしいですか？
+      soft_delete: 削除してよろしいですか？
+      hard_delete: 完全に削除してよろしいですか？
+      convert: 変換してよろしいですか？
+      unload: 入力したデータは保存されません。
+      clone: 複製してよろしいですか？
+      redirect_head: アクセスしてよろしいですか？
+      redirect: 外部のサイトにアクセスしようとしています。
+      export: エクスポートを開始してよろしいですか？
+      import: インポートを開始してよろしいですか？
+      download: ダウンロードしてよろしいですか？
+      set_tag: タグを設定してよろしいですか？
+      reset_tag: タグを削除してよろしいですか？
+      in_use: 使用中のファイルを削除してよろしいですか？
+      initialize: 初期化してよろしいですか？
+      restore: 元に戻してよろしいですか？
+      move: 移動してよろしいですか？
+      send: 送信してよろしいですか？
+      publish: 公開してよろしいですか？
+      depublish: 非公開にしてよろしいですか？
+      restore_file: ファイルを復元してもよろしいですか？
+      delete_file_histories: ファイル履歴を削除してもよろしいですか？
+      contains_url_expect: このページにリンクを貼っているページがあるため、処理を中断します。貼っているリンクを全て解除してから操作を続行してください。
+      contains_links_in_file: このページに対して、リンクを貼っている他のページがあるため削除できません
+      contains_links_in_file_ignoring_alert: 被リンクを確認の上、チェックボックスをクリックして削除してください。
+      not_contains_links_in_file: 被リンクがないので削除できます。
+      target_to_delete: 削除対象の確認
+      target_to_public: 公開対象の確認
+      target_to_closed: 非公開対象の確認
+    notice:
+      saved: 保存しました。
+      deleted: 削除しました。
+      unable_to_delete: '%{items} を削除できませんでした。'
+      changed: 変更しました。
+      unable_to_change: '%{items} を変更できませんでした。'
+      copied: 複製しました。
+      imported: インポートしました。
+      started_import: インポートを開始しました。
+      started_upload: アップロードを開始しました。
+      started_deliver: 配信を開始しました。
+      started_test_deliver: テスト配信を開始しました。
+      started_apply: 反映処理を開始しました。
+      sent: 送信しました。
+      posted: 投稿しました。
+      initialized: 初期化しました。
+      file_droppable: ファイルをドロップすることでアップロードできます。
+      uploading: アップロードしています。
+      lock_user_all: 利用を停止しました。
+      unlock_user_all: 利用停止を解除しました。
+      text_zoomed: "文字サイズを %{count} に設定しました。"
+      restored: 元に戻しました。
+      run: 実行しました。
+      already_job_started: 実行準備中であるか、実行中です。
+      clipboard_copied: コピーしました。
+      clipboard_copy_failed: コピーできませんでした。クリップボードがサポートされていません。
+      published: 公開しました。
+      depublished: 非公開にしました。
+      moved: 移動しました。
+      hit: 件ヒットしました。
+      first_to_last: 件を表示しています。
+      set_seen: 既読にしました。
+      unset_seen: 未読にしました。
+      set_star: スターをつけました。
+      unset_star: スターをはずしました。
+      move_all: 移動しました。
+      set_seen_all: 既読にしました。
+      unset_seen_all: 未読にしました。
+      set_star_all: スターをつけました。
+      unset_star_all: スターをはずしました。
+      replace_saved: 差し替え保存しました。
+      max_file_size_hard_limit_short_notice: "（%{human_size} 以下）"
+      max_file_size_hard_limit_long_notices:
+        - "サーバ設定でファイルのアップロード容量の上限が %{human_size} に設定されています。"
+        - これを超える制限サイズを設定しても有効に機能しません。
+        - サーバ設定の変更を希望される場合はシステム管理者にお問い合わせください。
+
+    info:
+      soft_delete: データの実削除ではなく無効状態として保存されます。
+      hard_delete: データが実削除されます。
+      soft_delete_locked: 削除状態が削除不可になっている為、削除できません。
+      history_is_blank: 履歴はありません。
+      branch_pages_history_is_blank: 差し替えページのため、履歴はありません。
+    warning:
+      initial_password: 初期パスワードを変更してください。
+      session_timeout: セッションの有効期限が切れました。
+      password_expired: パスワードの有効期限が切れました。パスワードを変更してください。
+      password_neary_expired: もうすぐパスワードの有効期限が切れます。パスワードを変更してください。
+    errors:
+      import:
+        blank_file: ファイルを入力してください。
+        invalid_file_type: 不正なファイル形式です。
+    apis:
+      groups:
+        index: グループを選択する
+        search: グループを検索
+        select: グループを設定する
+      users:
+        index: ユーザーを選択する
+        search: ユーザーを検索
+        select: ユーザーを設定する
+      organizations:
+        index: 組織を選択する
+        search: 組織を検索
+        select: 組織を設定する
+        label: 組織名
+    wareki:
+      seireki:
+        name: 西暦
+        min: 0001/1/1
+        max: 2100/1/1
+      meiji:
+        name: 明治
+        min: 1868/1/25
+        max: 1912/7/30
+      taisho:
+        name: 大正
+        min: 1912/7/30
+        max: 1926/12/25
+      showa:
+        name: 昭和
+        min: 1926/12/25
+        max: 1989/1/8
+      heisei:
+        name: 平成
+        min: 1989/1/8
+        max: 2019/5/1
+      reiwa:
+        name: 令和
+        min: 2019/5/1
+        max: 2100/1/1
+    state:
+      public: 公開中
+      closed: 非公開
+      edit: 編集中
+      draft: 下書き
+      ready: 公開待ち
+      request: 申請中
+      approve: 承認
+      remand: 差し戻し
+    options:
+      state:
+        show: 表示
+        hide: 非表示
+        enabled: 有効
+        disabled: 無効
+        public: 公開
+        closed: 非公開
+        closing: 公開終了待ち
+        draft: 下書き
+        ready: 公開待ち
+        active: 有効
+        expired: 無効
+        all: 全て
+        request: 申請
+        approve: 承認
+        pending: 下位承認待ち
+        remand: 差し戻し
+        start: 選択
+        cancel: 取消
+        allow: 許可する
+        deny: 許可しない
+        required: 必須
+        optional: 任意
+        notify: 通知する
+        silence: 通知しない
+        force_silence: 通知しない（全体管理）
+        deleted: 削除済み
+      resizing:
+        320x240: 320x240 (QVGA横)
+        240x320: 240x320 (QVGA縦)
+        640x480: 640x480 (VGA横)
+        480x640: 480x640 (VGA縦)
+        800x600: 800x600 (SVGA横)
+        600x800: 600x800 (SVGA縦)
+        1024x768: 1024x768 (XGA横)
+        768x1024: 768x1024 (XGA縦)
+        1280x720: 1280x720 (HD横)
+        720x1280: 720x1280 (HD縦)
+      text_type:
+        plain: テキスト形式
+        markdown: Markdown形式
+        cke: 書式編集
+      wareki:
+        seireki: 西暦
+        meiji: 明治
+        taisho: 大正
+        showa: 昭和
+        heisei: 平成
+        reiwa: 令和
+      map_api:
+        googlemaps: Googleマップ
+        openlayers: OpenLayers
+      kana_format:
+        hiragana: ひらがな
+        katakana: カタカナ
+        romaji: ローマ字
+      opengraph_type:
+        none: なし
+        article: 記事
+      twitter_card:
+        none: なし
+        summary: サマリー形式
+        summary_large_image: 大きな画像形式
+      first_released:
+        published: 公開済み
+        draft: 未公開
+      session_lifetime:
+        5min: 5分
+        15min: 15分
+        30min: 30分
+        60min: 60分
+      sort:
+        created_asc: 作成日時(日付順)
+        created_desc: 作成日時(新着順)
+        updated_asc: 更新日時(日付順)
+        updated_desc: 更新日時(新着順)
+        released_asc: 公開日時(日付順)
+        released_desc: 公開日時(新着順)
+        order_asc: 指定値(昇順)
+        order_desc: 指定値(降順)
+        filename: ファイル名
+        filename_asc: ファイル名(昇順)
+        filename_desc: ファイル名(降順)
+      sort_direction:
+        asc: 昇順
+        desc: 降順
+      restriction:
+        none: 制限なし
+        api_only: API利用のみ
+      multibyte_filename_state:
+        enabled: アップロード可
+        disabled: アップロード不可
+      csv_encoding:
+        Shift_JIS: シフトJIS（Excel 2016 より前）
+        UTF-8: UTF-8（Excel 2016 以降）
+      user_lock_state:
+        unlocked: 利用可
+        locked: 利用停止
+      user_deletion_lock_state:
+        unlocked: 削除可
+        locked: 削除不可
+      text_zoom:
+        zoom_in: '+'
+        zoom_out: '-'
+        reset: 標準
+      datetime_unit:
+        day: 日
+        week: 週
+        month: か月
+        year: 年
+      gws_use:
+        disabled: 使用しない
+        enabled: 使用する
+      upload_policy:
+        default_none: 既定 (制限なし)
+        default_sanitizer: 既定 (無害化)
+        default_restricted: 既定 (アップロード拒否)
+        sanitizer: 無害化
+        restricted: アップロード拒否
+      sanitizer_state:
+        wait: 無害化中
+        complete: 無害化済
+        error: 無害化失敗
+      duration:
+        "1_day": １日
+        "1_week": １週間
+        "2_weeks": ２週間
+        "1_month": １ヶ月
+        "2_months": ２ヶ月
+        "3_months": ３ヶ月
+        "6_months": ６ヶ月
+        "1_year": １年
+      image_resizes_disabled:
+        enabled: 自動リサイズ有効
+        disabled: 自動リサイズ無効
+      approve_remind_later:
+        "1_day": １日後
+        "2_days": ２日後
+        "3_days": ３日後
+        "4_days": ４日後
+        "5_days": ５日後
+        "6_days": ６日後
+        "1_week": １週間後
+        "2_weeks": ２週間後
+      search:
+        kind:
+          any_of: が次と一致する
+          none_of: が次と一致しない
+          start_with: が次から始まる
+          end_with: が次で終わる
+
+    tasks:
+      started: 開始しました。
+      interrupted: 中断命令を送信しました。
+      confirm_start: 処理を開始しますか？
+      confirm_reset: 処理が終わっていない場合、複数回実行されてしまいます。\nタスクを削除してよろしいですか？
+    units:
+      count: 件
+      mega_byte: MB
+      days_after: 日後
+      days_before: 日前
+      days_progress: 日経過
+      mobile_size: KB(キロバイト)
+      during: 間
+
+    rescues:
+      default:
+        head: お探しのページは見つかりません
+        body: お探しのページは見つかりませんでした。<br>一時的にアクセスできない状態になっているか、URLが変更・削除されたのかもしれません。
+
+  modules:
+    addons:
+      ss/body: 本文
+      ss/markdown: 内容
+      ss/mobile_setting: モバイル設定
+      ss/file_setting: ファイル設定
+      ss/user_group_history: 異動履歴
+      ss/map_setting: 地図設定
+      ss/kana_setting: かな設定
+      ss/facebook_setting: Facebook設定
+      ss/twitter_setting: Twitter設定
+      ss/line_setting: LINE設定
+      ss/approve_setting: 承認設定
+      ss/editor_setting: エディタ設定
+      ss/mail_setting: メール設定
+      ss/trash_setting: ゴミ箱設定
+      ss/link_file: ファイル
+      ss/notification/reply:
+        discussion: 電子会議室
+      ss/elasticsearch/site_setting: サイト内検索設定
+      ss/translate/site_setting: 自動翻訳
+      ss/site_usage: 使用量
+      ss/logo_setting: ロゴ設定
+      ss/release: 公開設定
+      ss/generate_lock: 書き出し停止
+      ss/partner_site: 提携サイト設定
+      ss/inquiry_setting: お問い合わせフォーム設定
+      ss/maintenance_mode: メンテナンスモード
+
+  activemodel:
+    attributes:
+      ss/download_param:
+        encoding: 文字コード
+      ss/import_param:
+        in_file: ファイル
+      ss/password_update_service:
+        new_password: 新しいパスワード
+        new_password_again: 新しいパスワード（入力確認）
+        old_password: 現在のパスワード
+
+  mongoid:
+    models:
+      session: セッション
+      simple_captcha/simple_captcha_data: 画像認証
+      ss/site: サイト
+      ss/user: ユーザー
+      ss/user_title: 役職
+      ss/user_occupation: 職種
+      ss/group: グループ
+      ss/user_group_history: 異動履歴
+      ss/file: ファイル
+      ss/temp_file: 一時ファイル
+      ss/user_file: ユーザーファイル
+      ss/group_file: グループファイル
+      ss/task: タスク
+      ss/max_file_size: 最大ファイルサイズ
+      ss/image_resize: 画像リサイズ
+      ss/thumb_file: サムネイルファイル
+      ss/migration: DBマイグレーション
+      ss/access_token: アクセストークン
+      ss/notification: 通知
+    errors:
+      models:
+        ss/model/group:
+          not_found: "%{line_no} 行目: Id %{id} のグループは存在しません。"
+        ss/model/user:
+          not_found: "%{line_no} 行目: Id %{id} のユーザーは存在しません。"
+        ss/model/role:
+          not_found: "%{line_no} 行目: Id %{id} のロールは存在しません。"
+        ss/model/prefecture_code:
+          invalid_code: "は不正です。"
+        ss/addon/generate_lock:
+          disallow_datetime_by_system: の日時はシステムにより許可されていません。より短い日時を入力してください。
+      messages:
+        not_selected: を選択してください。
+    attributes:
+      ss/document:
+        id: id
+        created: 作成日時
+        updated: 更新日時
+        deleted: 削除日時
+        state: ステータス
+        filepath: ファイルパス
+        filename: ファイル名
+        basename: ファイル名
+        sort: 並び順
+        limit: 表示件数
+        layout_id: レイアウト
+        shortcut: ショートカット
+        view_state: 状態
+        text_index: 全文検索インデックス(未使用)
+      ss/model/site:
+        name: サイト名
+        host: ホスト名
+        domains: ドメイン
+        subdir: サブディレクトリ
+        parent_id: 親サイト
+        https: HTTPS
+        mypage_scheme: マイページスキーム
+        mypage_domain: マイページドメイン
+        group_ids: グループ
+        domains_with_subdir: サブディレクトリを含めたドメイン
+        upload_policy: アップロード制限
+        maintenance_mode: メンテナンスモード
+        maint_remark: メンテナンス備考
+        maint_excluded_user_ids: 除外ユーザー
+      ss/model/user:
+        name: 氏名
+        kana: カナ
+        uid: ユーザーID
+        email: メールアドレス
+        password: パスワード
+        in_password: パスワード
+        tel: 電話番号
+        tel_ext: 内線番号
+        tel_ext_short: 内線
+        in_title_id: 役職
+        in_occupation_id: 職種
+        group_ids: グループ
+        groups: グループ
+        cms_roles: CMSロール
+        cms_role_ids: CMSロール
+        gws_roles: GWSロール
+        gws_role_ids: GWSロール
+        sys_roles: SYSロール
+        sys_role_ids: SYSロール
+        webmail_roles: WEBMAILロール
+        webmail_role_ids: WEBMAILロール
+        type: ユーザータイプ
+        sns: SNSユーザー
+        ldap: LDAPユーザー
+        account_start_date: 有効期限（開始）
+        account_expiration_date: 有効期限（終了）
+        initial_password_warning: 初期パスワード警告
+        session_lifetime: セッション寿命
+        restriction: 利用制限
+        lock_state: 利用状態
+        deletion_lock_state: 削除状態
+        remark: 備考
+        organization_id: 所属組織
+        organization_uid: 職員番号
+        switch_user_id: 切り替えユーザー
+        login_roles: ログイン種別
+        last_loggedin: 最終ログイン日時
+      ss/model/user_title:
+        code: 役職コード
+        name: 役職名
+        remark: 備考
+        order: 並び順
+        group_id: グループ
+        activation_date: 有効期限（開始）
+        expiration_date: 有効期限（終了）
+      ss/model/user_occupation:
+        code: 職種コード
+        name: 職種名
+        remark: 備考
+        order: 並び順
+        group_id: グループ
+        activation_date: 有効期限（開始）
+        expiration_date: 有効期限（終了）
+      ss/model/reference/user_titles:
+        title_ids: 役職
+        title_orders: 役職並び順
+      ss/model/reference/user_occupations:
+        occupation_ids: 職種
+        occupation_orders: 職種並び順
+      ss/model/group:
+        name: グループ名
+        order: 表示順
+        activation_date: 有効期限（開始）
+        expiration_date: 有効期限（終了）
+        domains: ドメイン
+        gws_use: グループウェアの使用
+        upload_policy: アップロード制限
+      ss/user_group_history:
+        created: 異動日時
+        cms_site_id: CMSサイト
+        gws_site_id: GWSサイト
+        group_ids: グループ
+        user_id: ユーザー
+      ss/reference/user:
+        user_id: ユーザー
+      ss/reference/site:
+        site_id: サイト
+      ss/model/task:
+        site_id: サイト
+        name: タスク名
+        started: 開始日時
+        closed: 終了日時
+        interrupt: 中止命令
+        total_count: 全体件数
+        current_count: 処理件数
+        logs: ログ
+        segment: セグメント
+      ss/model/file:
+        in_file: ファイル
+        in_files: ファイル
+        image: 画像
+        download: ダウンロード
+        model: モデル
+        state: 状態
+        name: ファイル名
+        filename: ファイル名（英数）
+        size: ファイルサイズ
+        content_type: コンテンツタイプ
+        resizing: リサイズ
+        geo_location: 緯度・経度
+        owner_item_id: オーナーId
+        owner_item_type: オーナー
+        site_id: サイト
+      ss/model/role:
+        name: ロール名
+        permission_level: 権限レベル
+        permissions: 権限設定
+      ss/model/address:
+        member_id: ユーザー
+        name: 氏名
+        kana: カナ
+        company: 会社
+        title: 役職
+        tel: 携帯電話番号
+        email: メールアドレス
+        home_postal_code: 郵便番号（自宅）
+        home_prefecture: 都道府県（自宅）
+        home_city: 市区町村（自宅）
+        home_street_address: 番地（自宅）
+        home_tel: 電話番号（自宅）
+        home_fax: ファックス番号（自宅）
+        office_postal_code: 郵便番号（勤務先）
+        office_prefecture: 都道府県（勤務先）
+        office_city: 市区町村（勤務先）
+        office_street_address: 番地（勤務先）
+        office_tel: 電話番号（勤務先）
+        office_fax: ファックス番号（勤務先）
+        personal_webpage: WEBページ
+        memo: メモ
+      ss/addon/body:
+        html: 本文
+      ss/addon/markdown:
+        text_type: 内容形式
+        text: 内容
+        html: 内容
+      ss/addon/mobile_setting:
+        mobile_state: 状態
+        mobile_size: １ページの最大サイズ
+        mobile_location: ロケーション
+        mobile_css: CSS
+      ss/addon/map_setting:
+        map_api: 地図API
+        map_api_key: APIキー
+        map_api_layer: 地図レイヤー
+        show_google_maps_search: Googleマップへのリンク
+        map_api_mypage: 管理画面での地図表示
+        map_center: 地図の中心座標
+        map_max_number_of_markers: 最大地点数
+      ss/addon/kana_setting:
+        kana_format: ふりがなの形式
+      ss/addon/facebook_setting:
+        facebook_app_id: App ID
+        facebook_page_url: ページURL
+        opengraph_type: OpenGraph
+        opengraph_defaul_image_url: 既定の画像URL
+      ss/addon/twitter_setting:
+        twitter_poster_state: ページ連携
+        twitter_card: カード形式
+        twitter_username: ユーザー名
+        twitter_default_image_url: 既定の画像URL
+        twitter_consumer_key: コンシューマーキー
+        twitter_consumer_secret: コンシューマーシークレット
+        twitter_access_token: アクセストークン
+        twitter_access_token_secret: トークンシークレット
+      ss/addon/line_setting:
+        line_poster_state: ページ連携
+        line_channel_secret: チャネルシークレット
+        line_channel_access_token: チャネルアクセストークン
+      ss/addon/site_auto_post_setting:
+        site_twitter_auto_post: Twitter自動投稿
+        site_edit_auto_post: 編集時に自動投稿
+      ss/addon/file_setting:
+        file_resizing: 添付ファイルリサイズ
+        file_resizing_width: 幅
+        file_resizing_height: 高さ
+        file_resizing_label: "%{size}（サイト設定）"
+        multibyte_filename_state: 日本語ファイル名
+        file_fs_access_restriction_state: /fs のアクセス制限
+        file_fs_access_restriction_allowed_ip_addresses: 許可IPアドレス
+        file_fs_access_restriction_basic_auth: Basic認証
+        file_fs_access_restriction_basic_auth_id: Basic認証（ID）
+        file_fs_access_restriction_basic_auth_password: Basic認証（パスワード）
+        file_fs_access_restriction_env: 環境変数
+        file_fs_access_restriction_env_key: 環境変数（キー）
+        file_fs_access_restriction_env_value: 環境変数（値）
+      ss/addon/trash_setting:
+        trash_threshold: ゴミ箱保持期間
+        trash_threshold_unit: ゴミ箱保持期間単位
+      ss/addon/approve_setting:
+        forced_update: メールアドレス注意設定
+        close_confirmation: 非公開保存の警告表示設定
+        approve_remind_state: 承認督促
+        approve_remind_later: 承認督促期間
+      ss/addon/generate_lock:
+        generate_lock_until: 書き出し停止期限
+        generate_lock: 書き出し停止
+        generate_unlock: 書き出し停止解除
+        generate_locked: 書き出しは停止されています。
+        generate_unlocked: 書き出しは停止されていません。
+      ss/model/max_file_size:
+        name: 名前
+        extensions: 拡張子
+        size: 制限サイズ
+        order: 並び順
+        state: 状態
+      ss/model/image_resize:
+        max_width: 横幅
+        max_height: 縦幅
+        quality: 画質
+      ss/model/postal_code:
+        code: 郵便番号
+        prefecture: 都道府県
+        prefecture_kana: 都道府県（カナ）
+        prefecture_code: 都道府県コード
+        city: 区市町村
+        city_kana: 区市町村（カナ）
+        town: 町名
+        town_kana: 町名（カナ）
+      ss/model/prefecture_code:
+        code: 市町村コード
+        prefecture: 都道府県名（漢字）
+        prefecture_kana: 都道府県名（カナ）
+        city: 市区町村名（漢字）
+        city_kana: 市区町村名（カナ）
+      ss/thumb_file:
+        original_id: 元画像ID
+        image_size: 画像サイズ
+        image_size_name: 画像サイズ名
+        thumb_width: 幅
+        thumb_height: 高さ
+      ss/model/job_log:
+        job_id: ジョブID
+        hostname: ホスト名
+        ip_address: IPアドレス
+        process_id: プロセスID
+        class_name: ジョブ名
+        started: 開始日時
+        closed: 終了日時
+        state: 状態
+        args: パラメータ
+        logs: ログ
+        save_term: 保存期間
+      ss/model/editor_setting:
+        color_button: 文字色変更ボタン
+        editor_css_path: スタイルシートパス
+        syntax_check: アクセシビリティチェック
+      ss/model/mail_setting:
+        sender_name: 差出人名
+        sender_email: 差出人メールアドレス
+        sender_user_id: 差出ユーザー
+        mail_signature: 署名
+      ss/model/notification:
+        group_id: グループ
+        member_ids: 参加者
+        subject: 件名
+        text: 本文TEXT
+        html: 本文HTML
+        format: フォーマット
+        send_date: 送信日時
+        export: エクスポート
+        url: URL
+      ss/addon/notification/reply:
+        reply_module: 返信モジュール名
+        reply_model: 返信モデル名
+        reply_item_id: 返信ID
+      ss/addon/elasticsearch/site_setting:
+        elasticsearch_hosts: 全文検索サーバー
+        elasticsearch_deny: 除外パス
+        elasticsearch_site_ids: サイト
+        elasticsearch_indexes: インデックス
+        elasticsearch_outside: 外部サイト検索
+      ss/addon/translate/site_setting:
+        translate_state: ステータス
+        translate_source_id: 元言語コード
+        translate_target_ids: 翻訳言語コード
+        translate_api: API
+        translate_mock_api_request_count: APIリクエスト数
+        translate_mock_api_request_word_count: APIリクエスト文字数
+        translate_microsoft_api_key: "サブスクリプション キー"
+        translate_microsoft_api_request_count: APIリクエスト数
+        translate_microsoft_api_request_word_count: APIリクエスト文字数
+        translate_microsoft_api_request_metered_usage: "x-metered-usage"
+        translate_google_api_project_id: プロジェクトID
+        translate_google_api_credential_file_id: サービスアカウント秘密鍵
+        translate_google_api_request_count: APIリクエスト数
+        translate_google_api_request_word_count: APIリクエスト文字数
+        translate_api_request_word_limit: 文字数上限
+        translate_api_limit_exceeded_html: 制限超過時の表示HTML
+      ss/addon/source_cleaner/site_setting:
+        source_cleaner_unwrap_tag_state: 不要なタグの削除
+        source_cleaner_remove_tag_state: 空のタグの削除
+        source_cleaner_remove_class_state: 不要なクラスの削除
+      ss/addon/site_usage:
+        usage_node_count: フォルダー数
+        usage_page_count: ページ数
+        usage_file_count: ファイル数
+        usage_db_size: DB使用量
+        usage_group_count: グループ数
+        usage_user_count: ユーザー数
+        usage_calculated_at: 使用量計算日時
+      ss/model/logo_setting:
+        logo_application_name: アプリケーション名
+        logo_application_image_id: ロゴ画像
+        logo_application_template: ロゴHTML
+      ss/addon/release:
+        released: 公開日時
+        release_date: 公開開始日時(予約)
+        close_date: 公開終了日時(予約)
+      ss/lockable:
+        lock_until: ロック期限日時
+      ss/user_settings:
+        user_settings: ユーザー別設定
+      ss/addon/partner_setting:
+        partner_site_ids: 提携サイト
+      ss/addon/inquiry_setting:
+        inquiry_form_id: お問い合わせフォーム
+
+  tooltip:
+    ss/model/site:
+      upload_policy:
+        - ファイルアップロード時の動作を設定します。
+    ss/model/user:
+      name:
+        - ユーザーの名称を入力します。
+      kana:
+        - ユーザーのカナを入力します。
+      uid:
+        - ユーザーIDを設定します。
+        - ログイン時にユーザーIDもしくはメールアドレスを利用します。
+      email:
+        - ユーザーのメールアドレスを設定します。
+        - ログイン時にユーザーIDもしくはメールアドレスを利用します。
+        - メールアドレスはページの承認申請等でも利用します。
+      in_password:
+        - ログイン時に利用するパスワードを入力します。
+      tel:
+        - ユーザーの電話番号を設定します。
+      tel_ext:
+        - ユーザーの内線番号を設定します。
+      group:
+        - ユーザーの所属するグループを選択します。
+      group_ids:
+        - ユーザーの所属するグループを選択します。
+      type:
+        - ユーザータイプを選択します。
+        - 通常はSNSユーザーを選択します。
+        - LDAPを利用する場合にLDAPユーザーを選択します。
+      title_ids:
+        - 役職を選択します。
+      occupation_ids:
+        - 職種を選択します。
+      account_start_date:
+        - 有効期限の開始日を入力します。
+      account_expiration_date:
+        - 有効期限の終了日を入力します。
+      initial_password_warning:
+        - 初期パスワード警告を有効にするかどうかを選択します。
+      session_lifetime:
+        - セッションの寿命を秒数で指定します。
+        - 最大 3600（1時間）です。
+        - 空欄の場合は、システムの既定値が用いられます。
+      restriction:
+        - 利用制限を選択します。
+      lock_state:
+        - 利用状態を選択します。
+      deletion_lock_state:
+        - 削除状態を選択します。
+      remark:
+        - 備考を入力します。
+      organization_id: 所属する組織を選択します。
+      organization_uid:
+        - 職員番号を入力します。
+        - サイト、グループ専用ログイン画面で使用します。
+      switch_user_id:
+        - 切り替えユーザーを選択します。
+        - ログイン後にユーザーが切り替わります。
+        - 共通アカウントを利用する場合などに使用します。
+    ss/model/group:
+      name:
+        - グループの名称を入力します。
+      order:
+        - 一覧画面での表示順を指定します。
+        - 数字が小さいほど一覧ページの上位にリンクが表示されます。
+      activation_date:
+        - 有効期限の開始日を指定します。
+      expiration_date:
+        - 有効期限の終了日を指定します。
+      gws_use:
+        - グループウェアを使用するかどうかを指定します。
+        - 既定では、グループウェアを使用します。
+      upload_policy:
+        - ファイルアップロード時の動作を設定します。
+    ss/document:
+      title:
+        - ページのタイトルに利用し、ブラウザのタイトルバーに表示されます。
+        - |-
+          レイアウトに下記のように記述することでページに出力することが可能です。
+          &lt;h1 id="ss-page-name">Page Name&lt;/h1>
+      title_for_index:
+        - 一覧のタイトルに利用されます。未設定の場合はタイトルが流用されます。
+      filename:
+        - ファイル名はURLに利用します。
+        - 半角英数字で入力します。
+        - .htmlなどの拡張子の記述は不要です。
+      state:
+        - 公開、非公開を選択します。
+        - 非公開を選択することで下書き状態で保存することが可能です。
+        - また、一旦、公開状態にしたコンテンツを非公開に変更することで、公開を取り下げることができます。
+      layout_id:
+        - ページのレイアウトを選択します。
+      body_layout_id:
+        - ページの本文レイアウトを選択します。
+        - 通常レイアウトのみの利用であれば設定は不要です。
+      order:
+        - 並び順を指定します。
+        - 数字が小さいほど一覧ページの上位に表示されます。
+      keywords:
+        - 検索エンジン用のキーワードの設定に利用します。
+        - 「,」で区切ることにより複数のキーワードの設定が可能です。
+      description:
+        - 検索エンジン用のページ概要の設定に利用します。
+      summary_html:
+        - 一覧ページで表示するページの概要に利用します。
+        - |-
+          一覧系のフォルダーのループHTMLの設定で下記のように記述した箇所に表示されます。
+          #{summary}
+      name:
+        - サイト名を入力します。
+      host:
+        - ホストを設定します。
+      domains:
+        - ドメインを設定します。
+      subdir:
+        - サブディレクトリを設定します。
+      parent_id:
+        - 親サイトを設定します。
+        - 静的ファイルのパスを親サイトに合わせることができます。
+      https:
+        - HTTPSの有効無効を設定します。
+      released:
+        - 更新日を特定の日時へ変更したい場合に設定します。
+        - 省略した場合は、更新日が表示されます。
+      release_date:
+        - 公開を開始する日時を指定します。
+        - 指定した日時が来ると公開されます。
+        - 即時公開する場合は指定は不要です。
+      close_date:
+        - 公開を終了する日時を指定します。
+        - 指定した日時が来ると非公開になります。
+      permission_level:
+        - 編集を許可する権限レベルを指定します。
+      group_ids:
+        - 編集を許可するグループを選択します。
+      user_ids:
+        - 編集を許可するユーザーを選択します。
+      import:
+        - CSVファイルに記載された施設の種類、地域、用途、または管理グループが事前に作成されていない場合、該当する施設は登録されません
+      file_order:
+        - 管理画面上でのファイルの並び順をリアルタイムで変更し、ファイルを見つけやすくします。
+        - ただし、並び順は保存されません。
+      maintenance_mode:
+        - 除外ユーザーのみ操作可能になります。
+        - それ以外のユーザー操作できません。
+      maint_excluded_user_ids:
+        - メンテナンスモード時に操作することができるユーザーを選択します。
+    ss/model/file:
+      in_file:
+        - ファイルを選択します。
+      name:
+        - ファイル名を入力します。
+      filename:
+        - ファイル名（英数）を入力します。
+      geo_location:
+        - 緯度・経度を10進で入力します。
+      image_resizes_disabled:
+        - 管理者によって自動リサイズが設定されています。
+        -
+        - 下記の条件の場合に自動的に画像がリサイズされます。
+        - 容量 %{size}以上
+        - 横幅 %{width}ピクセル以上
+        - 高さ %{height}ピクセル以上
+        -
+        - 容量を超過している場合、あらかじめ設定している画質に変更されます。
+        - 横幅、高さを超過している場合、収まるように縮小されます。
+        - 自動リサイズをしたくない場合は、管理者に権限を付与してもらった後、左の「自動リサイズ有効」をクリックし「自動リサイズ無効」に設定してください。
+    ss/model/user_title:
+      code: 役職コードを入力します。
+      name: 役職名を入力します。
+      activation_date: 有効期限の開始日時を入力します。
+      expiration_date: 有効期限の終了日時を入力します。
+      remark: 備考を入力します。
+      order:
+        - 並び順を入力します。
+        - 数字が大きいほど上位に表示されます。
+    ss/model/user_occupation:
+      code: 職種コードを入力します。
+      name: 職種名を入力します。
+      activation_date: 有効期限の開始日時を入力します。
+      expiration_date: 有効期限の終了日時を入力します。
+      remark: 備考を入力します。
+      order:
+        - 並び順を入力します。
+        - 数字が大きいほど上位に表示されます。
+    ss/addon/mobile_setting:
+      mobile_state:
+        - モバイルページの有効無効を設定します。
+      mobile_size:
+        - モバイルページの最大サイズを設定します。
+        - 100kbから1000kbが設定できます。
+      mobile_location:
+        - モバイルページのパスを設定します。
+      mobile_css:
+        - モバイルページで使用するCSSパスを設定できます。
+        - 複数の場合は改行区切りで入力します。
+        - 空欄の場合は既定のCSS
+        - /css/mobile.css
+        - が設定されます。
+    ss/model/address:
+      member_id:
+        - ユーザーを設定します。
+      name:
+        - 氏名を入力します。
+      kana:
+        - カナを入力します。
+      company:
+        - 会社を入力します。
+      title:
+        - 役職を入力します。
+      tel:
+        - 携帯電話番号を入力します。
+      email:
+        - メールアドレスを入力します。
+      home_postal_code:
+        - 郵便番号（自宅）を入力します。
+      home_prefecture:
+        - 都道府県（自宅）を入力します。
+      home_city:
+        - 市区町村（自宅）を入力します。
+      home_street_address:
+        - 番地（自宅）を入力します。
+      home_tel:
+        - 電話番号（自宅）を入力します。
+      home_fax:
+        - ファックス番号（自宅）を入力します。
+      office_postal_code:
+        - 郵便番号（勤務先）を入力します。
+      office_prefecture:
+        - 都道府県（勤務先）を入力します。
+      office_city:
+        - 市区町村（勤務先）を入力します。
+      office_street_address:
+        - 番地（勤務先）を入力します。
+      office_tel:
+        - 電話番号（勤務先）を入力します。
+      office_fax:
+        - ファックス番号（勤務先）を入力します。
+      personal_webpage:
+        - WEBページを入力します。
+      memo:
+        - メモを入力します。
+      address_group_id:
+        - グループ名を入力します。
+    ss/model/role:
+      name:
+        - ロール名を入力します。
+      permissions:
+        - 権限を設定します。
+        - （全て）はすべてが対象、（所有）はログインアカウントの所属するグループが作成したものが対象となります。
+      in_file:
+        - CSVファイルを指定し権限のインポートを行います。
+        - idが記述されていない行は新規作成になります。
+    gws/shared_address/group:
+      name:
+        - グループ名を入力します。
+      order:
+        - 並び順を入力します。
+    ss/addon/map_setting:
+      map_api:
+        - サイトで使用する地図APIを選択します。
+      map_api_key:
+        - 地図APIで使用するAPIキーを入力します。
+        - GoogleマップのAPIキーはこの項目に設定します。
+      map_api_layer:
+        - サイトで使用するOpenLayersのレイヤーを選択します。
+      show_google_maps_search:
+        - 有効にすると、地図マーカーに「Googleマップで見る」リンクが表示されます。
+      map_api_mypage:
+        - 管理画面で地図を表示するか設定します。
+      map_center:
+        - 地図の中心座標を経度、緯度の順に入力します。
+        - Googleマップは緯度、経度の順で表示しますが、これとは順番が逆になっているので注意してください。
+      map_max_number_of_markers:
+        - 1ページあたりのマーカー数の最大個数を入力します。
+    ss/addon/kana_setting:
+      kana_format:
+        - かな機能にて公開画面にふりがなを付与した際の表記形式を設定します。
+    ss/addon/facebook_setting:
+      facebook_app_id:
+        - Facebook の App Id を設定します。
+        - 設定すると「Facebook インサイト」でアクセスを解析できるようになります。
+      facebook_page_url:
+        - Facebook ページの URL を設定します。
+        - 設定するとシェアされた記事を見た別のユーザーが「いいね！」をすることができます。
+      opengraph_type:
+        - Open Graph 形式を選択します。
+        - Facebook でどのような見え方をするかは「Facebook Sharing Debugger（https://developers.facebook.com/tools/debug/sharing/）」で確認することができます。
+      opengraph_defaul_image_url:
+        - 既定の画像のURL を設定します。
+        - ページに画像が含まれていない場合、ここで設定した URL が og:image として使用されます。
+        - ページに画像が含まれている場合、ここで設定した URL は使用されません。
+    ss/addon/twitter_setting:
+      twitter_poster_state:
+        - 有効にすると、ページ編集時にTwitter連携が表示されます。
+        - コンシューマーキーとアクセストークン、それぞれのシークレットキーを設定する必要があります。
+      twitter_card:
+        - Twitter のカード形式を選択します。
+        - Twitter でどのような見え方をするかは「Twitter Card Validator（https://cards-dev.twitter.com/validator）」で確認することができます。
+      twitter_username:
+        - Twitter のユーザー名を設定します。
+        - 設定すると「Twitter Card Analytics」でアクセスを解析できるようになります。
+      twitter_default_image_url:
+        - 既定の画像のURL を設定します。
+        - ページに画像が含まれていない場合、ここで設定した URL が twitter:image として使用されます。
+        - ページに画像が含まれている場合、ここで設定した URL は使用されません。
+      twitter_consumer_key:
+        - コンシューマーキー(APIキー, Consumer Key, API Key)を設定します。
+        - Twitterへの自動投稿に必須です。
+      twitter_consumer_secret:
+        - コンシューマーシークレット(APIシークレット, Consumer Secret, API Secret)を設定します。
+        - Twitterへの自動投稿に必須です。
+      twitter_access_token:
+        - アクセストークン(Access Token)を設定します。
+        - Twitterへの自動投稿に必須です。
+      twitter_access_token_secret:
+        - アクセストークンシークレット(Access Token Secret)を設定します。
+        - Twitterへの自動投稿に必須です。
+    ss/addon/line_setting:
+      line_poster_state:
+        - 有効にすると、ページ編集時にLINE連携が表示されます。
+        - チャネルシークレットとチャネルアクセストークンを設定する必要があります。
+      line_channel_secret:
+        - Lineのチャネルシークレットを設定します。
+        - Lineとの連携に必須です。
+      line_channel_access_token:
+        - Lineのチャネルアクセストークンを設定します。
+        - Lineとの連携に必須です。
+    ss/addon/file_setting:
+      file_resizing:
+        - ページの添付ファイル（アップロード）のリサイズにてデフォルトサイズを設定できます。
+        - 幅、高さ共に200が最小値になります。
+      multibyte_filename_state:
+        - 日本語ファイルのアップロードを設定できます。
+        -
+        - "アップロード可: 日本語ファイルはアップロード可ですが、日本語部分がアンダースコアに置き換わります。既定の動作です。"
+        - "アップロード不可: 日本語ファイルをアップロードすることができなくなり、英数字・ハイフン・アンダースコアのみで構成されたファイルのみをアップロードすることができるようになります。"
+      file_fs_access_restriction_state:
+        - /fs 以下のアクセスを制限する場合、「有効」を選択してください。
+        - そして、有効にする場合、「許可IPアドレス」「Basic認証」「環境変数」のいずれかのフィールドに適切な設定を入力してください。
+        -
+        - この設定は、サブディレクトリ型サブサイトにおいて、nginx と協働でアクセス制限を実施するもので、
+        - 本設定のみでアクセス制限が有効になるわけではありません。
+      file_fs_access_restriction_allowed_ip_addresses:
+        - アクセスを許可する IP アドレスを設定します。
+        - 複数の IP アドレスを設定する場合は、改行で区切って設定します。
+        - "\"192.168.10.0/24\" や \"192.168.10.0/255.255.255.0\" のようなネットワークアドレスも設定することができます。"
+      file_fs_access_restriction_env:
+        - 許可する環境変数を設定します。
+        -
+        - これが想定するユースケースですが、nginx はクライアント証明書を認証すると、認証した Subject DN を $ssl_client_s_dn に、Issuer DN を $ssl_client_i_dn にセットします。
+        - これらを nginx の proxy_set_header でシラサギへ伝播し、シラサギで設定内容を確認するというケースを想定しています。
+        -
+        - "nginx の設定例:"
+        - proxy_set_header X-SSL_CLIENT_S_DN \$ssl_client_s_dn
+        -
+        - "シラサギの設定例:"
+        - "  環境変数（キー）: X-SSL_CLIENT_S_DN"
+        - "  環境変数（値）: 証明書 Subject DN"
+    ss/addon/trash_setting:
+      trash_threshold:
+        - ゴミ箱の保持期間を設定できます。
+    ss/addon/approve_setting:
+      forced_update:
+        - メールアドレスが設定されていない場合の承認について設定します。
+        - 無効に設定すると実行時の注意を無視します。
+      close_confirmation:
+        - 下書き保存時の警告表示を設定します。
+    ss/model/max_file_size:
+      name:
+        - 設定名を入力します
+      extensions:
+        - 制限するファイルの拡張子を入力します
+        - 複数の場合はスペース区切りで入力します
+        - 拡張子の大文字小文字は区別されずどちらも制限対象となります
+      size:
+        - 最大ファイルサイズをMB単位で設定可能です
+      order:
+        - 並び順を設定します
+      state:
+        - 制限の有効/無効を設定します
+    ss/model/image_resize:
+      max_width:
+        - 画像ファイルの横幅を設定可能です
+      max_height:
+        - 画像ファイルの縦幅を設定可能です
+      quality:
+        - 画像ファイルの画質を0から100の間で設定可能です
+        - 最大ファイルサイズを超過した場合、画質に基づいて画像を圧縮します
+        - 画質が高い程劣化が少ないです
+    ss/model/editor_setting:
+      color_button:
+        - 文字色変更ボタンの表示を設定します。
+      editor_css_path:
+        - エディタ用スタイルシートのパスを設定します。
+      syntax_check:
+        - アクセシビリティチェックの有効無効を設定します。
+
+    ss/model/mail_setting:
+      sender_name:
+        - システムから送信されるメールの既定の差出人名を入力します。
+      sender_email:
+        - システムから送信されるメールの既定の差出人メールアドレスを入力します。
+        - "未入力の場合、システム設定のメールアドレス（例: noreply@example.jp）が使用されます。"
+      mail_signature:
+        - システムから送信されるメールの既定の署名を入力します。
+
+    ss/addon/elasticsearch/site_setting:
+      elasticsearch_deny:
+        - 検索対象から除外するページのパスを入力します。
+        - 改行区切りで入力します。
+      elasticsearch_site_ids:
+        - 検索対象サイトを設定します。
+        - 設定したサイトのページが表示されるようになります。
+      elasticsearch_indexes:
+        - 検索対象のインデックスを設定します。
+        - 設定したインデックスのページが表示されるようになります。
+      elasticsearch_outside:
+        - 外部サイト検索を設定します。
+        - 検索フォームにプルダウンが表示され、外部サイト検索ができるようになります。
+
+    ss/addon/source_cleaner/site_setting:
+      source_cleaner_unwrap_tag_state:
+        - 属性のない div, span タグの削除の有効/無効を設定します。
+      source_cleaner_remove_tag_state:
+        - 空の p, div, span タグの削除の有効/無効を設定します。
+      source_cleaner_remove_class_state:
+        - mso から開始するクラスの削除の有効/無効を設定します。
+
+    ss/model/prefecture_code:
+      code:
+        - 6桁の市町村コード（全国地方公共団体コード）を設定します。
+      prefecture:
+        - 都道府県名（漢字）を設定します。
+      prefecture_kana:
+        - 都道府県名（カナ）を設定します。
+      city:
+        - 市町村名（漢字）を設定します。
+      city_kana:
+        - 市町村名（カナ）を設定します。
+
+    ss/addon/inquiry_setting:
+      inquiry_form_id:
+        - グループ共通のお問い合わせフォームを設定します。
+
+    ss:
+      contrast_ratio:
+        - 7以上でAAA、4.5以上でAA
+        - （22ポイント以上の文字、または、18ポイント以上の太字の場合は4.5以上でAAA、3以上でAA）
+
+  job:
+    models:
+      ss/public_file_remover_job: 公開済みファイル削除ジョブ
+      ss/task_sweep_job: タスク削除ジョブ

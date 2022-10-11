@@ -1,0 +1,12 @@
+<% buf = render(@item.form_partial_path, f: f) if @item.form_partial_path %>
+<% return if buf.blank? %>
+
+<%
+  addon_options = {}
+  addon_options[:id] = "column-#{@model.name.underscore.gsub('/', '-')}"
+  addon_options[:head] = @model.model_name.human
+  addon_options[:toggle] = true
+%>
+<%= render "ss/crud/addon", addon: addon_options do %>
+  <%= buf %>
+<% end %>

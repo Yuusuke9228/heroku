@@ -1,0 +1,89 @@
+<%= jquery do %> SS_SearchUI.modal(); <% end %>
+
+<div class="search-ui-form">
+  <%= form_for :s, url: { action: :index }, html: { method: "GET", class: :search } do |f| %>
+    <%= hidden_field_tag :single, params[:single] %>
+    <dl class="see">
+      <dt><%= t("mongoid.models.gws/group") %></dt>
+      <dd class="dd-group">
+        <% if browser.ie?(["<10"]) %>
+          <%= render partial: "gws/apis/users/group_dropdown_normal", locals: { f: f } %>
+        <% else %>
+          <%= render partial: "gws/apis/users/group_dropdown_tree", locals: { f: f } %>
+        <% end %>
+      </dd>
+
+      <dt><%= t("mongoid.models.gws/custom_group") %></dt>
+      <dd class="dd-custom-group">
+        <% if browser.ie?(["<10"]) %>
+          <%= render partial: "gws/apis/users/custom_group_dropdown_normal", locals: { f: f } %>
+        <% else %>
+          <%= render partial: "gws/apis/users/custom_group_dropdown_tree", locals: { f: f } %>
+        <% end %>
+      </dd>
+
+      <% options = Gws::User.new(cur_site: @cur_site).title_id_options %>
+      <% if options.present? %>
+      <dt><%= @model.t :title_ids %></dt>
+      <dd>
+        <%= f.select :title_ids, options,
+          { selected: params[:s].try(:[], :title_ids), include_blank: true },
+          { class: "submit-on-change" } %>
+      </dd>
+      <% end %>
+
+      <% options = Gws::User.new(cur_site: @cur_site).occupation_id_options %>
+      <% if options.present? %>
+      <dt><%= @model.t :occupation_ids %></dt>
+      <dd>
+        <%= f.select :occupation_ids, options,
+          { selected: params[:s].try(:[], :occupation_ids), include_blank: true },
+          { class: "submit-on-change" } %>
+      </dd>
+      <% end %>
+
+      <dt><%= @cur_post.t :state %></dt>
+      <dd>
+        <%= f.select :browsed_state, @cur_post.browsed_state_options,
+          { selected: params[:s].try(:[], :browsed_state), include_blank: true },
+          { class: "submit-on-change" } %>
+      </dd>
+
+      <dt><%= t "ss.keyword" %></dt>
+      <dd>
+        <%= f.text_field :keyword, value: params[:s].try(:[], :keyword), style: 'max-width: 20rem;' %>
+        <%= f.submit  t("ss.buttons.search"), class: 'btn my-0' %>
+      </dd>
+    </dl>
+  <% end %>
+</div>
+
+<table class="index">
+  <thead>
+  <tr>
+    <th class="name"><%= Gws::User.t :name %></th>
+    <th class="browsed"><%= I18n.t('gws/board.topic.browsed') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @items.each do |user| %>
+    <tr data-user-id="<%= user.id %>">
+      <td class="name"><%= gws_public_user_long_name(user.long_name) %></td>
+      <td class="browsed">
+        <% @cur_post.browsed_at(user).tap do |seen_at| %>
+          <span class="browsed">
+          <% if seen_at %>
+            <%= I18n.t('gws/board.options.browsed_state.read') %>
+              <time datetime="<%= seen_at.iso8601 %>"><%= I18n.l(seen_at) %></time>
+          <% else %>
+            <%= I18n.t('gws/circular.post.unseen') %>
+          <% end %>
+          </span>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @items if @items.try(:current_page) %>

@@ -1,0 +1,30 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<dl class="see mod-cms-release">
+  <dt><%= @model.t :state %></dt>
+  <dd><%= f.select :state, @item.state_options %></dd>
+
+  <% if @item.respond_to?(:released) %>
+    <dt><%= @model.t :released %><%= @model.tt :released %></dt>
+    <dd>
+      <% if @item.respond_to?(:released_type) %>
+        <%= f.select :released_type, @item.released_type_options %>
+      <% end %>
+      <%= f.text_field :released, class: "datetime js-datetime", value: @item.released.try { |time| I18n.l(time, format: :picker) } %>
+    </dd>
+  <% end %>
+</dl>
+
+<%= jquery do %>
+  var $el = $("#" + <%== addon[:id].to_json %>);
+  $el.find("[name='item[released_type]']").on("change", function() {
+    if ($(this).val() === "fixed") {
+      $el.find("[name='item[released]']").removeClass("hide");
+    } else {
+      $el.find("[name='item[released]']").addClass("hide");
+    }
+  }).trigger("change");
+<% end %>

@@ -1,0 +1,31 @@
+<% @tap_menu = proc do |item| %>
+  <%= link_to t('ss.links.show'), action: :show, id: item %>
+  <%= link_to t('ss.links.delete'), action: :delete, id: item %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <span class="id">#<%= item.id %></span>
+  <span class="site"><%= tryb { item.site.name } %></span>
+  <% if item.segment.present? %>
+    <span class="segment"><%= "[#{item.segment}]" %></span>
+  <% end %>
+  <span class="state"><%= item.state %></span>
+  <span class="started">
+    <%= item.started.try do |time| %>
+      <%= content_tag("time", I18n.l(time, format: :picker), datetime: time.iso8601, title: time.iso8601) %>
+      <%= link_to(t("ss.buttons.copy"), "#", class: "clipboard-copy-button", data: { text: time.iso8601 }) %>
+    <% end %>
+  </span>
+  <span class="closed">
+    <%= item.closed.try do |time| %>
+      <%= content_tag("time", I18n.l(time, format: :picker), datetime: time.iso8601, title: time.iso8601) %>
+      <%= link_to(t("ss.buttons.copy"), "#", class: "clipboard-copy-button", data: { text: time.iso8601 }) %>
+    <% end %>
+  </span>
+<% end %>
+
+<%= render template: "ss/crud/index" %>
+
+<%= jquery do %>
+  SS_Clipboard.renderCopy();
+<% end %>

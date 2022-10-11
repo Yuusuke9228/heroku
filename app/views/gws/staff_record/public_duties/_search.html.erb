@@ -1,0 +1,16 @@
+<%
+  year_options = Gws::StaffRecord::Year.site(@cur_site).map { |c| [c.name, c.id] }
+%>
+<div class="list-head-search">
+  <%= form_for :s, url: "", html: { class: "index-search", method: :get } do |f| %>
+    <%= f.select :year_id, year_options %>
+    <%= render Gws::StaffRecord::YearlyGroupComponent.new(cur_site: @cur_site, cur_year: @cur_year, selected: @s[:section_name]) %>
+    <%= f.text_field :keyword, style: "width: 300px;" %>
+    <input type="submit" value="<%= t('ss.buttons.search') %>" class="btn"/>
+
+    <span class="limit">
+      <%= @model.t :limit %>
+      <%= f.select :limit, @cur_site.divide_duties_limit_options, selected: @limit %>
+    </span>
+  <% end %>
+</div>

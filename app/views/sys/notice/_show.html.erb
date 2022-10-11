@@ -1,0 +1,10 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.send :name %></dd>
+
+  <dt><%= @model.t :notice_severity %></dt>
+  <dd><%= @item.label :notice_severity %></dd>
+
+  <dt><%= @model.t :notice_target %></dt>
+  <dd><%= br @item.notice_target.map { |val| @item.disp_notice_target val }.select(&:present?) %></dd>
+</dl>

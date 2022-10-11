@@ -1,0 +1,30 @@
+<%= render partial: "menu" %>
+
+<%= form_for :item, url: @cur_node.url, html: { method: :post, multipart: true, autocomplete: :off, class: "mypage-new member-blog-page" } do |f| %>
+
+<div class="mypage-form member-blog-page">
+  <%= error_messages_for :item, header_message: false %>
+
+  <div class="columns">
+    <%= render partial: "form", locals: { f: f }  %>
+    <% @model.addons.each do |addon| %>
+      <% file = "#{Rails.root}/app/views/#{addon.path}/view/_form.html.erb" %>
+      <%= render "#{addon.path}/view/form", f: f if File.exist?(file) %>
+    <% end %>
+    <dl class="column">
+      <dt><%= @model.t :released %></dt>
+      <dd><%= f.text_field :released, class: "datetime js-datetime", value: tryb { @item.released.strftime("%Y/%m/%d %H:%M") } %></dd>
+    </dl>
+    <dl class="column">
+      <dt><%= @model.t :state %></dt>
+      <dd><%= f.select :state, @item.state_options %></dd>
+    </dl>
+  </div>
+
+  <footer class="send">
+    <%= f.submit t("ss.buttons.save"), data: { disable_with: t("ss.buttons.saving") } %>
+    <%= f.button t("ss.buttons.cancel"), type: :reset, onclick: "location.href='#{@cur_node.url}'; return false;" %>
+  </footer>
+</div>
+
+<% end %>

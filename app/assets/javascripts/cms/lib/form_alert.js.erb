@@ -1,0 +1,183 @@
+this.Form_Alert = (function () {
+  function Form_Alert() {};
+
+  Cms_Form.alert = Form_Alert;
+
+  Form_Alert.alerts = {};
+
+  Form_Alert.asyncValidations = [];
+
+  Form_Alert.beforeSaves = [];
+
+  Form_Alert.render = function () {
+    $("input:submit").on("click.form_alert", function (e) {
+      var submit = this;
+      var form = $(submit).closest("form");
+
+      var resolved = function(html) {
+        var promise = Form_Alert.asyncValidate(form, submit, { html: html });
+        promise.done(function() {
+          if (!SS.isEmptyObject(Form_Alert.alerts)) {
+            Form_Alert.showAlert(form, submit);
+            return;
+          }
+
+          $(submit).off(".form_alert");
+          // To protected from bubbling events within a event wraps trigger "click" with setTimeout
+          setTimeout(function() { $(submit).trigger("click"); }, 0);
+        });
+      };
+
+      var rejected = function(xhr, status, error) {
+        alert(error);
+      };
+
+      Cms_Form.getHtml(resolved, rejected);
+
+      e.preventDefault();
+      return false;
+    });
+  };
+
+  Form_Alert.asyncValidate = function (form, submit, opts) {
+    Form_Alert.alerts = {};
+    var promises = [];
+    $.each(Form_Alert.asyncValidations, function () {
+      var promise = this(form, submit, opts);
+      promises.push(promise);
+    });
+
+    return $.when.apply($, promises);
+  };
+
+  Form_Alert.addValidation = function (validate) {
+    return Form_Alert.asyncValidations.push(Form_Alert.wrapDeferred(validate));
+  };
+
+  Form_Alert.addAsyncValidation = function (validate) {
+    return Form_Alert.asyncValidations.push(validate);
+  };
+
+  Form_Alert.runBeforeSave = function (form, submit) {
+    return $.each(Form_Alert.beforeSaves, function () {
+      return this(form, submit);
+    });
+  };
+
+  Form_Alert.showAlert = function (form, submit) {
+    var $div = $('<div/>', { id: "alertExplanation", class: "errorExplanation" });
+    $div.append("<h2><%= I18n.t('cms.alert') %></h2>");
+
+    var appendAlerts = function (alerts) {
+      for (var addon in alerts) {
+        var fields = alerts[addon];
+        $div.append('<p>' + addon + '</p>');
+        var $ul = $("<ul>").appendTo($div);
+        var i, j, len;
+        for (i = j = 0, len = fields.length; j < len; i = ++j) {
+          var field = fields[i];
+          if (field["msg"]) {
+            $ul.append('<li>' + field["msg"] + '</li>');
+          }
+        }
+      }
+    }
+    appendAlerts(Form_Alert.alerts);
+
+    // caution: below IE8, you must use document.createElement() method to create <footer>
+    var $footer = $(document.createElement("footer")).addClass('send');
+    
+    if (SS.isEmptyObject(Form_Alert.alerts[<%= I18n.t("cms.backlink_check").to_json %>])) {
+      $footer.append('<button name="button" type="button" class="btn-primary save"><%= I18n.t("ss.buttons.ignore_alert") %></button>');
+    }
+    $footer.append('<button name="button" type="button" class="btn-default cancel"><%= I18n.t("ss.buttons.cancel") %></button>');
+    $.colorbox({
+      html: $div.get(0).outerHTML + $footer.get(0).outerHTML,
+      maxHeight: "80%",
+      fixed: true
+    });
+    $("#cboxLoadedContent").find(".save").on("click", function () {
+      Form_Alert.runBeforeSave(form, submit);
+      $(submit).off(".form_alert");
+      return $(submit).trigger("click");
+    });
+    $("#cboxLoadedContent").find(".cancel").on("click", function (e) {
+      $.colorbox.close();
+      return false;
+    });
+  };
+
+  Form_Alert.addBeforeSave = function (callback) {
+    return Form_Alert.beforeSaves.push(callback);
+  };
+
+  Form_Alert.asyncValidateSyntaxCheck = function (form, submit, opts) {
+    var promise = Syntax_Checker.asyncCheck();
+    promise.done(function() {
+      $.each(Syntax_Checker.errors, function(id, error) {
+        Form_Alert.add(<%= I18n.t('cms.syntax_check').to_json %>, error["ele"], error["msg"]);
+      });
+    });
+    return promise;
+  };
+
+  Form_Alert.wrapDeferred = function (validate) {
+    return function (form, submit) {
+      var d = $.Deferred();
+      try {
+        validate(form, submit);
+        d.resolve();
+      } catch (ex) {
+        d.reject(ex);
+      }
+      return d.promise(form, submit);
+    };
+  };
+
+  Form_Alert.clonedName = function (form, submit) {
+    var name = $(form).find("#addon-basic #item_name");
+    if ($(submit).hasClass("publish_save") && /^\[<%= I18n.t('workflow.cloned_name_prefix') %>\]/.test($(name).val())) {
+      var addonName = $(name).closest(".addon-view").find("header").text();
+      return Form_Alert.add(addonName, name, <%= I18n.t('errors.messages.cloned_name').to_json %>);
+    }
+  };
+
+  Form_Alert.closeConfirmation = function (form, submit) {
+    var addonName, msg;
+    if ($(submit).attr("data-close-confirmation")) {
+      addonName = <%= I18n.t("cms.confirm.close").to_json %>;
+      msg = null;
+      if ($(submit).attr("data-contain-links-path")) {
+        msg = '<a href="' + $(submit).attr("data-contain-links-path") + '" target="_blank" rel="noopener">' + <%= I18n.t("cms.confirm.check_contains_urls").to_json %> + '</a>';
+      }
+      return Form_Alert.add(addonName, null, msg);
+    }
+  };
+
+  Form_Alert.snsPostConfirmation = function (form, submit) {
+    var addonName, messages, f;
+    f = $(submit).data("sns-post-confirmation");
+
+    messages = [];
+    if (f) {
+      messages = f();
+    }
+
+    addonName = <%= I18n.t("cms.sns_post").to_json %>;
+    $.each(messages, function() {
+      Form_Alert.add(addonName, null, this);
+    });
+  }
+
+  Form_Alert.add = function (addon, ele, msg) {
+    var base;
+    (base = Form_Alert.alerts)[addon] || (base[addon] = []);
+    return Form_Alert.alerts[addon].push({
+      "ele": ele,
+      "msg": msg
+    });
+  };
+
+  return Form_Alert;
+
+})();

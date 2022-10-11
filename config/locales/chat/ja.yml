@@ -1,0 +1,198 @@
+ja:
+  chat:
+    bot: チャットボット
+    first_suggest: 最初のサジェスト
+    loop_intent: 循環参照されているシナリオです。
+    not_found_intent: 返答またはサジェストを作成してください。
+    report: レポート
+    session_count: セッション数
+    links:
+      add_or_edit: 追加または編集する
+      open_site_search: サイト内検索の結果を開く
+    options:
+      question:
+        success: はい
+        retry: いいえ
+    line_bot:
+      service:
+        about: 約
+        details: 詳細情報
+        map: 地図
+        no_facility: 近くに施設はありません。
+        search_results: サイト内検索結果を開く
+        search_location: 近くの施設を探す
+        send_location: 現在の位置情報を送りますか？
+        set_location: 位置を送る
+        site_search: サイト内検索へ移動
+        success: はい
+        retry: いいえ
+        choices: 選択肢
+        select_info: 何をお探しですか？
+        no_event: 近くにイベントはありません。
+        facility: 施設
+        event: イベント
+        facility_info: 施設情報
+        event_info: イベント情報
+      line_report: Lineのレポート
+    line_report:
+      phrase/input: 入力されたフレーズ
+      used_time: 時間帯別利用者数
+      phrase/called: 使用されたフレーズ
+      phrase/name: フレーズ名
+      phrase/frequency: 使用回数
+      phrase/success: 解決した
+      phrase/retry: 解決しなかった
+      phrase/reply_count: 返答回数
+      phrase/reply_rate: 返答率
+      session/range: 期間
+      session/users: 利用者数
+      session/today: 今日
+      session/yesterday: 昨日
+      session/this_month: 今月
+      session/last_month: 先月
+      date: 日付
+      total: 合計
+      hour: 時
+      session: 利用回数
+
+  modules:
+    chat: チャット
+    addons:
+      chat/category: カテゴリー
+      chat/path: フォルダー
+      chat/text: 文章
+
+  cms:
+    nodes:
+      chat/bot: チャットボット
+    parts:
+      chat/bot: チャットボット
+
+  cms_role:
+    delete_other_chat_bots: チャットボットの削除(全て)
+    delete_private_chat_bots: チャットボットの削除(所有)
+    edit_other_chat_bots: チャットボットの編集(全て)
+    edit_private_chat_bots: チャットボットの編集(所有)
+    read_other_chat_bots: チャットボットの閲覧(全て)
+    read_private_chat_bots: チャットボットの閲覧(所有)
+    import_other_chat_bots: チャットボットのインポート(全て)
+    import_private_chat_bots: チャットボットのインポート(所有)
+
+  mongoid:
+    models:
+      chat/category: カテゴリー
+      chat/history: 履歴
+      chat/intent: シナリオ
+      chat/node/bot: チャットボット
+      chat/part/bot: チャットボット
+    errors:
+      models:
+        chat/intent:
+          not_found: "%{line_no} 行目: Id %{id} のシナリオは存在しません。"
+    attributes:
+      chat/category:
+        name: 名前
+        order: 並び順
+        node_id: フォルダー
+      chat/history:
+        session_id: セッションID
+        request_id: リクエストID
+        text: 文章
+        question: フィードバック
+        result: 返答
+        suggest: サジェスト
+        click_suggest: 使用したサジェスト
+        node_id: フォルダー
+        prev_intent_id: 前回のシナリオ
+        intent_id: シナリオ
+      chat/intent:
+        name: 名前
+        phrase: フレーズ
+        suggest: サジェスト
+        response: 返答
+        link: リンク
+        question: フィードバック
+        site_search: サイト内検索のリンク
+        order: 並び順
+        node_id: フォルダー
+        error: エラー
+      chat/addon/category:
+        category_ids: カテゴリー
+      chat/addon/path:
+        chat_path: フォルダーパス
+      chat/addon/text:
+        first_text: 開始時文章
+        first_suggest: 開始時サジェスト
+        exception_text: 例外文章
+        response_template: 返答テンプレート
+        question: フィードバック
+        chat_success: フィードバック返答(はい)
+        chat_retry: フィードバック返答(いいえ)
+        set_location: 位置情報送信テキスト
+        radius: 半径(km)
+        intent_ids: シナリオ
+        chat_category_ids: シナリオカテゴリー
+
+  tooltip:
+    chat/intent:
+      name:
+        - 名前を設定します。
+      phrase:
+        - フレーズを設定します。
+        - 改行でフレーズを複数設定できます。
+        - チャットボットで指定のフレーズが使用されていると返答します。
+      suggest:
+        - サジェストを設定できます。
+        - 改行でサジェストを複数設定できます。
+        - チャットボットで指定のフレーズが使用されているとサジェストを返します。
+      response:
+        - 返答を設定します。
+        - チャットボットで指定のフレーズが使用されていると返答します。
+        - 設定しない場合、親フォルダーの返答テンプレートを使用します。
+      link:
+        - リンクを設定します。
+        - 改行でリンクを複数設定できます。
+        - 返答で設定したリンクをLineチャットボットで表示するのに必要です。
+      question:
+        - フィードバックを表示するか設定します。
+      site_search:
+        - サイト内検索のリンクを表示するか設定します。
+      order:
+        - 並び順を設定します。
+    chat/category:
+      name:
+        - 名前を設定します。
+      order:
+        - 並び順を設定します。
+    chat/addon/category:
+      category_ids:
+        - カテゴリーを設定します。
+    chat/addon/path:
+      chat_path:
+        - フォルダーのパスを設定します。
+        - デフォルトでは親フォルダーを使用します。
+    chat/addon/text:
+      first_text:
+        - チャットボットの開始時に表示される文章を設定できます。
+      first_suggest:
+        - チャットボットの開始時に表示されるサジェストを設定できます。
+        - 改行でサジェストを複数設定できます。
+      exception_text:
+        - 対応するフレーズが見つからない場合に返答する文章を設定できます。
+      response_template:
+        - シナリオの返答を設定します。
+        - シナリオ作成時に返答がない場合に使用されます。
+      question:
+        - フィードバックの文章を設定できます。
+      chat_success:
+        - フィードバックに対して"はい"を押された場合に表示される文章を設定できます。
+      chat_retry:
+        - フィードバックに対して"いいえ"を押された場合に表示される文章を設定できます。
+      set_location:
+        - Lineで位置情報を送る時のテキストを設定できます。
+      radius:
+        - Lineで位置情報を送った時の検索範囲を設定できます。
+
+  job:
+    models:
+      chat/intent/import_job: シナリオインポート

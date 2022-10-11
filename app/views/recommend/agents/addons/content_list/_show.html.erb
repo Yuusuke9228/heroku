@@ -1,0 +1,11 @@
+<%= render "cms/agents/addons/page_list/show", local_assigns %>
+
+<dl class="see">
+  <dt><%= @model.t :exclude_paths %></dt>
+  <dd><%=br @item.exclude_paths %></dd>
+
+  <% if @model.use_display_target %>
+    <dt><%= @model.t :display_target %></dt>
+    <dd><%= @item.label :display_target %></dd>
+  <% end %>
+</dl>

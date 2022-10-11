@@ -1,0 +1,24 @@
+<dl class="see">
+  <% if @item.folder.present? %>
+    <dt><%= @model.t :folder_id %></dt>
+    <dd>
+      <%= @item.folder.name %>
+      <%= f.hidden_field :folder_id %>
+    </dd>
+  <% end %>
+
+  <% if params[:action] == 'copy' %>
+    <input type="hidden" name="copy" value="true" />
+  <% end %>
+
+  <dt><%= @model.t :name %><%= @model.tt :name %></dt>
+  <dd><%= f.text_field :name, autofocus: pc_browser? %></dd>
+
+  <dt><%= @model.t :severity %><%= @model.tt :severity %></dt>
+  <dd>
+    <label for="item_severity">
+      <%= f.check_box :severity, {}, 'high', '' %>
+      <%= t "gws.options.severity.high" %>
+    </label>
+  </dd>
+</dl>

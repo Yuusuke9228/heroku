@@ -1,0 +1,48 @@
+<%
+  now = Time.zone.now
+  ymd = params[:ymd]
+  if ymd.present?
+    origin = Time.zone.local(ymd[0..3].to_i, ymd[4..5].to_i, ymd[6..7].to_i)
+    next_day = origin + 1.day
+    prev_day = origin - 1.day
+  else
+    next_day = now.beginning_of_day + 1.day
+    prev_day = now.beginning_of_day - 1.day
+  end
+%>
+<div class="list-head">
+  <%= form_tag({ action: :index }, { method: "GET", class: :search }) do %>
+    <div class="list-head-action">
+      <% pressed = origin && now.to_date == origin.to_date %>
+      <%= ss_button_to(t('gws.history.days.today'), url_for(action: :index, ymd: now.strftime('%Y%m%d')), method: "GET", class: "btn", style: 'margin-right: 12px;', aria: { pressed: pressed }, disabled: pressed) %>
+      <%= ss_button_to(t('gws.history.days.prev_day'), url_for(action: :index, ymd: prev_day.strftime('%Y%m%d')), method: "GET", class: "btn") %>
+      <%= text_field_tag("ymd", origin.try { |value| value.strftime('%Y/%m/%d') }, id: nil, class: 'datetime js-date', data: { min_date: min_updated.strftime('%Y/%m/%d'), max_date: 0}) %>
+      <%= ss_button_to(t('gws.history.days.next_day'), url_for(action: :index, ymd: next_day.strftime('%Y%m%d')), method: "GET", class: "btn", disabled: now < next_day) %>
+    </div>
+    <% if class_name_options.present? %>
+      <div class="list-head-action" style="margin-left: 18px">
+        <%= select_tag "s[class_name]", options_for_select(class_name_options, @s.class_name), id: nil, include_blank: true %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render template: "_search" %>
+</div>
+
+<%= jquery do %>
+  $('.list-head input[name="ymd"]').datetimepicker({
+    onChangeDateTime: function(dp, $input) {
+      var ymd = $input.val();
+      ymd = ymd.replace(/\//g, '');
+
+      var url = '<%= url_for(action: :index, ymd: ':ymd') %>';
+      url = url.replace(':ymd', ymd);
+      url = url.replace('//', '/')
+
+      location.href = url;
+    }
+  });
+  $('.list-head select[name="s[class_name]"]').on("change", function() {
+    $(this).closest("form").submit();
+  });
+<% end %>

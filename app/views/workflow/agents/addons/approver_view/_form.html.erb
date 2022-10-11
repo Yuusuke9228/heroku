@@ -1,0 +1,64 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+
+  if params[:controller] =~ /^gws/
+    def approvers_path(*args); gws_workflow_search_approvers_path(*args); end
+  else
+    def approvers_path(*args); workflow_search_approvers_path(*args); end
+  end
+
+%>
+
+<% 1.upto(@model::MAX_APPROVERS) do |level| %>
+<h1 class="workflow-level-header workflow-level-<%= level %>"><%= @model.t :level, level: level %></h1>
+<dl class="see workflow-approvers workflow-level-<%= level %>">
+  <dt><%= @model.t :required_counts %><%= @model.tt :required_counts %></dt>
+  <dd><%= select_tag "item[required_counts][]", options_for_select(@item.required_count_options, @item.required_count_at(level)), id: nil %></dd>
+  <dt><%= @model.t :approver_attachment_uses %><%= @model.tt :approver_attachment_uses %></dt>
+  <dd><%= select_tag "item[approver_attachment_uses][]", options_for_select(@item.approver_attachment_use_options, @item.approver_attachment_use_at(level)), id: nil, include_blank: true %></dd>
+  <dt><%= @model.t :approvers %><%= @model.tt :approvers %></dt>
+  <dd>
+    <%= f.hidden_field("approvers[]", value: "", class: "hidden-ids", id: nil) %>
+    <%= link_to t("workflow.search_approvers.index"), approvers_path(level: level), class: "ajax-box approvers", "data-template" => "#{addon[:id]}-template" %>
+  </dd>
+  <dd>
+    <table class="index ajax-selected">
+      <thead>
+        <tr>
+          <th class="name"><%= @model.t :name %></th>
+          <th><%= t('ss.buttons.edit') %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @item.approver_users_at(level).each do |user| %>
+          <% if user.present? %>
+            <tr data-id="<%= "#{level},#{user.id}" %>">
+              <td>
+                <%= hidden_field_tag("#{f.object_name}[approvers][][level]", level, id: nil) %>
+                <%= hidden_field_tag("#{f.object_name}[approvers][][user_id]", user.id, id: nil) %>
+                <%= user.long_name %>
+              </td>
+              <td>
+                <%= check_box_tag("#{f.object_name}[approvers][][editable]", 1, @item.approver_user_editable?(level, user), id: nil) %>
+              </td>
+              <td><%= link_to t("ss.buttons.delete"), "#", class: "deselect btn" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <script id="<%= addon[:id] %>-template" type="text/x-ejs">
+      <tr data-id="<%%= data.id %>">
+        <td>
+          <input type="hidden" name="item[approvers][][level]" value="<%%= data.id.split(',')[0] %>">
+          <input type="hidden" name="item[approvers][][user_id]" value="<%%= data.id.split(',')[1] %>">
+          <%%= data.name %>
+        </td>
+        <td><input type="checkbox" name="item[approvers][][editable]" value="1"></td>
+        <td><a class="deselect btn" href="#"><%= I18n.t "ss.buttons.delete" %></a></td>
+      </tr>
+    </script>
+  </dd>
+</dl>
+<% end %>

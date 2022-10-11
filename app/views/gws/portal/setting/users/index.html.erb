@@ -1,0 +1,24 @@
+<%= jquery do %>
+SS_Clipboard.renderCopy();
+<% end %>
+
+<% @index_title = proc do |item| %>
+  <% portal = item.find_portal_setting(cur_user: @cur_user, cur_site: @cur_site) %>
+  <% if portal.portal_readable?(@cur_user, site: @cur_site) %>
+    <%= link_to item.name, gws_portal_user_path(user: item), class: "title" %>
+  <% else %>
+    <span class="title title--disabled"><%= item.name %></span>
+  <% end %>
+<% end %>
+
+<% @tap_menu = proc do |item| %>
+<% end %>
+
+<% @index_check = proc do |item| %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <%= gws_public_user_profile(item, :uid_or_id, :datetime, :main_group, :user_title, :user_occupation, :email, :tel) %>
+<% end %>
+
+<%= render template: "gws/crud/index" %>

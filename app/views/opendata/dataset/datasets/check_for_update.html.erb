@@ -1,0 +1,15 @@
+<div class="addon-views">
+  <div class="addon-view">
+    <div class="addon-body">
+      <dl class="see">
+        <% @item.assoc_pages.each do |page| %>
+          <dt><%= page.class.t :name %></dt>
+          <dd><%= page.name %></dd>
+
+          <dt><%= page.class.t :updated %></dt>
+          <dd><%= I18n.l(page.updated, format: :long) %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</div>

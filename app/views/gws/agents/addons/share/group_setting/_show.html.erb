@@ -1,0 +1,18 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<dl class="see addon-gws-share-group-setting">
+  <dt><%= @model.t :share_max_file_size %></dt>
+  <dd><%= number_to_human_size(@item.share_max_file_size) %></dd>
+
+  <dt><%= @model.t :share_files_capacity %></dt>
+  <dd><%= number_to_human_size(@item.share_files_capacity) %></dd>
+
+  <dt><%= @model.t :share_default_sort %></dt>
+  <dd><%= @item.label :share_default_sort %></dd>
+
+  <dt><%= @model.t :share_new_days %></dt>
+  <dd><%= @item.share_new_days %> <%= t("datetime.prompts.day") %></dd>
+</dl>

@@ -1,0 +1,84 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.name %></dd>
+
+  <dt><%= @model.t :kana %></dt>
+  <dd><%= @item.kana %></dd>
+
+  <dt><%= @model.t :uid %></dt>
+  <dd><%= @item.uid %></dd>
+
+  <% if @item.organization_uid.present? %>
+  <dt><%= @model.t :organization_uid %></dt>
+  <dd><%= @item.organization_uid %></dd>
+  <% end %>
+
+  <dt><%= @model.t :email %></dt>
+  <dd><%= @item.email %></dd>
+
+  <dt><%= @model.t :tel %></dt>
+  <dd><%= @item.tel %></dd>
+
+  <dt><%= @model.t :tel_ext %></dt>
+  <dd><%= @item.tel_ext %></dd>
+
+  <dt><%= @model.t :type %></dt>
+  <dd><%= @item.label :type %></dd>
+
+  <% if @item.account_start_date.present? %>
+  <dt><%= @model.t :account_start_date %></dt>
+  <dd><%= tryb{@item.account_start_date.strftime("%Y/%m/%d %H:%M")} %></dd>
+  <% end %>
+
+  <% if @item.account_expiration_date.present? %>
+  <dt><%= @model.t :account_expiration_date %></dt>
+  <dd><%= tryb{@item.account_expiration_date.strftime("%Y/%m/%d %H:%M")} %></dd>
+  <% end %>
+
+  <% if @item.initial_password_warning.present? %>
+  <dt><%= @model.t :initial_password_warning %></dt>
+  <dd><%= @item.label :initial_password_warning %></dd>
+  <% end %>
+
+  <% if @item.session_lifetime.present? %>
+  <dt><%= @model.t :session_lifetime %></dt>
+  <dd><%= @item.label(:session_lifetime) || I18n.t('datetime.distance_in_words.x_seconds', count: @item.session_lifetime) %></dd>
+  <% end %>
+
+  <% if @item.restriction.present? %>
+  <dt><%= @model.t :restriction %></dt>
+  <dd><%= @item.label :restriction %></dd>
+  <% end %>
+
+  <dt><%= @model.t :lock_state %></dt>
+  <dd><%= @item.label :lock_state %></dd>
+
+  <dt><%= @model.t :deletion_lock_state %></dt>
+  <dd><%= @item.label :deletion_lock_state %></dd>
+
+  <% if @ss_mode != :gws && @item.organization.present? %>
+  <dt><%= @model.t :organization_id %></dt>
+  <dd><%= @item.organization.name %></dd>
+  <% end %>
+
+  <dt><%= @model.t :group_ids %></dt>
+  <% if @ss_mode == :gws %>
+    <% main_group = @item.gws_main_group(@cur_site) %>
+    <dd>
+      <% @item.groups.site(@cur_site).active.order_by(name: 1).each do |c| %>
+        <% if main_group && main_group.id == c.id %>
+          <strong><b><%= c.name %></b></strong><br />
+        <% else %>
+          <%= c.name %><br />
+        <% end %>
+      <% end %>
+    </dd>
+  <% else %>
+    <dd><%= br @item.groups.order_by(name: 1).map { |c| c.name } %></dd>
+  <% end %>
+
+  <% if @item.remark.present? %>
+  <dt><%= @model.t :remark %></dt>
+  <dd><%= br @item.remark %></dd>
+  <% end %>
+</dl>

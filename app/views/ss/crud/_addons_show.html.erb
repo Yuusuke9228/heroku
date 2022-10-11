@@ -1,0 +1,15 @@
+<% return if addons.blank? %>
+
+<% display_body ||= "show" %>
+<% css_classes ||= [] %>
+<% css_classes = Array(css_classes).flatten.compact %>
+<% addons.each do |addon| %>
+  <% addon_options = { id: "addon-#{addon.id}", head: addon.name, class: css_classes.dup, toggle: true, display_body: display_body } %>
+
+  <% buf = render addon.show_partial_path, addon: addon_options if addon.show_partial_path %>
+  <% next if buf.blank? %>
+
+  <%= render "ss/crud/addon", addon: addon_options do %>
+    <%= buf %>
+  <% end %>
+<% end %>

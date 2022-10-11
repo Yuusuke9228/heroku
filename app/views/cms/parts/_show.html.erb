@@ -1,0 +1,26 @@
+<%
+  template_path = @item.route.sub('/', '/agents/parts/') + "/edit/_show"
+  file_path = "#{Rails.root}/app/views/#{template_path}.html.erb"
+%>
+
+<dl class="see">
+  <dt><%= @model.t :route %></dt>
+  <dd><%= @item.label :route %></dd>
+
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.send :name %></dd>
+
+  <dt><%= @model.t :basename %></dt>
+  <dd><%= @item.send :basename %></dd>
+
+  <dt><%= @model.t :mobile_view %></dt>
+  <dd><%= @item.label :mobile_view %></dd>
+
+  <dt><%= @model.t :ajax_view %></dt>
+  <dd><%= @item.label :ajax_view %></dd>
+
+  <dt><%= @model.t :ajax_view_expire_seconds %></dt>
+  <dd><%= @item.ajax_view_expire_seconds %><%= t("datetime.prompts.second") if @item.ajax_view_expire_seconds.present? %></dd>
+</dl>
+
+<%= render template: template_path if File.exist?(file_path) %>

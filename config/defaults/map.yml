@@ -1,0 +1,100 @@
+production: &production
+  # Map Api
+  #   googlemaps - use googlemaps v3
+  #   openlayers - use openlayers3
+  #   open_street_map - use OpenStreetMap
+  api: googlemaps
+  api_key:
+  language: ja
+  region: jp
+  layers:
+    - name: '国土地理院地図'
+      source: "XYZ"
+      url: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png"
+      projection: "EPSG:3857"
+    - name: 'OpenStreetMap'
+      source: "OSM"
+      url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      projection: "EPSG:3857"
+
+  # Map Addon Center Location
+  map_center:
+    - 36.204824
+    - 138.252924
+
+  # Max Number of Markers in Map Addon
+  map_max_point_form: 10
+
+  # System Limit of Markers in Map Addon
+  map_system_limit_number_of_markers: 100
+
+  # Google Maps Addon Zoom Level
+  googlemaps_zoom_level: 13
+
+  # Google Maps API End-Point
+  googlemaps_api_end_point: "https://maps.googleapis.com/maps/api/js"
+
+  googlemaps_search_end_point: "https://www.google.co.jp/maps/search/"
+
+  # Openlayers Addon Zoom Level
+  openlayers_zoom_level: 10
+
+  # Map Addon marker image urls
+  map_marker_images:
+    googlemaps:
+      default:
+        marker: "/assets/img/googlemaps/marker1.png"
+        click: "/assets/img/googlemaps/marker17.png"
+      picker:
+        - "/assets/img/googlemaps/marker1.png"
+        - "/assets/img/googlemaps/marker2.png"
+        - "/assets/img/googlemaps/marker3.png"
+        - "/assets/img/googlemaps/marker4.png"
+        - "/assets/img/googlemaps/marker5.png"
+        - "/assets/img/googlemaps/marker6.png"
+        - "/assets/img/googlemaps/marker7.png"
+        - "/assets/img/googlemaps/marker8.png"
+        - "/assets/img/googlemaps/marker9.png"
+        - "/assets/img/googlemaps/marker10.png"
+        - "/assets/img/googlemaps/marker11.png"
+        - "/assets/img/googlemaps/marker12.png"
+        - "/assets/img/googlemaps/marker13.png"
+        - "/assets/img/googlemaps/marker14.png"
+        - "/assets/img/googlemaps/marker15.png"
+        - "/assets/img/googlemaps/marker16.png"
+    openlayers:
+      default:
+        marker: "/assets/img/googlemaps/marker1.png"
+        click: "/assets/img/googlemaps/marker17.png"
+      picker:
+        - "/assets/img/openlayers/marker1.png"
+        - "/assets/img/openlayers/marker2.png"
+        - "/assets/img/openlayers/marker3.png"
+        - "/assets/img/openlayers/marker4.png"
+        - "/assets/img/openlayers/marker5.png"
+        - "/assets/img/openlayers/marker6.png"
+        - "/assets/img/openlayers/marker7.png"
+        - "/assets/img/openlayers/marker8.png"
+        - "/assets/img/openlayers/marker9.png"
+        - "/assets/img/openlayers/marker10.png"
+        - "/assets/img/openlayers/marker11.png"
+        - "/assets/img/openlayers/marker12.png"
+        - "/assets/img/openlayers/marker13.png"
+        - "/assets/img/openlayers/marker14.png"
+        - "/assets/img/openlayers/marker15.png"
+        - "/assets/img/openlayers/marker16.png"
+
+test:
+  <<: *production
+  layers:
+    - name: '国土地理院地図'
+      source: "XYZ"
+      url: "https://via.placeholder.com/256.png?text=CyberJapandata,Public"
+      projection: "EPSG:3857"
+    - name: 'OpenStreetMap'
+      source: "OSM"
+      url: "https://via.placeholder.com/256.png?text=OSM,Public"
+      projection: "EPSG:3857"
+
+development:
+  <<: *production

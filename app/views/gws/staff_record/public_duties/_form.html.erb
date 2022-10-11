@@ -1,0 +1,22 @@
+<dl class="see">
+  <dt><%= @model.t :title_ids %><%= @model.tt :title_ids %></dt>
+  <dd><%= f.select :in_title_id, @item.title_id_options, selected: tryb { @item.title.id }, include_blank: "" %></dd>
+
+  <dt><%= @model.t :occupation_ids %><%= @model.tt :occupation_ids %></dt>
+  <dd><%= f.select :in_occupation_id, @item.occupation_id_options, selected: tryb { @item.occupation.id }, include_blank: "" %></dd>
+
+  <dt><%= @model.t :tel_ext %><%= @model.tt :tel_ext %></dt>
+  <dd><%= f.text_field :tel_ext %></dd>
+
+  <dt><%= @model.t :charge_name %><%= @model.tt :charge_name %></dt>
+  <dd><%= f.text_field :charge_name %></dd>
+
+  <dt><%= @model.t :divide_duties %><%= @model.tt :divide_duties %></dt>
+  <dd><%= f.text_area :divide_duties %></dd>
+
+  <dt><%= @model.t :remark %><%= @model.tt :remark %></dt>
+  <dd><%= f.text_area :remark %></dd>
+
+  <dt><%= @model.t :order %><%= @model.tt :order %></dt>
+  <dd><%= f.number_field :order %></dd>
+</dl>

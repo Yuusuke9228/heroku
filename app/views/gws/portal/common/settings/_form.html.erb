@@ -1,0 +1,10 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd>
+    <% if @item.is_a?(Gws::Portal::GroupSetting) %>
+      <%= f.text_field :name %>
+    <% else %>
+      <%= @item.name %>
+    <% end %>
+  </dd>
+</dl>

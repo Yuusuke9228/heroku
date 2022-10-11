@@ -1,0 +1,53 @@
+<dl class="see">
+  <dt><%= @model.t :job_id %></dt>
+  <dd><%= @item.job_id %></dd>
+
+  <dt><%= @model.t :class_name %></dt>
+  <dd><%= t(@item.class_name.underscore, scope: "job.models") %></dd>
+
+  <% if @ss_mode.nil? %>
+    <dt><%= @model.t :site_id %></dt>
+    <dd><%= @item.site.try { |site| site.name } %></dd>
+  <% end %>
+
+  <dt><%= @model.t :hostname %></dt>
+  <dd><%= @item.process_id %> @ <%= @item.hostname %>(<%= @item.ip_address %>)</dd>
+
+  <dt><%= @model.t :started %></dt>
+  <dd class="datetime">
+    <%= @item.started.try do |time| %>
+      <%= content_tag("time", I18n.l(time, format: :picker), datetime: time.iso8601, title: time.iso8601) %>
+      <%= link_to(t("ss.buttons.copy"), "#", class: "clipboard-copy-button", data: { text: time.iso8601 }) %>
+    <% end %>
+  </dd>
+
+  <dt><%= @model.t :closed %></dt>
+  <dd class="datetime">
+    <%= @item.closed.try do |time| %>
+      <%= content_tag("time", I18n.l(time, format: :picker), datetime: time.iso8601, title: time.iso8601) %>
+      <%= link_to(t("ss.buttons.copy"), "#", class: "clipboard-copy-button", data: { text: time.iso8601 }) %>
+    <% end %>
+  </dd>
+
+  <dt><%= @model.t :state %></dt>
+  <dd><%= t(@item.state, scope: "job.state") %></dd>
+
+  <dt><%= @model.t :args %></dt>
+  <dd><%= @item.args %></dd>
+
+  <dt><%= @model.t :logs %></dt>
+  <% if ::File.exist?(@item.file_path) %>
+  <dd>
+    <%= t('job.log_notice', count: Fs::DEFAULT_HEAD_LOGS) %>
+    <%= text_area_tag :logs, safe_join(Fs.head_lines(@item.file_path), "\n"), readonly: true, style: "height: 400px" %>
+    <%= link_to(t('job.download_log'), { action: :download }, { class: :btn }) %>
+  </dd>
+  <% else %>
+  <dd><%= text_area_tag :logs, @item.logs.blank? ? "" : safe_join(@item.logs, "\n"), readonly: true, style: "height: 400px" %></dd>
+  <% end %>
+  </dd>
+</dl>
+
+<%= jquery do %>
+  SS_Clipboard.renderCopy();
+<% end %>

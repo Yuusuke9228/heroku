@@ -1,0 +1,10 @@
+<% return "" if @item.opendata_category_ids.blank? %>
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<dl class="see mod-cms-opendata-category">
+  <dt><%= @model.t :opendata_category_ids %></dt>
+  <dd><%= br @item.opendata_categories.pluck(:name) %></dd>
+</dl>

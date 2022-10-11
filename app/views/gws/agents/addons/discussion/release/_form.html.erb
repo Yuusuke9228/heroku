@@ -1,0 +1,9 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<dl class="see mod-gws-release">
+  <dt><%= @model.t :state %><%= @model.tt :state %></dt>
+  <dd><%= f.select :state, @item.state_options %></dd>
+</dl>

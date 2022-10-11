@@ -1,0 +1,49 @@
+<% @index_title = proc do |item| %>
+  <%= link_to item.name_with_code, { action: :show, id: item }, class: "title" %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <span class="id">#<%= item.id %></span>
+  <% if item.updated %>
+    <%# 滅多なことでは updated は nil にはならないが、過去の電子職員録のインポートで nil になる可能性があるので nil チェックを入れてから表示する %>
+    <span class="datetime"><%= I18n.l(item.updated, format: :picker) %></span>
+  <% end %>
+
+  <% if Gws::StaffRecord::Group.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_groups_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/group') %> (<%= number_with_delimiter item.yearly_groups.size %>)
+      <% end %>
+    </span>
+  <% end %>
+  <% if Gws::StaffRecord::User.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_users_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/user') %> (<%= number_with_delimiter item.yearly_users.size %>)
+      <% end %>
+    </span>
+  <% end %>
+  <% if Gws::StaffRecord::Seating.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_seatings_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/seating') %> (<%= number_with_delimiter item.yearly_seatings.size %>)
+      <% end %>
+    </span>
+  <% end %>
+  <% if Gws::StaffRecord::UserTitle.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_user_titles_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/title_ids') %> (<%= number_with_delimiter item.yearly_user_titles.size %>)
+      <% end %>
+    </span>
+  <% end %>
+  <% if Gws::StaffRecord::UserOccupation.allowed?(:read, @cur_user, site: @cur_site) %>
+    <span>
+      <%= link_to gws_staff_record_user_occupations_path(year: item.id) do %>
+        <%= t('mongoid.models.gws/staff_record/occupation_ids') %> (<%= number_with_delimiter item.yearly_user_occupations.size %>)
+      <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+<%= render template: "gws/crud/index" %>

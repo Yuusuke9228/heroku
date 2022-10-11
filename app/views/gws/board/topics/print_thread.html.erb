@@ -1,0 +1,11 @@
+<%= render 'ss/crud/print_preview_head', links: [[ I18n.t('ss.links.back'), { action: :show } ]] %>
+
+<div class="sheet">
+  <%= render template: 'show_thread' %>
+</div>
+
+<%= jquery do %>
+  SS_Font.render();
+
+  $('.subscribed-users').hide();
+<% end %>

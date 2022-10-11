@@ -1,0 +1,23 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.send :name %></dd>
+
+  <dt><%= @model.t :order %></dt>
+  <dd><%= @item.send :order %></dd>
+
+  <dt><%= @model.t :form_id %></dt>
+  <dd>
+    <% if @item.form %>
+      <%= link_to @item.form.name, cms_form_path(id: @item.form) %>
+    <% end %>
+  </dd>
+
+  <dt><%= @model.t :node_id %></dt>
+  <dd>
+    <% if @item.node %>
+      <%= link_to @item.node.name, article_pages_path(cid: @item.node) %><br>
+      </dd><dd>
+      <%= link_to @item.node.full_url, @item.node.full_url, target: "_blank", rel: "noopener" %>
+    <% end %>
+  </dd>
+</dl>

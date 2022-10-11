@@ -1,0 +1,25 @@
+<dl class="see">
+  <dt><%= @model.t :name %></dt>
+  <dd><%= @item.name %></dd>
+
+  <dt><%= @model.t :term %></dt>
+  <dd>
+    <%= term(@item) %>
+    <% if @item.todo_state == 'unfinished' && @item.end_at < Time.zone.now %>
+    <span class="todo-over"><%= t('gws/schedule/todo.todo_over') %></span>
+    <% end %>
+  </dd>
+
+  <% if @item.priority.present? %>
+  <dt><%= @model.t :priority %></dt>
+  <dd><%= @item.label :priority %></dd>
+  <% end %>
+
+  <% if @item.color.present? %>
+  <dt><%= @model.t :color %></dt>
+  <dd><%= content_tag :span, @item.name, style: "background-color: #{@item.color}; color: #{@item.text_color}" %></dd>
+  <% end %>
+
+  <dt><%= @model.t :achievement_rate %></dt>
+  <dd><%= t("gws/schedule/todo.achievement_rate", count: @item.achievement_rate || 0) %></dd>
+</dl>

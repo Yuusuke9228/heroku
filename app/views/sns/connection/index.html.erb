@@ -1,0 +1,20 @@
+<div class="addon-view" id="addon-basic">
+  <div class="addon-head"><h2><%= t "sns.connection" %></h2></div>
+  <div class="addon-body">
+    <dl class="see">
+      <dt><%= t("sys.remote_addr") %></dt>
+      <dd><%= remote_addr %></dd>
+
+      <dt><%= t("sys.user_agent") %></dt>
+      <% browser = Browser.new(request.user_agent, accept_language: request.accept_language) rescue nil %>
+      <% if browser %>
+        <dd>
+          <span class="browser"><%= browser.name %> <%= browser.full_version %></span>
+          @
+          <span class="platform"><%= browser.platform.name %></span>
+        </dd>
+      <% end %>
+      <dd><%= request.user_agent %></dd>
+    </dl>
+  </div>
+</div>

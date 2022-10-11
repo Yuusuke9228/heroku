@@ -1,0 +1,1128 @@
+ja:
+  opendata:
+    create: 新規登録
+    manage_datasets: データセットを管理する
+    manage_resources: リソースを管理する
+    manage_url_resources: クローリングを管理する
+    manage_appfiles: アプリファイルを管理する
+    manage_comments: コメントを管理する
+    dataset_catalog: データカタログ
+    dataset: データセット
+    resource: リソース
+    tag: タグ
+    dataset_group: グループ
+    harvest: ハーベスト
+    poster: 投稿
+    ckan:
+      group: CKANグループ
+      organization: CKAN組織
+    links:
+      add_resource: 新しいリソースを追加する
+      add_url_resource: 新しいURLを追加する
+      add_appfile: 新しいアプリファイルを追加する
+      add_comment: 新しいコメントを追加する
+      build_rdf: RDFに変換する
+      back_to_resource: リソースへ戻る
+      back_to_rdf_class: 戻る
+      back_to_column_types: 戻る
+      check_for_update: 更新をチェックする
+      sync: 同期する
+      copy_url: URLをコピー
+      harvest_import_datasets: データセットをインポートする
+      harvest_destroy_datasets: 関連するデータセットを削除する
+      dataset_map_search_datasets: データセットを探す
+      deleted: 削除済み
+      add_favorite: マイリストに登録する
+      registered_favorite: マイリストに登録済み
+    search_datasets:
+      index: データセットを選択する
+      search: データセットを検索
+      select: データセットを設定する
+      deselect: 削除
+      name: データセット名
+      bluk_download: 一括ダウンロード
+      download: "一括ダウンロード(%{size}件)"
+    search_dataset_groups:
+      index: データセットグループを選択する
+      search: データセットグループを検索
+      select: データセットグループを設定する
+      deselect: 削除
+    buttons:
+      delete_account: アカウント削除
+      next: 次へ進む
+      build: RDFを作成する
+      back: 前へ戻る
+    notice:
+      deleted_account: アカウントを削除しました。
+      started_building_rdf_job: "RDF 変換処理を開始しました。処理結果は「ジョブ実行履歴」で確認してください。"
+      start_export: エクスポートを開始しました。
+      source_url: "リンクを登録する際にURLを入力してください。ファイルを設定した場合は入力の必要はありません。"
+      resource_preview_error: リソースをプレビューできませんでした。
+      bulk_download_exceeded_filesize: "検索結果の一括ダウンロードサイズが大きすぎます。\n一括ダウンロードのサイズは、%{size}までを想定しています。\n申し訳ありませんが、個別にダウンロードしていただくか、検索条件を変更してください。"
+      mypage_bulk_download_exceeded_filesize: "一括ダウンロードサイズが大きすぎます。\n一括ダウンロードのサイズは、%{size}までを想定しています。\n申し訳ありませんが、個別にダウンロードをお願いします。"
+      recreate_rdf: "次のリソースに関連する RDF が作成されています。"
+      remove_favorite: 登録解除しました。
+      select_datasets_limit: 最大１０件までデータセットを選択できます。
+      dataset_graph_select_resource: 「データセットを探す」よりデータセットを検索して、リソースを選択するとグラフが表示されます。
+    export:
+      subject: '[オープンデータ/データセット] エクスポートが完了しました。'
+      notify_message: "ダウンロードの準備が完了しました。\n下記のURLからダウンロードしてください。\n\n%{link}"
+      start_message: "エクスポート処理を開始しました。"
+      export_message: "登録されている全データセットをエクスポートします。\nエクスポートを押下すると、エクスポート処理が完了次第、実行したユーザー宛に通知が送られ、データをダウンロードできます。"
+    notify_update_plan:
+      subject: 更新予定のデータセット
+    reports:
+      report: レポート
+      download_reports: ダウンロード数
+      preview_reports: プレビュー数
+      access_reports: アクセス数
+      not_exists_reports: 集計結果がありません。
+      total_year: 年合計
+      total_month: 月合計
+    histories:
+      history: 履歴
+      download_histories: ダウンロード履歴
+      preview_histories: プレビュー履歴
+      download_history_archives: アーカイブ
+      preview_history_archives: アーカイブ
+    public_entity:
+      format: データセット一覧
+      download: 公開中のデータセットの一覧を推奨データセット「オープンデータ一覧」の形式にてダウンロードできます。
+      headers:
+        - 都道府県コード又は市区町村コード
+        - "NO"
+        - 都道府県名
+        - 市区町村名
+        - データ名称
+        - データ概要
+        - データ形式
+        - 分類１
+        - 分類２
+        - 分類３
+        - 分類４
+        - 更新頻度
+        - URL
+        - API対応有無
+        - ライセンス
+        - 登録日
+        - 最終更新日
+        - 備考
+    download_reports:
+      dataset_data: データセット/データ名
+    errors:
+      messages:
+        invalid_rdf: RDFストアの登録に失敗しました。
+        invalid_timeout: タイムアウトしました。
+        dynamic_file: 動的ファイルはクローリングできません。
+        property_not_selected: プロパティが選択されていません。
+        build_rdf_failed: RDFの作成に失敗しました。
+        validate_appurl: はアプリのファイルを登録している場合、入力できません。
+        validate_appfile: はアプリの公開URLを登録している場合、登録できません。
+        cannot_connect_fuseki: Fusekiに接続できません。
+        import_started: インポート処理を開始しました。
+        destroy_started: 削除処理を開始しました。
+        invalid_type: タイプが不正です。
+        invalid_operator: 操作が不正です。
+        invalid_regexp: 正規表現が不正です。
+        too_many_categories: "分野の設定数が多すぎます（末端分野の制限数: %{limit}）"
+        too_many_estat_categories: "eStat分野の設定数が多すぎます（末端eStat分野の制限数: %{limit}）"
+        resource_preview_failed: リソースをプレビューできませんでした。
+        resource_preview_timeout: 容量が大きいためリソースをプレビューできませんでした。
+    crawl_state:
+      same:
+      updated: 更新
+      deleted: 削除
+    crawl_update:
+      none:
+      auto: 自動
+    crawl_update_name:
+      none: 手動
+      auto: 自動
+
+    confirm:
+      build_csv2rdf: "RDF 変換処理を開始します。よろしいですか？"
+      recreate_rdf: "RDF を再作成しますか？"
+    labels:
+      auto_assing: "自動割付結果"
+      auto_mis_assing: "自動割付ミス"
+      samples: "データ"
+      rdf_property: RDF プロパティ
+      category_ids: 分野
+      estat_category_ids: eStat分野
+      group_ids: グループ
+      group: 分類
+      guest_user: ゲストユーザー
+      category: 分野
+      estat-category: e-Stat分野
+      area: 地域
+      tag: タグ
+      license: ライセンス
+      format: フォーマット
+      keyword: キーワード
+      sort: 並び順
+      size: サイズ
+      state: 状態
+      point: いいね
+      time: 回
+      other: 他
+      count: 件
+      app: アプリ
+      dataset: データセット
+      idea: アイデア
+      resource: リソース
+      comment: コメント
+      app_name: アプリ名
+      appfile_name: アプリファイル名
+      dataset_name: データセット名
+      idea_name: アイデア名
+      resource_name: リソース名
+      comment_count: コメント数
+      create_datetime: 登録日時
+      update_datetime: 更新日時
+      executed_count: 実行回数
+      downloaded_count: 合計ダウンロード数
+      downloaded_wrap: 一括ダウンロード
+      iine: いいね！
+      public_url: 公開URL
+      execute: 実 行
+      execute_fullscreen: 全画面表示で実行
+      html: HTML
+      css: CSS
+      javascript: JavaScript
+      sample: サンプルデータ
+      relation_dataset: 関連データセット
+      relation_app: 関連アプリ
+      relation_idea: 関連アイデア
+      characteristic: ファイル固有
+      login: ログイン
+      new: 新規作成
+      edit: 編集
+      delete: 削除
+      edit_profile: プロフィールの編集
+      delete_account: アカウントの削除
+      delete_favorite_dataset: リストから削除
+      downloaded: ダウンロード
+      preview: プレビュー
+      add_comment: コメントを投稿
+      add_idea: アイデアを投稿する
+      more: もっと見る
+      apps_count: 登録アプリ件数
+      datasets_count: 登録データセット件数
+      ideas_count: 登録アイデア件数
+      login_twitter: twitter ID でログイン
+      login_facebook: Facebook ID でログイン
+      login_yahoo: YAHOO!JAPAN ID でログイン
+      login_google: Google アカウントでログイン
+      login_github: GitHub アカウントでログイン
+      comment_invite_start: コメントしたい場合には
+      comment_invite_end: してください
+      not_exist: 存在しません
+      no_related_dataset: 関連データセットはありません。
+      no_related_app: 関連アプリはありません。
+      no_favorite_datasets: 登録はありません。
+      not_data: 該当するデータは登録されていません
+      delete_comment: コメントは削除されました
+      request_comment: コメントは承認待ちです
+      closed_comment: コメントは非公開です
+      delete_account_q: アカウントを削除してよろしいですか？
+      delete_account_remain: ユーザー情報は消えますが、過去に投稿したデータは残ります。
+      count_display: 件のデータを表示しています。
+      no_app: アプリは見つかりませんでした。
+      no_dataset: データセットは見つかりませんでした。
+      no_dataset_group: データセットグループは見つかりませんでした。
+      no_idea: アイデアは見つかりませんでした。
+      management_page: 下記のページで管理することが出来ます。
+      popular_string: 一般的な文字列データを表します。
+      popular_integer: 一般的な整数データを表します。
+      popular_real: 一般的な実数データを表します。
+      no_change_rdf: この列は RDF へ変換しない
+      updated: "%Y年%1m月%1d日 %1H時%1M分"
+      category_prefixes:
+        -
+        - '-'
+      login_history: ログイン履歴
+      search_option: 検索オプション
+      issue: 課題
+      data: データ
+      note: 備考
+      external_link: 外部リンク
+      list_view: 一覧表示
+      map_view: 地図表示
+      graph_view: グラフ表示
+      not_found_dataset: データセットがみつかりません。
+      and_condition: AND条件
+      convert_setting: コンバート設定
+      errors: エラー
+    messages:
+      max_row_notice: "最大 %{max} 行を表示しています。"
+      max_pdf_preview_notice: "最大で%{max}ページ表示しています。"
+      build_rdf_success: RDFの作成に成功しました。
+      sent_rdf_success: RDFストアの登録に成功しました。
+      require_at_least_two_rows: "2 行以下の CSV ファイルは変換できません。"
+      harvest_imported_dataset: "よりインポートされたデータセットです。\n変更を行う場合は対象サイトのデータセットを更新して再インポートしてください。"
+      harvest_import_category_settings: "既存の分野設定を破棄しCSVファイルにて上書きします。"
+    sort_options:
+      released: 新着順
+      popular: 人気順
+      attention: 注目順
+      count_desc: 件数（降順）
+      datasets:
+        released: 新着データセット
+        popular: 人気データセット
+        attention: 注目データセット
+      apps:
+        released: 新着アプリ
+        popular: 人気アプリ
+        attention: 注目アプリ
+      ideas:
+        released: 新着アイデア
+        popular: 人気アイデア
+        attention: 注目アイデア
+    state_options:
+      public: 公開
+      closed: 非公開
+    default_state_options:
+      none: ""
+      default: 既定
+    search_options:
+      all_keywords: すべてのキーワードを含む
+      any_keywords: いずれかのキーワードを含む
+      any_conditions: すべてをOR条件で検索する
+    type_condition_options:
+      string: 文字列
+      regexp: 正規表現
+      ckan_group: CKANグループ
+      ckan_tag: CKANタグ
+      shirasagi_category: SHIRASAGI分野
+      shirasagi_estat_category: SHIRASAGI eStat分野
+      shirasagi_area: SHIRASAGI地域
+    operator_condition_options:
+      match: 一致する
+      unmatch: 一致しない
+    update_plan_unit_options:
+      monthly: 毎月
+      quarterly: 四半期
+      yearly: 毎年
+      two_yearly: ２年
+      three_yearly: ３年
+      four_yearly: ４年
+      five_yearly: ５年
+    api_state_options:
+      enabled: 有
+      disabled: 無
+    harvest_importer_api_options:
+      ckan: "Ckan API"
+      shirasagi_api: "Shirasagi API"
+      shirasagi_scraper: "Shirasagi スクレイピング"
+    harvest_exporter_api_options:
+      ckan: "Ckan API"
+    assoc_job:
+      dataset_text: "%{name} の一覧は %{url} でも公開されているので、%{url} もご覧ください。"
+      resource_text: "%{name} は %{now} 時点の情報を元に作成しています。"
+    assoc_page_notice:
+      no_assoc_page: 連携ページは設定されていません。
+      assoc_page_is_updated: 連携ページは更新されています。
+      assoc_page_is_not_updated: 連携ページは更新されていません。データセットは最新です。
+      assoc_page_is_removed: 連携ページは削除されています。
+    assoc_file_notice:
+      no_assoc_file: 連携ファイルは設定されていません。
+      assoc_file_is_updated: 連携ファイルは更新されています。
+      assoc_file_is_not_updated: 連携ファイルは更新されていません。リソースは最新です。
+      assoc_file_is_removed: 連携ファイルは削除されています。
+    association_is_removed: 削除されています
+    counter_html:
+      - '<div class="catalog-date">'
+      - '  <div class="title"><h2 class="catalog">データカタログ</h2></div>'
+      - '  <article class="date-number">'
+      - '    <div class="dateset">'
+      - '      <span class="number">#{dataset_count}</span>'
+      - '      <span>データセット</span>'
+      - '    </div>'
+      - '    <div class="tag">'
+      - '      <span class="number">#{dataset_tag_count}</span>'
+      - '      <span>タグ</span>'
+      - '    </div>'
+      - '    <div class="group">'
+      - '      <span class="number">#{dataset_group_count}</span>'
+      - '      <span>グループ</span>'
+      - '    </div>'
+      - '  </article>'
+      - '</div>'
+    downloaded_by_options:
+      single: 単独
+      dataset: データセット
+      bulk: 一括
+    anti_bot_method_options:
+      set_nofollow: "ダウンロードやプレビューなどの <a> タグに rel=\"nofollow\" をつける"
+      use_button_for_bulk_download: "一括ダウンロードに <button> タグを用いる"
+    graph_types:
+      bar: 棒グラフ
+      line: 線グラフ
+      pie: 円グラフ
+
+    # Web API
+    api:
+      package_list_help: |-
+        [api] package_list - 公開データセット名一覧を取得する。
+        [param1] limit - 出力するデータセット名の最大件数を指定する。
+                         0を指定した場合は件数を制限しない。
+        [param2] offset - 出力を開始するデータセットの配列インデックスを指定する。
+                          limitが設定された場合のみ、有効とする。
+      group_list_help: |-
+        [api] group_list - データセットグループ情報の一覧を取得する。
+        [param1] sort - 戻り値のソート対象の項目。
+                        name（デフォルト）またはpackagesを指定する。
+        [param2] all_fields - 全項目を出力するかどうかを指定する。
+                              True：表示、False：非表示（デフォルト）。
+        [param3] groups - 未実装。
+      tag_list_help: |-
+        [api] tag_list - タグ名一覧を取得する。
+        [param1] query - 指定した文字列を含むタグ名を出力対象とする。
+        [param2] all_fields - 未実装。
+        [param3] vocabulary_id - 未実装。
+      package_show_help: |-
+        [api] package_show - 公開データセット情報を取得する。
+        [param1] id - IDまたは名称が指定した文字列と一致するデータセット情報を出力する。（必須）
+        [param2] use_default_schema - 未実装。
+      tag_show_help: |-
+        [api] tag_show - タグが指定した文字列と一致する公開データセット情報の一覧を取得する。
+        [param1] id - 指定した文字列と一致するタグを出力対象とする。（必須）
+      group_show_help: |-
+        [api] group_show - 公開データセットグループ情報を取得する。
+        [param1] id - IDまたは名称が指定した文字列と一致するデータセットグループ情報を出力対象とする。（必須）
+      package_search_help: |-
+        [api] package_search - 公開データセット情報に対して、全文検索を行う。
+        [param1] q - 全文検索のキーワードを指定する。（初期値：":"）
+        [param2] fq - 未実装。
+        [param3] sort - 未実装。
+        [param4] rows - 取得するデータセット情報の最大数を指定する。
+        [param5] start - 取得を開始するデータセット情報の配列インデックスを指定する。
+        [param6] facet - 未実装。
+        [param7] facet.mincount - 未実装。
+        [param8] facet.field - 未実装。
+      resource_search_help: |-
+        [api] resource_search - 指定項目に指定値を部分一致で含む公開リソース情報を取得する。
+        [param1] query - 検索条件を指定する。（必須）
+                         検索条件は"項目名:値"の形式で指定する。（1セットのみ、指定可能。）
+                         下記の項目名のいずれかを指定した場合のみ、有効となる。
+                         （name、description、filename、format）
+        [param2] fields - 未実装。（Deprecated）
+        [param3] order_by - 昇順でソートを行う項目名を指定する。
+                            下記の項目名のいずれかを指定した場合のみ、有効となる。
+                            （name、description、filename、format）
+        [param4] offset - 取得を開始するリソースの配列インデックスを指定する。
+        [param5] limit - 取得するリソースの最大件数を指定する。
+
+  modules:
+    opendata: オープンデータ
+    addons:
+      opendata/category: 分野
+      opendata/estat_category: eStat分野
+      opendata/category_setting: 分野設定
+      opendata/estat_category_setting: eStat分野設定
+      opendata/dataset_group: データセットグループ
+      opendata/area: 地域
+      opendata/dataset_node: データセット
+      opendata/dataset: データセット
+      opendata/app: アプリ
+      opendata/idea_node: アイデア
+      opendata/idea: アイデア
+      opendata/release: 公開設定
+      opendata/resource: リソース
+      opendata/url_resource: クローリング
+      opendata/appfile: アプリファイル
+      opendata/rdf_store: RDFストア
+      opendata/url_rdf_store: RDFストア
+      opendata/comment: コメント
+      opendata/site_setting: オープンデータ設定
+      opendata/workflow/idea_comment_approver: 承認
+      opendata/dataset_page_setting: データセット詳細ページ設定
+      opendata/app_page_setting: アプリ詳細ページ設定
+      opendata/idea_page_setting: アイデア詳細ページ設定
+      opendata/list_node_setting: フォルダー設定
+      opendata/cms_ref/page: ページ連携
+      opendata/cms_ref/attachment_file: 添付ファイル連携
+      opendata/harvest/importer_category_setting: 分野設定
+      opendata/harvest/importer_estat_category_setting: eStat分野設定
+      opendata/harvest/importer_area_setting: 地域設定
+      opendata/harvest/importer_report: レポート
+      opendata/harvest/edit_lock: ハーベスト
+      opendata/harvest/license: ハーベスト設定
+      opendata/update_plan: 更新頻度
+      opendata/node_area: "都道府県 市区町村"
+      opendata/pref_code: 地域コード
+      opendata/counter_html: レイアウト
+      opendata/graph: グラフプレビュー表示
+
+  cms:
+    nodes:
+      opendata/category: 分野
+      opendata/estat_category: eStat分野
+      opendata/area: 地域
+      opendata/dataset: データセット
+      opendata/dataset_category: データセット分野
+      opendata/dataset_estat_category: データセットeStat分野
+      opendata/dataset_area: データセット地域
+      opendata/search_dataset_group: データセットグループ検索
+      opendata/search_dataset: データセット検索
+      opendata/dataset_map: データセット地図
+      opendata/dataset_graph: データセットグラフ
+      opendata/sparql: SPARQL
+      opendata/api: API
+      opendata/app: アプリ
+      opendata/app_category: アプリ分野
+      opendata/search_app: アプリ検索
+      opendata/idea: アイデアボックス
+      opendata/idea_category: アイデア分野
+      opendata/search_idea: アイデア検索
+      opendata/mypage: マイページ
+      opendata/member: メンバー
+      opendata/my_profile: マイプロフィール
+      opendata/my_dataset: マイデータセット
+      opendata/my_favorite_dataset: マイリストデータセット
+      opendata/my_app: マイアプリ
+      opendata/my_idea: マイアイデア
+    parts:
+      opendata/mypage_login: ログイン
+      opendata/dataset: データセット
+      opendata/dataset_group: データセットグループ
+      opendata/dataset_counter: データセットカウンター
+      opendata/app: アプリ
+      opendata/idea: アイデア
+
+  cms_role:
+    read_other_opendata_datasets: データセットの閲覧（全て）
+    read_private_opendata_datasets: データセットの閲覧（所有）
+    read_member_opendata_datasets: データセットの閲覧（メンバー）
+    edit_other_opendata_datasets: データセットの編集（全て）
+    edit_private_opendata_datasets: データセットの編集（所有）
+    edit_member_opendata_datasets: データセットの編集（メンバー）
+    delete_other_opendata_datasets: データセットの削除（全て）
+    delete_private_opendata_datasets: データセットの削除（所有）
+    delete_member_opendata_datasets: データセットの削除（メンバー）
+    release_other_opendata_datasets: データセットの公開（全て）
+    release_private_opendata_datasets: データセットの公開（所有）
+    release_member_opendata_datasets: データセットの公開（メンバー）
+    approve_other_opendata_datasets: データセットの承認（全て）
+    approve_private_opendata_datasets: データセットの承認（所有）
+    approve_member_opendata_datasets: データセットの承認（メンバー）
+    reroute_other_opendata_datasets: データセットの承認経路変更（全て）
+    reroute_private_opendata_datasets: データセットの承認経路変更（所有）
+    revoke_other_opendata_datasets: データセットの承認申請取消（全て）
+    revoke_private_opendata_datasets: データセットの承認申請取消（所有）
+    read_other_opendata_apps: アプリの閲覧（全て）
+    read_private_opendata_apps: アプリの閲覧（所有）
+    read_member_opendata_apps: アプリの閲覧（メンバー）
+    edit_other_opendata_apps: アプリの編集（全て）
+    edit_private_opendata_apps: アプリの編集（所有）
+    edit_member_opendata_apps: アプリの編集（メンバー）
+    delete_other_opendata_apps: アプリの削除（全て）
+    delete_private_opendata_apps: アプリの削除（所有）
+    delete_member_opendata_apps: アプリの削除（メンバー）
+    release_other_opendata_apps: アプリの公開（全て）
+    release_private_opendata_apps: アプリの公開（所有）
+    release_member_opendata_apps: アプリの公開（メンバー）
+    approve_other_opendata_apps: アプリの承認（全て）
+    approve_private_opendata_apps: アプリの承認（所有）
+    approve_member_opendata_apps: アプリの承認（メンバー）
+    reroute_other_opendata_apps: アプリの承認経路変更（全て）
+    reroute_private_opendata_apps: アプリの承認経路変更（所有）
+    revoke_other_opendata_apps: アプリの承認申請取消（全て）
+    revoke_private_opendata_apps: アプリの承認申請取消（所有）
+    read_other_opendata_ideas: アイデアの閲覧（全て）
+    read_private_opendata_ideas: アイデアの閲覧（所有）
+    read_member_opendata_ideas: アイデアの閲覧（メンバー）
+    edit_other_opendata_ideas: アイデアの編集（全て）
+    edit_private_opendata_ideas: アイデアの編集（所有）
+    edit_member_opendata_ideas: アイデアの編集（メンバー）
+    delete_other_opendata_ideas: アイデアの削除（全て）
+    delete_private_opendata_ideas: アイデアの削除（所有）
+    delete_member_opendata_ideas: アイデアの削除（メンバー）
+    release_other_opendata_ideas: アイデアの公開（全て）
+    release_private_opendata_ideas: アイデアの公開（所有）
+    release_member_opendata_ideas: アイデアの公開（メンバー）
+    approve_other_opendata_ideas: アイデアの承認（全て）
+    approve_private_opendata_ideas: アイデアの承認（所有）
+    approve_member_opendata_ideas: アイデアの承認（メンバー）
+    reroute_other_opendata_ideas: アイデアの承認経路変更（全て）
+    reroute_private_opendata_ideas: アイデアの承認経路変更（所有）
+    revoke_other_opendata_ideas: アイデアの承認申請取消（全て）
+    revoke_private_opendata_ideas: アイデアの承認申請取消（所有）
+    import_other_opendata_datasets: データセットのインポート
+    edit_other_opendata_harvests: ハーベスト機能の利用
+    edit_other_opendata_harvested: ハーベスト機能の取込みデータセット強制編集
+    edit_other_opendata_public_entity_datasets: データセット一覧ダウンロードの利用
+    read_opendata_reports: 各種レポートの閲覧
+    read_opendata_histories: 各種履歴の閲覧
+
+  mongoid:
+    models:
+      opendata/license: ライセンス
+      opendata/dataset_group: データセットグループ
+      opendata/dataset: データセット
+      opendata/crawl: クローリング
+      opendata/app: アプリ
+      opendata/idea: アイデア
+      opendata/idea_comment: コメント
+      opendata/csv2rdf_setting: RDF変換設定
+      opendata/member_notice: 会員通知
+      opendata/resources: リソース
+      opendata/export_datasets: エクスポート
+      opendata/import_datasets: インポート
+      opendata/dataset_importer: インポート
+      opendata/resource_download_history: リソースダンロード履歴
+      opendata/resource_download_report: リソースダンロード数集計結果
+    attributes:
+      opendata/addon/category:
+        category_ids: 分野
+      opendata/addon/area:
+        area_ids: 地域
+      opendata/addon/category_setting:
+        st_category_ids: 分野
+        categories_limit: 分野数の上限
+      opendata/addon/estat_category_setting:
+        st_estat_category_ids: eStat分野
+        estat_categories_limit: eStat分野数の上限
+      opendata/addon/rdf_store:
+        rdf_iri: グラフ名
+        rdf_error: RDF登録エラー
+      opendata/addon/url_rdf_store:
+        rdf_iri: グラフ名
+        rdf_error: RDF登録エラー
+      opendata/addon/counter_html:
+        html: HTML
+      opendata/member:
+        icon_id: アイコン画像
+      opendata/license:
+        name: ライセンス名
+        file_id: ライセンス画像
+        in_file: ファイル
+        related_url: 関連URL
+        order: 並び順
+        default_state: 既定
+      opendata/dataset_group:
+        name: グループ名
+      opendata/dataset:
+        name: データセット名
+        text: 説明
+        creator_name: データ作成者
+        site_id: サイト
+        user_id: データ作成者
+        group_id: 所属グループ
+        point: 評価
+        license: ライセンス
+        tags: タグ
+        category_ids: 分野
+        estat_category_ids: eStat分野
+        dataset_group_ids: グループ
+        area_ids: 地域
+        resources: リソース
+        downloaded: 合計ダウンロード数
+        no: No
+        api_state: API
+        last_updated: 最終更新日時
+        updated_date: 更新日
+        harvest_text_index: テキストインデックス
+        harvest_ckan_groups: CKANグループ
+        harvest_ckan_tags: CKANタグ
+        harvest_shirasagi_categories: SHIRASAGI分野
+        harvest_shirasagi_areas: SHIRASAGI地域
+      opendata/resource:
+        file_id: ファイル
+        in_file: ファイル
+        source_url: リソースURL
+        name: リソース名
+        text: 説明
+        format: フォーマット
+        size: サイズ
+        license_id: ライセンス
+        tsv_id: プレビュー用データ
+        content: データの内容
+        order: 並び順
+        downloaded_count: ダウンロード数
+      opendata/url_resource:
+        file_id: クローリングファイル
+        in_file: クローリングファイル
+        name: リソース名
+        text: 説明
+        format: フォーマット
+        size: サイズ
+        original_url: URL
+        license_id: ライセンス
+        tsv_id: プレビュー
+        content: クローリングデータの内容
+        crawl_state: ステータス
+        original_updated: 元ファイル更新日時
+        crawl_update: 更新方法
+      opendata/app:
+        name: アプリ名
+        text: 説明
+        license: ライセンス
+        appurl: 公開URL
+        tags: タグ
+        category_ids: 分野
+        area_ids: 地域
+        group_id: 所属グループ
+        dataset_ids: 関連データセット
+        point: 評価
+        executed: 実行回数
+        site_id: サイト
+        user_id: アプリ作成者
+        appfiles: アプリファイル
+      opendata/appfile:
+        file_id: ファイル
+        in_file: ファイル
+        name: アプリファイル名
+        text: 説明
+      opendata/idea:
+        name: タイトル
+        site_id: サイト
+        user_id: 作成者
+        dataset_id: 関連データセット
+        app_id: 関連アプリ
+        point: 評価
+        text: アイデア
+        tags: タグ
+        comment_body: 本文
+        commented: 合計コメント数
+        request_comment: 未承認コメント
+        issue: 課題
+        data: データ
+        note: 備考
+      opendata/idea_comment:
+        text: コメント
+        member_name: 投稿者名
+        deleted: 削除日時
+      opendata/csv2rdf_setting:
+        dataset: データセット
+        header_rows: タイトル行数
+        header_labels: タイトル
+        class: RDFクラス
+        column_types: 列設定
+      opendata/harvest/importer:
+        name: 名前
+        source_url: URL
+        api_type: API
+        resource_size_limit_mb: 最大リソースサイズ
+        order: 並び順
+        state: ステータス
+        basicauth_state: Basic認証
+        basicauth_username: Basic認証ユーザー名
+        basicauth_password: Basic認証パスワード
+      opendata/harvest/importer/category_setting:
+        id: ID
+        order: 並び順
+        category_name: 分野名
+        category_filename: 分野ファイル名
+        type: タイプ
+        value: 値
+        operator: 操作
+      opendata/harvest/importer/estat_category_setting:
+        id: ID
+        order: 並び順
+        category_name: 分野名
+        category_filename: 分野ファイル名
+        type: タイプ
+        value: 値
+        operator: 操作
+      opendata/harvest/importer/report:
+        no: No
+        name: レポート
+        resouce_no: リソースNo
+        dataset_no: データセットNo
+        dataset_name: データセット名
+        resouce_name: リソース名
+        category_ids: 分野
+        estat_category_ids: eStat分野
+        area_ids: 地域
+      opendata/harvest/importer/report_dataset:
+        imported: インポート
+        imported_attributes: 属性
+      opendata/harvest/exporter:
+        name: 名前
+        url: URL
+        api_type: API
+        api_key: APIキー
+        order: 並び順
+      opendata/harvest/exporter/group_setting:
+        name: 名前
+        ckan_id: "CKAN ID"
+        ckan_name: "CKAN NAME"
+        order: 並び順
+        category_ids: 分野
+        estat_category_ids: eStat分野
+      opendata/harvest/exporter/owner_org_setting:
+        name: 名前
+        ckan_id: "CKAN ID"
+        order: 並び順
+        group_ids: グループ
+      opendata/addon/site_setting:
+        dataset_workflow_route: データセット承認
+        app_workflow_route: アプリ承認
+        idea_workflow_route: アイデア承認
+        dataset_state: データセット
+        app_state: アプリ
+        idea_state: アイデア
+        anti_bot_methods: Bot対策
+      opendata/addon/workflow/idea_comment_approver:
+        workflow_user_id: 申請者
+        workflow_state: 承認状態
+        workflow_comment: 申請コメント
+        workflow_approvers: 承認者
+        workflow_required_counts: 必要承認数
+        comment: 差し戻しコメント
+        approver_comment: 承認者コメント
+      opendata/addon/dataset_page_setting:
+        show_point: ポイント表示
+        show_tabs: タブ表示
+      opendata/addon/app_page_setting:
+        show_point: ポイント表示
+        show_tabs: タブ表示
+      opendata/addon/idea_page_setting:
+        show_point: ポイント表示
+        show_tabs: タブ表示
+      opendata/addon/list_node_setting:
+        limit: 表示件数
+      opendata/addon/cms_ref/page:
+        assoc_site_id: 連携サイト
+        assoc_node_id: 連携フォルダー
+        assoc_page_id: 連携ページ
+        assoc_site_ids: 連携サイト
+        assoc_node_ids: 連携フォルダー
+        assoc_page_ids: 連携ページ
+        assoc_method: 連携確認方法
+      opendata/addon/cms_ref/attachment_file:
+        assoc_site_id: 連携サイト
+        assoc_node_id: 連携フォルダー
+        assoc_page_id: 連携ページ
+        assoc_method: 連携確認方法
+        assoc_filename: 連携ファイル
+      opendata/addon/harvest/importer_category_setting:
+        default_category_ids: 既定の分野
+        category_settings: コンバート設定
+      opendata/addon/harvest/importer_estat_category_setting:
+        default_estat_category_ids: 既定のeStat分野
+        category_settings: コンバート設定
+      opendata/addon/harvest/importer_area_setting:
+        default_area_ids: 既定の地域
+      opendata/addon/harvest/license:
+        uid: ライセンスID
+      opendata/addon/update_plan:
+        update_plan: 更新頻度
+        update_plan_date: 更新予定日
+        update_plan_mail_state: 更新予定日のメール通知
+      opendata/addon/pref_code:
+        pref_code: コード
+      opendata/resource/history_model:
+        full_url: URL
+        dataset_id: データセットID
+        dataset_name: データセット名
+        dataset_areas: 地域
+        dataset_categories: 分野
+        dataset_estat_categories: eStat分野
+        resource_id: リソースID
+        resource_name: リソース名
+        resource_filename: リソースファイル名
+        resource_format: リソースフォーマット
+        resource_source_url: リソースソースURL
+        remote_addr: 接続元IP
+        user_agent: ユーザーエージェント
+      opendata/resource_download_history:
+        downloaded: ダウンロード日時
+        downloaded_by: ダウンロード方法
+      opendata/resource_preview_history:
+        previewed: プレビュー日時
+      opendata/resource/report_model:
+        year_month: 年月
+        deleted: 削除日
+        dataset_id: データセットID
+        dataset_name: データセット名
+        dataset_url: データセットURL
+        dataset_areas: データセット地域
+        dataset_categories: データセット分野
+        dataset_estat_categories: データセットeStat分野
+        resource_id: リソースID
+        resource_name: リソース名
+        resource_filename: リソースファイル名
+        resource_format: リソースフォーマット
+      opendata/addon/graph:
+        preview_graph_state: グラフ表示
+        preview_graph_types: グラフ種別
+
+  activemodel:
+    models:
+      opendata/dataset_download_report: ダウンロードレポート
+      opendata/dataset_importer: インポート
+      opendata/dataset_preview_report: プレビューレポート
+      opendata/dataset_access_report: アクセスレポート
+    attributes:
+      opendata/dataset_download_report:
+        period: 期間
+        type: 単位
+        export: 出力
+      opendata/dataset_download_report/type:
+        day: 日
+        month: 月
+        year: 年
+      opendata/dataset_importer:
+        in_file: ファイル
+      opendata/dataset_preview_report:
+        period: 期間
+        type: 単位
+        export: 出力
+      opendata/dataset_preview_report/type:
+        day: 日
+        month: 月
+        year: 年
+      opendata/dataset_access_report:
+        period: 期間
+        type: 単位
+        export: 出力
+      opendata/dataset_access_report/type:
+        day: 日
+        month: 月
+        year: 年
+    errors:
+      models:
+        opendata/dataset_download_report:
+          attributes:
+            base:
+              period: 期間の指定が不正です。開始と終了は同じ、または開始が終了より過去の日付となるよう入力してください。
+      template:
+        header: 入力内容を確認してください。
+
+  tooltip:
+    opendata/dataset:
+      text:
+        - データセットの説明を入力します。
+        - URLは自動的にリンクが設定されます。
+      tags:
+        - 関連する単語を登録します。
+        - カンマ、スペースで区切ることにより複数の単語を設定することができます。
+      creator_name:
+        - データ作成者を入力します。
+    opendata/resource:
+      source_url:
+        - リソースが外部サイトに存在する場合、リソースのURLを入力します。
+        - この項目を設定した場合、リソースファイルを登録する必要はありません。
+      format:
+        - ファイルのフォーマットを半角英数の大文字で入力します。
+        - 「 TTL 」を入力した場合はRDFサーバにデータが登録されます。
+      text:
+        - リソースの説明を入力します。
+        - URLは自動的にリンクが設定されます。
+      tsv_id:
+        - TSV、CSVファイルを登録しておくとデータセットのページでプレビュー表示ができます。
+        - リソースファイルがTSV、CSVファイルの場合は登録する必要はありません。
+      order:
+        - 並び順を入力します。
+        - 数字が小さい順に表示されます。
+    opendata/app:
+      text:
+        - アプリの説明を入力します。
+        - URLは自動的にリンクが設定されます。
+      tags:
+        - 関連する単語を登録します。
+        - カンマ、スペースで区切ることにより複数の単語を設定することができます。
+    opendata/appfile:
+      text:
+        - ファイルの説明を入力します。
+        - URLは自動的にリンクが設定されます。
+    opendata/idea:
+      text:
+        - コメント内容を入力します。
+        - URLは自動的にリンクが設定されます。
+      tags:
+        - 関連する単語を登録します。
+        - カンマ、スペースで区切ることにより複数の単語を設定することができます。
+    opendata/license:
+      name:
+        - ライセンス名を入力します。
+      related_url:
+        - 登録するライセンスの公式ページや説明ページのURLを登録します。
+      order:
+        - 表示順を入力します。
+        - 数字が小さいほど上位に表示されます。
+    opendata/csv2rdf_settings:
+      rdf_property:
+        - 適切な RDF プロパティを一覧内から選択し、「保存」ボタンをクリックします。
+    opendata/addon/dataset_page_setting:
+      show_point:
+        - ポイントを表示するかどうかを選択します。
+        - 未選択の場合、ポイントを表示します。
+      show_tabs:
+        - 表示するタブを選択します。
+    opendata/addon/app_page_setting:
+      show_point:
+        - ポイントを表示するかどうかを選択します。
+        - 未選択の場合、ポイントを表示します。
+      show_tabs:
+        - 表示するタブを選択します。
+    opendata/addon/idea_page_setting:
+      show_point:
+        - ポイントを表示するかどうかを選択します。
+        - 未選択の場合、ポイントを表示します。
+      show_tabs:
+        - 表示するタブを選択します。
+    opendata/addon/list_node_setting:
+      limit:
+        - |-
+          リストの表示件数を指定します。
+    opendata/cms_ref/page:
+      assoc_method:
+        - 連携確認方法を選択します。
+        - 自動を選択すると、CMS の記事との連携が自動で確認され、記事が削除されたり非公開になったりした場合、自動的にデータセットが非公開になります。また、リソースは自動的に記事の添付ファイルと連動するようになります。
+        - 手動を選択すると、CMS の記事との連携が自動では確認されません。
+    opendata/addon/update_plan:
+      update_plan: 更新頻度を入力します。
+      update_plan_date:
+        - 更新予定日を入力します。
+        - 更新予定日のメール通知が有効の場合、メール通知されます。
+        - ""
+        - 毎月　：更新予定日 から １ヶ月毎
+        - 四半期：更新予定日 から ３ヶ月毎
+        - 毎年　：更新予定日 から １年毎
+        - ２年毎：更新予定日 から ２年毎
+        - ３年毎：更新予定日 から ３年毎
+        - ４年毎：更新予定日 から ４年毎
+        - ５年毎：更新予定日 から ５年毎
+        - 空欄　：更新予定日
+      update_plan_mail_state: 更新予定日のメール通知を設定します。
+    opendata/addon/counter_html:
+      html:
+        - HTMLを設定します。
+        - |-
+          下記のテンプレートが使用可能です。
+          #{dataset_count}　データセット件数が表示されます。
+          #{dataset_tag_count}　データセットのタグ件数が表示されます。
+          #{dataset_group_count}　データセットのグループ件数が表示されます。
+          #{estat_dataset_count}　eStat分野が設定されたデータセット件数が表示されます。
+          #{estat_dataset_tag_count}　eStat分野が設定されたデータセットのタグ件数が表示されます。
+          #{estat_dataset_group_count}　eStat分野が設定されたデータセットのグループ件数が表示されます。
+          #{app_count}　アプリ件数が表示されます。
+          #{app_tag_count}　アプリのタグ件数が表示されます。
+          #{idea_count}　アイデア件数が表示されます。
+          #{idea_tag_count}　アイデアのタグ件数が表示されます。
+    opendata/harvest/importer:
+      name:
+        - 名前を設定します。
+      source_url:
+        - URLを設定します。
+      api_type:
+        - APIを設定します。
+      resource_size_limit_mb:
+        - 最大リソースサイズを設定します。
+        - サイズを超えたリソースは外部リンクとしてインポートされます。
+      order:
+        - 並び順を設定します。
+      state:
+        - ステータスを設定します。
+        - 無効に設定すると定期実行の際に無視されます。
+      basicauth_state:
+        - Basic認証のステータスを設定します。
+      basicauth_username:
+        - Basic認証のユーザー名を設定します。
+      basicauth_password:
+        - Basic認証のパスワードを設定します。
+    opendata/addon/harvest/importer_category_setting:
+      default_category_ids:
+        - 既定の分野を設定します。
+    opendata/addon/harvest/importer_estat_category_setting:
+      default_estat_category_ids:
+        - 既定のeStat分野を設定します。
+    opendata/addon/harvest/importer_area_setting:
+      default_area_ids:
+        - 既定の地域を設定します。
+    opendata/addon/category_setting:
+      categories_limit:
+        - データセットに設定できる末端の分野数の上限を設定します。
+        - 空欄 および 0 は無制限です。
+    opendata/addon/estat_category_setting:
+      st_estat_categories:
+        - フォルダー下で使用するカテゴリーを設定します。
+        - 設定されていない場合は全カテゴリーが対象となります。
+      estat_categories_limit:
+        - データセットに設定できる末端のeStat分野数の上限を設定します。
+        - 空欄 および 0 は無制限です。
+    opendata/harvest/exporter:
+      name:
+        - 名前を設定します。
+      url:
+        - URLを設定します。
+      api_type:
+        - APIを設定します。
+      api_key:
+        - APIキーを設定します。
+      order:
+        - 並び順を設定します。
+    opendata/part/dataset:
+      loop_html:
+        - 自動生成されたリスト表示部分のHTMLを指定することが可能です。
+        - |-
+          下記のように記述します。
+          #{class}　リンク先のファイル名が表示されます。ファイル名に拡張子がある場合、拡張子を除いた部分が表示されます。
+          #{date}　リンク先のページの公開日時が「2015/4/1」の形式で表示されます。
+          #{date.default}　リンク先のページの公開日時が「2015/4/1」の形式で表示されます。
+          #{date.iso}　リンク先のページの公開日時が「2015-04-01」の形式で表示されます。
+          #{date.long}　リンク先のページの公開日時が「2015年4月1日」の形式で表示されます。
+          #{date.short}　リンク先のページの公開日時が「4/1」の形式で表示されます。
+          #{time}　リンク先のページの公開日時が「2015/4/1 12:34」の形式で表示されます。
+          #{time.default}　リンク先のページの公開日時が「2015/4/1 12:34」の形式で表示されます。
+          #{time.iso}　リンク先のページの公開日時が「2015-4-1 12:34」の形式で表示されます。
+          #{time.long}　リンク先のページの公開日時が「2015年4月1日 12時34分」の形式で表示されます。
+          #{time.short}　リンク先のページの公開日時が「15/04/01 12:34」の形式で表示されます。
+          #{url}　リンク先ページのURLが表示されます。
+          #{name}　リンク先ページのタイトルが表示されます。
+          #{index_name}　リンク先ページの一覧用タイトルが表示されます。未設定の場合はタイトルが表示されます。
+          #{summary}　リンク先ページのSummaryが表示されます。
+          #{html}　リンク先ページの本文が表示されます。
+          #{current}　現在訪問しているページとURLが同一の場合、classにcurrentが付与されます。
+          #{new}　リンク先のページ公開日時がNEWマーク期間の範囲内の場合、classにnewが付与されます。
+          #{id}　リンク先のファイルIDが表示されます。
+          #{group}　リンク先ページの所有グループが表示されます。
+          #{groups}　リンク先ページの全ての所有グループが表示されます。
+          #{img.src}　リンク先ページ内に画像が存在する場合、リンク先ページの先頭の画像が表示されます。それ以外の場合、既定のパスが表示されます。
+          #{categories}　リンク先ページ内がカテゴリに関連付けられている場合、リンク先ページのカテゴリリストが表示されます。
+          #{pages.count}　リンク先ページ内にページが存在する場合、リンク先ページ内のページ数が表示されます。
+          #{event_dates} イベント日が「2015/4/1」の形式で表示されます。
+          #{event_dates.default} イベント日が「2015/4/1」の形式で表示されます。
+          #{event_dates.default_full} イベント日が「2015/4/1 (水)」の形式で表示されます。
+          #{event_dates.iso} イベント日が「2015-4-1」の形式で表示されます。
+          #{event_dates.iso_full} イベント日が「2015-4-1 (水)」の形式で表示されます。
+          #{event_dates.long} イベント日が「2015年4月1日」の形式で表示されます。
+          #{event_dates.full} イベント日が「2015年4月1日 (水)」の形式で表示されます。
+          #{event_deadline} イベントの締切日が「2015/4/1 12:34」の形式で表示されます。
+          #{event_deadline.default} イベントの締切日が「2015/4/1 12:34」の形式で表示されます。
+          #{event_deadline.iso} イベントの締切日が「2015-4-1 12:34」の形式で表示されます。
+          #{event_deadline.long} イベントの締切日が「2015年4月1日 12時34分」の形式で表示されます。
+          #{event_deadline.short} イベントの締切日が「15/04/01 12:34」の形式で表示されます。
+          #{tags} リンク先ページのタグが表示されます。
+
+          #{class_categories} リンク先ページ内が分野に関連付けられている場合、全てのカテゴリのフォルダ名が表示されます。
+          #{class_estat_categories} リンク先ページ内がeStat分野に関連付けられている場合、全てのカテゴリのフォルダ名が表示されます。
+          #{dataset_point} データセットのいいね！数が表示されます。
+          #{dataset_downloaded} データセットのダウンロード数が表示されます。
+    opendata/addon/site_setting:
+      anti_bot_methods:
+        - Bot 対策方法を選択します。
+        - "&lt;a&gt; タグに rel=\"nofollow\" をつけると、Bot はリンクを辿らなくなります（ただし、紳士的な Bot のみ）。"
+        - "通常の Bot ではボタンをクリックしないので、一括ダウンロードに &lt;button&gt; タグを用いるようにすると、Bot が辿らなくなります。"
+    opendata/addon/graph:
+      preview_graph_state:
+        - プレビューにてグラフ表示を有効にするか設定します。
+      preview_graph_types:
+        - グラフ表示する種別を選択します。
+  job:
+    models:
+      opendata/csv2rdf_converter/job: RDF変換ジョブ
+      opendata/facility/assoc_job: 施設CSV取り込みジョブ
+      opendata/cms_integration/assoc_job: 記事連携設定ジョブ
+      opendata/harvest/harvest_datasets_job: ハーベストジョブ
+      opendata/harvest/import_datasets_job: ハーベストインポートジョブ
+      opendata/harvest/export_datasets_job: ハーベストエクスポート削除ジョブ
+      opendata/harvest/destroy_datasets_job: ハーベスト関連データセット削除ジョブ
+      opendata/notify_dataset_plan_job: データセット更新通知ジョブ
+      opendata/dataset/export_job: データセットエクスポートジョブ
+      opendata/dataset/import_job: データセットインポートジョブ
+      opendata/resource_download_history_update_job: リソースダウンロード履歴更新ジョブ
+      opendata/resource_preview_history_update_job: リソースプレビュー履歴更新ジョブ

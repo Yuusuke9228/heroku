@@ -1,0 +1,7 @@
+<nav class="mod-navi">
+  <h2><%= t("sys.conf") %></h2>
+
+  <% avaiable_sys_links.each do |label, link| %>
+    <h3><%= link_to label, link %></h3>
+  <% end %>
+</nav>

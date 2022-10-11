@@ -1,0 +1,23 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+
+<dl class="see addon-gws-circular-group-setting">
+  <dt><%= @model.t :circular_default_due_date %></dt>
+  <dd><%= @item.circular_default_due_date %> <%= t('datetime.prompts.day') %></dd>
+
+  <dt><%= @model.t :circular_filesize_limit %></dt>
+  <dd><%= @item.circular_filesize_limit %> <%= t('ss.units.mega_byte') if @item.circular_filesize_limit %></dd>
+
+  <% if false %>
+  <dt><%= @model.t :circular_delete_threshold %>	</dt>
+  <dd><%= @item.circular_delete_threshold_name %></dd>
+  <% end %>
+
+  <dt><%= @model.t :circular_files_break %></dt>
+  <dd><%= @item.label :circular_files_break %></dd>
+
+  <dt><%= @model.t :circular_new_days %></dt>
+  <dd><%= @item.circular_new_days %> <%= t("datetime.prompts.day") %></dd>
+</dl>

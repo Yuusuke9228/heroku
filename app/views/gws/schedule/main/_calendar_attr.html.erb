@@ -1,0 +1,12 @@
+<%
+  css_classes = %w(calendar-attr)
+  dropdown = render("gws/schedule/main/calendar_attr_dropdown", user: user)
+  if dropdown.present?
+    css_classes += %w(dropdown gws-dropdown dropdown-toggle clickable)
+  end
+%>
+
+<div class="<%= css_classes.join(' ') %>" data-email="<%= user.email %>" data-user-id="<%= user.id %>">
+  <%= gws_public_user_profile(user, :main_group, :user_title, :user_occupation, :email, :tel) %>
+  <%= dropdown %>
+</div>

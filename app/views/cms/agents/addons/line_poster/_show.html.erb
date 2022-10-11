@@ -1,0 +1,29 @@
+<% return if !@cur_site.line_poster_enabled? %>
+
+<dl class="see mod-cms-line_poster">
+  <dt><%= @model.t :line_auto_post %></dt>
+  <dd><%= @item.label :line_auto_post %></dd>
+
+  <% if @item.use_line_post?%>
+    <dt><%= @model.t :line_post_format %></dt>
+    <dd><%= @item.label :line_post_format %></dd>
+
+    <dt><%= @model.t :line_text_message %></dt>
+    <dd><%=br @item.line_text_message %></dd>
+
+    <% if @item.line_edit_auto_post_enabled? %>
+      <dt><%= @model.t :line_edit_auto_post %></dt>
+      <dd><%= @item.label :line_edit_auto_post %></dd>
+    <% end %>
+
+    <% if @item.line_posted.present? %>
+      <dt><%= @model.t :line_posted %></dt>
+      <dd><%= tryb { br @item.line_posted.reverse.take(5).map { |posted| posted.strftime("%Y/%m/%d %H:%M") }.join("\n") } %></dd>
+    <% end%>
+
+    <% if @item.line_post_error.present? %>
+      <dt><%= @model.t :line_post_error %></dt>
+      <dd><div class="errorExplanation"><%= br @item.line_post_error %></div></dd>
+    <% end %>
+  <% end %>
+</dl>

@@ -1,0 +1,82 @@
+# ss
+
+production: &production
+  # Application name
+  application_name: SHIRASAGI
+
+  # Application Logo html
+  application_logo_html: '<div class="ss-logo-wrap"><img src="/assets/img/logo.png" alt="SHIRASAGI"><span class="ss-logo-application-name">SHIRASAGI</span></div>'
+
+  # StyleSheets on management pages.
+  stylesheets: ["ss/style", "ss/cke"]
+
+  # JavaScripts on management pages.
+  javascripts: ["ss/script"]
+
+  # history backups max age
+  history_max_age: 20
+
+  # history backups max age
+  keep_history_backup_after_destroyed: 14.days
+
+  # task の保存期間を設定
+  # 0 を設定すると無制限に保存
+  keep_tasks: 14.days
+
+  session:
+    key: '_ss_session'
+    same_site: 'Lax'
+    # uncomment blow setting if you have been running SHIRASAGI with full https
+    # secure: true
+
+  disable_permission_level: true
+
+  # how to paste file by
+  #   filename: physical name. this means paste file with only alpha-nums.
+  #   name: logical name. this means paste file with japanese text.
+  file_url_with: filename
+
+  # how to publish file by
+  #   cp: copy file
+  #   ln_s: create symbolic link
+  publish_file_with: cp
+
+  # Upload Policy (restricted, sanitizer)
+  upload_policy:
+
+  # Sanitizer directories
+  sanitizer_input: sanitizer_input
+  sanitizer_output: sanitizer_output
+  sanitizer_file_prefix: ss
+
+  # history log saving days
+  history_log_saving_days: 90
+
+  quality_options:
+    - label: 最高画質
+      quality: 85
+    - label: 高画質
+      quality: 60
+    - label: 中画質
+      quality: 55
+    - label: 低画質
+      quality: 40
+    - label: 最低画質
+      quality: 25
+
+  markdown:
+    help_url: "https://help.github.com/articles/basic-writing-and-formatting-syntax/"
+
+  updates_and_reloads_nginx_conf: false
+
+test:
+  <<: *production
+  disable: false
+  file_url_with: filename
+  publish_file_with: cp
+  sanitizer_input: tmp/test_sanitizer_input
+  sanitizer_output: tmp/test_sanitizer_output
+
+development:
+  <<: *production
+  disable: false

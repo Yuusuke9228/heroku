@@ -1,0 +1,21 @@
+<% @index_title = proc do |item| %>
+  <%= link_to item.name, { action: :show, id: item }, class: "title" %>
+<% end %>
+
+<% @index_meta = proc do |item| %>
+  <span class="id">#<%= item.id %></span>
+  <% if item.updated %>
+    <%# 滅多なことでは updated は nil にはならないが、過去の電子職員録のインポートで nil になる可能性があるので nil チェックを入れてから表示する %>
+    <span class="datetime"><%= I18n.l(item.updated, format: :picker) %></span>
+  <% end %>
+  <span class="group"><%= item.section_name %></span>
+  <% if title = item.title(@cur_site) %>
+    <span class="user-title"><%= title.name %></span>
+  <% end %>
+  <% if occupation = item.occupation(@cur_site) %>
+    <span class="user-occupation"><%= occupation.name %></span>
+  <% end %>
+  <span class="order"><%= item.order %></span>
+<% end %>
+
+<%= render template: "gws/crud/index" %>

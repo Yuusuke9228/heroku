@@ -1,0 +1,8 @@
+<% if @item.html.present? %>
+<dl class="see">
+  <dd class="wide">
+    <%= code_editor "#addon-cms-agents-addons-layout_html .layout-html", mode: :html, readonly: true %>
+    <%= text_area_tag "mod-cms-html", @item.html, id: nil, class: "layout-html", style: "height: 400px" %>
+  </dd>
+</dl>
+<% end %>

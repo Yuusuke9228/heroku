@@ -1,0 +1,18 @@
+<%= render "ss/agents/addons/markdown/form_markdown", f: f, item: @item %>
+
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+
+  SS.config.cms.ckeditor.fetch('javascripts', []).each do |js|
+    controller.javascript js
+  end
+
+  options = {}
+  if @ss_mode == :gws
+    options[:customCkeConfig] = gws_apis_cke_config_path(format: "js")
+  end
+%>
+
+<%= jquery do %>
+  new SS_Addon_Markdown(<%== "##{addon[:id]}".to_json %>, <%== options.to_json %>);
+<% end %>

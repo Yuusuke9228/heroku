@@ -1,0 +1,68 @@
+.ss-image-edit-canvas {
+  position: relative;
+  margin-top: 48px;
+
+  .toolbar {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    top: -45px;
+    left: 0;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 5px;
+    border-radius: 2px;
+    background: $black3;
+    color: $white;
+    white-space: nowrap;
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border-top: 7px solid $black3;
+      border-right: 7px solid transparent;
+      border-left: 7px solid transparent;
+    }
+  }
+
+  .btn-group {
+    display: inline-block;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+  }
+
+  .input-group {
+    display: inline-block;
+    margin: 4px 0;
+    padding: 0 2px;
+
+    label {
+      display: inline-block;
+    }
+    input {
+      width: 4em;
+      background: $gray4;
+    }
+  }
+
+  .btn {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    padding: 2px 0 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: $white;
+  }
+
+  .btn-group ~ .btn-group {
+    border-left: 1px solid $gray2;
+  }
+}

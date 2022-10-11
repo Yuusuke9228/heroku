@@ -1,0 +1,31 @@
+class Member::Agents::Parts::InvitedGroupController < ApplicationController
+  include Cms::PartFilter::View
+  include Member::LoginFilter
+  helper Cms::ListHelper
+
+  skip_before_action :logged_in?
+  before_action :set_member
+  before_action :set_my_group_node
+
+  private
+
+  def set_member
+    logged_in? redirect: false
+    if @cur_member.blank?
+      render plain: ''
+    end
+  end
+
+  def set_my_group_node
+    @my_group_node = Member::Node::MyGroup.site(@cur_site).and_public.first
+    if @my_group_node.blank?
+      render plain: ''
+    end
+  end
+
+  public
+
+  def index
+    @items = Member::Group.site(@cur_site).and_invited(@cur_member).limit(20).order_by(created: 1)
+  end
+end

@@ -1,0 +1,34 @@
+<%
+  items = @portlet.find_monitor_items(@portal, @cur_user, @cur_group)
+%>
+<div class="main-box">
+  <div class="portlet-title"><%= @portlet.name %></div>
+
+  <ul class="list-items">
+    <% items.each do |item| %>
+      <li class="list-item">
+        <div class="info">
+          <%= link_to item.name, gws_monitor_topic_path(category: '-', id: item), class: 'title' %>
+          <% if item.new_flag? %><span class="gws-board-flag-new"></span><% end %>
+          <div class="meta">
+            <span class="datetime"><%= Gws::Monitor::Topic.t(:due_date) %><%= tryb { item.due_date.strftime("%Y/%m/%d %H:%M") } %></span>
+            <span class="answer-state"><%= item.answer_state_name(@cur_group) %></span>
+            <span>
+              <% item.categories.compact.each do |category| %>
+                <%= link_to category.trailing_name, gws_monitor_topics_path(category: category.id),
+                            class: "gws-category-label", style: category_label_css(category) %>
+              <% end %>
+            </span>
+            <% if (file_count = item.descendants.where(user_group_id: @cur_group.id).pluck(:file_ids).flatten.compact.length) > 0 %>
+              <span class="gws-board-file-count"><img src="/assets/img/gws/ic-file.png" alt="" /><%= file_count %></span>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if items.next_page %>
+  <div class="list-more"><%= link_to I18n.t("ss.links.more"), gws_monitor_topics_path %></div>
+  <% end %>
+</div>

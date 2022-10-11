@@ -1,0 +1,34 @@
+<%
+  items = @portlet.find_faq_items(@portal, @cur_user)
+%>
+<div class="main-box">
+  <div class="portlet-title"><%= @portlet.name %></div>
+
+  <ul class="list-items">
+    <% items.each do |item| %>
+      <li class="list-item">
+        <div class="info">
+          <%= link_to item.name, gws_faq_topic_path(mode: '-', category: '-', id: item), class: 'title' %>
+          <% if item.new_flag? %><span class="gws-board-flag-new"></span><% end %>
+
+          <div class="meta">
+            <span class="datetime"><%= item.descendants_updated.strftime("%Y/%m/%d %H:%M") %></span>
+            <span>
+              <% item.categories.compact.each do |category| %>
+                <%= link_to category.trailing_name, gws_faq_topics_path(mode: '-', category: category.id),
+                            class: "gws-category-label", style: category_label_css(category) %>
+              <% end %>
+            </span>
+            <% if item.descendants_files_count.to_i > 0 %>
+              <span class="gws-board-file-count"><img src="/assets/img/gws/ic-file.png" alt="" /><%= item.descendants_files_count %></span>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if items.next_page %>
+  <div class="list-more"><%= link_to I18n.t("ss.links.more"), gws_faq_main_path %></div>
+  <% end %>
+</div>

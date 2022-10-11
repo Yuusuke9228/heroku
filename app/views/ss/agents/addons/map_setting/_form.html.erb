@@ -1,0 +1,30 @@
+<%
+  addon ||= local_assigns.fetch(:addon, {})
+  addon[:display_body] = "hide"
+%>
+<dl class="see mod-ss-map-setting">
+  <dt><%= @model.t :map_api %><%= @model.tt :map_api %></dt>
+  <dd><%= f.select :map_api, @item.map_api_options, include_blank: true %></dd>
+
+  <dt><%= @model.t :map_api_key %><%= @model.tt :map_api_key %></dt>
+  <dd><%= f.text_field :map_api_key %></dd>
+
+  <dt><%= @model.t :map_api_layer %><%= @model.tt :map_api_layer %></dt>
+  <dd><%= f.select :map_api_layer, @item.map_api_layer_options, include_blank: true %></dd>
+
+  <dt><%= @model.t :show_google_maps_search %><%= @model.tt :show_google_maps_search %></dt>
+  <dd><%= f.select :show_google_maps_search, @item.show_google_maps_search_options %></dd>
+
+  <dt><%= @model.t :map_api_mypage %><%= @model.tt :map_api_mypage %></dt>
+  <dd><%= f.select :map_api_mypage, @item.map_api_mypage_options %></dd>
+
+  <dt><%= @model.t :map_center %><%= @model.tt :map_center %></dt>
+  <dd></dd>
+  <dt class="depth-2"><%= t("map.longitude") %></dt>
+  <dd class="depth-2"><%= text_field_tag "#{f.object_name}[map_center][lng]", @item.map_center.try(:lng) %></dd>
+  <dt class="depth-2"><%= t("map.latitude") %></dt>
+  <dd class="depth-2"><%= text_field_tag "#{f.object_name}[map_center][lat]", @item.map_center.try(:lat) %></dd>
+
+  <dt><%= @model.t :map_max_number_of_markers %><%= @model.tt :map_max_number_of_markers %></dt>
+  <dd><%= f.number_field :map_max_number_of_markers %></dd>
+</dl>

@@ -1,0 +1,32 @@
+version: "2"
+plugins:
+  rubocop:
+    enabled: true
+    channel: rubocop-0-71
+    config:
+      file: .rubocop.yml
+  brakeman:
+    enabled: true
+    config:
+      file: .brakeman.yml # not supported
+  bundler-audit:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - ruby
+  rubymotion:
+    enabled: true
+  scss-lint:
+    enabled: true
+    config:
+      file: .scss-lint.yml
+exclude_patterns:
+- bin/**/*
+- private/**/*
+- public/**/*
+- spec/**/*
+- "**/vendor/**/*"

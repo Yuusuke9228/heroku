@@ -1,0 +1,7 @@
+<% if @cur_page.body_layout.present? %>
+  <%= render template: "cms/agents/addons/body_part/view/index" %>
+<% else %>
+  <% @cur_page.class.addons.each do |addon| %>
+    <%= render template: addon.view_template_path if addon.view_template_path %>
+  <% end %>
+<% end %>

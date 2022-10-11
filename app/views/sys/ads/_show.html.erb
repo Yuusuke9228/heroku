@@ -1,0 +1,16 @@
+<dl class="see">
+  <dt><%= @model.t :time %></dt>
+  <dd>
+    <% if @item.time %>
+      <%= @item.time.to_s(:delimited) %>
+      <span><%= t("datetime.prompts.second") %></span>
+    <% end %>
+  </dd>
+  <dt><%= @model.t :width %></dt>
+  <dd>
+    <% if @item.width %>
+      <%= @item.width.to_s(:delimited) %>
+      <span>px</span>
+    <% end %>
+  </dd>
+</dl>
